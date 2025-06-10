@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import Inicio from './Componente/Inicio.jsx';
@@ -15,6 +16,12 @@ import MiZona from './Componente/MiZona.jsx';
 
 
 function App() {
+
+const [usuarios, setUsuarios] = useState([
+  { nombre: 'Jhonny', email: 'jhonny.ruiz@epn.edu.ec', contraseña: '123456' },
+  { nombre: 'Gustavo', email: 'gustavo.herrera@epn.edu.ec', contraseña: '123456' }
+]);
+
   return (
     <div className="App">
 
@@ -22,7 +29,7 @@ function App() {
         <Routes>
 
           {/* Login es la ruta por defecto */}
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login usuarios={usuarios} />} />
 
           <Route path="/Inicio" element={<Inicio />} />
           <Route path="/Registro" element={<Registro />} />
