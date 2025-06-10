@@ -65,3 +65,14 @@
 .login-links a:hover {
     text-decoration: underline;
 }
+
+.logoBlanco {
+  width: 60%;   
+  height: auto; 
+  margin: 0 auto; 
+}
+
+.login-input,
+.login-button {
+  box-sizing: border-box;
+}

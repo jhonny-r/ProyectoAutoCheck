@@ -2,6 +2,7 @@ import React from "react";
 import '../Estilos/login.css';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import LogoBlanco from '../Imagenes/LogoBlanco.svg';
 
 function Login({ usuarios }) {
     const navigate = useNavigate();
@@ -22,10 +23,9 @@ function Login({ usuarios }) {
     return (
         <div className="login-container">
             <div className="login-box">
-                <div className="logo">🔍 AutoCheck</div>
+                <img src={LogoBlanco} alt="Logo AutoCheck" className="logoBlanco" />
                 <h2>Iniciar sesión</h2>
 
-                {/* Importante: conectar los inputs con el estado */}
                 <input
                     type="email"
                     placeholder="Correo electrónico"
@@ -44,7 +44,7 @@ function Login({ usuarios }) {
                 <button className="login-button" onClick={handleLogin}>Iniciar sesión</button>
                 <div className="login-links">
                     <Link to="/recuperacioncontra">Recuperar contraseña</Link><br />
-                   
+                   <br />
                     <Link to="/registro">Crear Cuenta</Link>
                 </div>
             </div>
