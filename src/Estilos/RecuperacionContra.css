@@ -1,0 +1,70 @@
+.recuperacion-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #c8c0c0;
+}
+
+.recuperacion-form {
+  width: 90%;
+  max-width: 400px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.recuperacion-header {
+  background-color: #b2f2bb;
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+  color: #2d6a4f;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.recuperacion-form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: none;
+  background-color: #f1f3f5;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.mensaje-recuperacion {
+  color: #444;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.btn-recuperar {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #74c0fc;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-recuperar:hover {
+  background-color: #4dabf7;
+}
+
+.btn-volver {
+  display: block;
+  margin: 20px auto 0 auto;
+  background: none;
+  color: #1971c2;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}

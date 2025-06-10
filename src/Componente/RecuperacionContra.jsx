@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import '../Estilos/RecuperacionContra.css';
 
 function RecuperacionContra({ usuarios }) {
 
@@ -18,26 +19,31 @@ function RecuperacionContra({ usuarios }) {
     };
 
     return (
-        <div>
-            <h2>Recuperar Contraseña</h2>
-            <form onSubmit={Recuperar}>
-                <label>
-                    Correo:
-                    <input
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </label>
-                <br />
-                <labe>{mensaje}</labe>
-                <button type="submit">Recuperar</button>
-            </form>
-             <button className="boton" onClick={() => navigate('/')}>Volver al Inicio</button>
-        </div>
-    );
+  <div className="recuperacion-container">
+    <form className="recuperacion-form" onSubmit={Recuperar}>
+      <div className="recuperacion-header">RECUPERAR CONTRASEÑA</div>
+
+      <input
+        type="email"
+        name="email"
+        placeholder="CORREO ELECTRÓNICO"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+
+      <div className="mensaje-recuperacion">{mensaje}</div>
+
+      <button type="submit" className="btn-recuperar">
+        RECUPERAR
+      </button>
+      <button type="button" className="btn-volver" onClick={() => navigate("/")}>
+        VOLVER AL INICIO
+      </button>
+    </form>
+  </div>
+);
+
 }
 
 export default RecuperacionContra;
