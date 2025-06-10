@@ -44,7 +44,8 @@ function Login({ usuarios }) {
                 <button className="login-button" onClick={handleLogin}>Iniciar sesión</button>
                 <div className="login-links">
                     <Link to="/recuperacioncontra">Recuperar contraseña</Link><br />
-                    <a href="#">Crear cuenta</a>
+                   
+                    <Link to="/registro">Crear Cuenta</Link>
                 </div>
             </div>
         </div>
