@@ -1,6 +1,7 @@
 import React from "react";
 import '../Estilos/login.css';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login({ usuarios }) {
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ function Login({ usuarios }) {
 
                 <button className="login-button" onClick={handleLogin}>Iniciar sesión</button>
                 <div className="login-links">
-                    <a href="#">¿Olvidaste tu contraseña?</a><br />
+                    <Link to="/recuperacioncontra">Recuperar contraseña</Link><br />
                     <a href="#">Crear cuenta</a>
                 </div>
             </div>

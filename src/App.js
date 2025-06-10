@@ -13,6 +13,7 @@ import ReporteVehiculo from './Componente/ReporteVehiculo.jsx';
 import VerificarVehiculo from './Componente/VerificarVehiculo.jsx';
 import Configuracion from './Componente/Configuracion.jsx';
 import MiZona from './Componente/MiZona.jsx';
+import RecuperacionContra from './Componente/RecuperacionContra.jsx';
 
 
 function App() {
@@ -41,6 +42,7 @@ const [usuarios, setUsuarios] = useState([
           <Route path="/VerificarVehiculo" element={<VerificarVehiculo />} />
           <Route path="/Configuracion" element={<Configuracion />} />
           <Route path="/MiZona" element={<MiZona />} />
+          <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
         </Routes>
       </BrowserRouter>
 
