@@ -1,7 +1,7 @@
 import React from "react";
 import '../Estilos/MapaReportes.css';
 
-function MapaReportes() {
+function MapaReportes({ BarriosPeligrosos }) {
 
 
     return (
@@ -15,7 +15,13 @@ function MapaReportes() {
 
 <div className="mapa-reportes-listas">
   <h2>Barrios más peligrosos</h2>
-  
+  <ul>
+    {BarriosPeligrosos.map((barrio, index) => (
+      <li key={index}>
+        {barrio.barrio} - {barrio.peligrosidad}
+      </li>
+    ))}
+  </ul>
 </div>
 
 
