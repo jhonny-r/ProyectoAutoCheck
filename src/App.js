@@ -23,6 +23,13 @@ const [usuarios, setUsuarios] = useState([
   { nombre: 'Gustavo', alias: 'gustavo', telefono: '0987654321',direccion:'Norte', email: 'gustavo.herrera@epn.edu.ec', contraseña: '123456' }
 ]);
 
+const [BarriosPeligrosos, setBarriosPeligrosos] = useState([
+  { barrio: 'Centro', peligrosidad: 'Alta' },
+  { barrio: 'Norte', peligrosidad: 'Media' },
+  { barrio: 'Sur', peligrosidad: 'Baja' }
+]);
+
+
 
 const agregarUsuario = (nuevoUsuario) => {
   setUsuarios([...usuarios, nuevoUsuario]);
