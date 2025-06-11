@@ -31,9 +31,12 @@ const [vehiculos, setVehiculos] = useState([
 console.log(vehiculos);
 
 const [BarriosPeligrosos, setBarriosPeligrosos] = useState([
-  { barrio: 'Centro', peligrosidad: 'Alta' },
-  { barrio: 'Norte', peligrosidad: 'Media' },
-  { barrio: 'Sur', peligrosidad: 'Baja' }
+  { barrio: 'La floresta', peligrosidad: '3' },
+  { barrio: 'Marta Bucaran', peligrosidad: '2' },
+  { barrio: 'La marin', peligrosidad: '1' },
+  { barrio: 'El condado', peligrosidad: '3' },
+  { barrio: 'La pradera', peligrosidad: '2' },
+  { barrio: 'El bosque', peligrosidad: '3' }
 ]);
 
 
