@@ -25,7 +25,7 @@ function ReporteVehiculo({agregarVehiculo}){
             barrio
         };
         agregarVehiculo(nuevoVehiculo);
-        navigate("/VerificarVehiculo");
+        navigate("/Inicio");
     };
 
     return (

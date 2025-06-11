@@ -63,7 +63,7 @@ const agregarVehiculo = (nuevoVehiculo) => {
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo agregarVehiculo={agregarVehiculo} />} />
           <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={BarriosPeligrosos} />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo />} />
-          <Route path="/VerificarVehiculo" element={<VerificarVehiculo />} />
+          <Route path="/VerificarVehiculo" element={<VerificarVehiculo vehiculos={vehiculos} />} />
           <Route path="/Configuracion" element={<Configuracion />} />
           <Route path="/MiZona" element={<MiZona />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
