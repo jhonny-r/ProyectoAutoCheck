@@ -2,13 +2,14 @@ import React, {useState} from "react";
 import '../Estilos/VerificarVehiculo.css';
 
 function VerificarVehiculo({vehiculos}) {
+    
     const [placa,setPlaca] = useState("");
     const [fecha,setFecha] = useState("");
     const [barrio,setBarrio] = useState("");
     const [descripcion,setDescripcion] = useState("");
 
     const consultar = (e) =>{
-        e.prevenDefault();
+        e.preventDefault();
         const vehiculo = vehiculos.find((v) => v.placa.toUpperCase() === placa.toUpperCase());
         if (vehiculo) {
            setFecha(vehiculo.fecha);
