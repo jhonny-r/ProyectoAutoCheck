@@ -19,9 +19,14 @@ import RecuperacionContra from './Componente/RecuperacionContra.jsx';
 function App() {
 
 const [usuarios, setUsuarios] = useState([
-  { nombre: 'Jhonny', email: 'jhonny.ruiz@epn.edu.ec', contraseña: '123456' },
-  { nombre: 'Gustavo', email: 'gustavo.herrera@epn.edu.ec', contraseña: '123456' }
+  { nombre: 'Jhonny', alias: 'jhonny', telefono: '0956369896',direccion:'Centro', email: 'jhonny.ruiz@epn.edu.ec', contraseña: '123456' },
+  { nombre: 'Gustavo', alias: 'gustavo', telefono: '0987654321',direccion:'Norte', email: 'gustavo.herrera@epn.edu.ec', contraseña: '123456' }
 ]);
+
+
+const agregarUsuario = (nuevoUsuario) => {
+  setUsuarios([...usuarios, nuevoUsuario]);
+};
 
   return (
     <div className="App">
@@ -33,7 +38,7 @@ const [usuarios, setUsuarios] = useState([
           <Route path="/" element={<Login usuarios={usuarios} />} />
 
           <Route path="/Inicio" element={<Inicio />} />
-          <Route path="/Registro" element={<Registro />} />
+          <Route path="/Registro" element={<Registro agregarUsuario={agregarUsuario} />} />
           <Route path="/MiAutoCheck" element={<MiAutoCheck />} />
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />
