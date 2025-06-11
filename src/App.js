@@ -29,6 +29,13 @@ const [vehiculos, setVehiculos] = useState([
 ]);
 
 console.log(vehiculos);
+const [BarriosPeligrosos, setBarriosPeligrosos] = useState([
+  { barrio: 'Centro', peligrosidad: 'Alta' },
+  { barrio: 'Norte', peligrosidad: 'Media' },
+  { barrio: 'Sur', peligrosidad: 'Baja' }
+]);
+
+
 
 const agregarUsuario = (nuevoUsuario) => {
   setUsuarios([...usuarios, nuevoUsuario]);
