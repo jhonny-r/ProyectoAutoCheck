@@ -49,7 +49,7 @@ const agregarUsuario = (nuevoUsuario) => {
           <Route path="/MiAutoCheck" element={<MiAutoCheck />} />
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />
-          <Route path="/MapaReportes" element={<MapaReportes />} />
+          <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={BarriosPeligrosos} />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo />} />
           <Route path="/VerificarVehiculo" element={<VerificarVehiculo />} />
           <Route path="/Configuracion" element={<Configuracion />} />
