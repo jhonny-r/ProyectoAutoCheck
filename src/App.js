@@ -23,9 +23,19 @@ const [usuarios, setUsuarios] = useState([
   { nombre: 'Gustavo', alias: 'gustavo', telefono: '0987654321',direccion:'Norte', email: 'gustavo.herrera@epn.edu.ec', contraseña: '123456' }
 ]);
 
+const [vehiculos, setVehiculos] = useState([
+  { fecha: '2023-10-01', tipo: 'Auto', placa: 'ABC123', marca: 'Chevrolet', modelo: 'Sonic', color: 'Rojo', barrio: 'Solanda' },
+  { fecha: '2023-10-02', tipo: 'Moto', placa: 'XYZ789', marca: 'Kawasaki', modelo: 'Ninja', color: 'Verde', barrio: 'Chillogallo' }
+]);
+
+console.log(vehiculos);
 
 const agregarUsuario = (nuevoUsuario) => {
   setUsuarios([...usuarios, nuevoUsuario]);
+};
+
+const agregarVehiculo = (nuevoVehiculo) => {
+  setVehiculos([...vehiculos, nuevoVehiculo]);
 };
 
   return (
@@ -43,7 +53,7 @@ const agregarUsuario = (nuevoUsuario) => {
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />
           <Route path="/MapaReportes" element={<MapaReportes />} />
-          <Route path="/ReporteVehiculo" element={<ReporteVehiculo />} />
+          <Route path="/ReporteVehiculo" element={<ReporteVehiculo agregarVehiculo={agregarVehiculo} />} />
           <Route path="/VerificarVehiculo" element={<VerificarVehiculo />} />
           <Route path="/Configuracion" element={<Configuracion />} />
           <Route path="/MiZona" element={<MiZona />} />

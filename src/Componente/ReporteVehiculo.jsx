@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import '../Estilos/ReporteVehiculo.css';
 
-const ReporteVehiculo =({setVehiculos}) =>{
+function ReporteVehiculo({agregarVehiculo}){
     const navigate = useNavigate();
 
     const [fecha, setFecha] = useState("");
@@ -24,7 +24,7 @@ const ReporteVehiculo =({setVehiculos}) =>{
             color,
             barrio
         };
-        setVehiculos(prevVehiculos => [...prevVehiculos, nuevoVehiculo]);
+        agregarVehiculo(nuevoVehiculo);
         navigate("/VerificarVehiculo");
     };
 
@@ -73,6 +73,7 @@ const ReporteVehiculo =({setVehiculos}) =>{
         </form>
     );
 
+    
 
 }
 

@@ -1,0 +1,60 @@
+.verificar-vehiculo{
+    margin: 40px auto;
+  width: 90%;
+  max-width: 500px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header{
+  background-color: #b2f2bb;
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+  color: #2d6a4f;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.fila{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.verificar-vehiculo input,
+.verificar-vehiculo textarea{
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: none;
+  background-color: #f1f3f5;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.verificar-vehiculo textarea{
+    height: 120px;
+    resize: none;
+}
+
+.btnConsultar{
+  padding: 12px 24px;
+  background-color: #69db7c;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.btnConsultar:hover{
+    background-color: #51cf66;
+}
