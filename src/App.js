@@ -29,6 +29,7 @@ const [vehiculos, setVehiculos] = useState([
 ]);
 
 console.log(vehiculos);
+
 const [BarriosPeligrosos, setBarriosPeligrosos] = useState([
   { barrio: 'Centro', peligrosidad: 'Alta' },
   { barrio: 'Norte', peligrosidad: 'Media' },
@@ -59,11 +60,11 @@ const agregarVehiculo = (nuevoVehiculo) => {
           <Route path="/MiAutoCheck" element={<MiAutoCheck />} />
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />
-          <Route path="/MapaReportes" element={<MapaReportes />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo agregarVehiculo={agregarVehiculo} />} />
           <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={BarriosPeligrosos} />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo />} />
           <Route path="/VerificarVehiculo" element={<VerificarVehiculo vehiculos={vehiculos} />} />
+          <Route path="/VerificarVehiculo" element={<VerificarVehiculo />} />
           <Route path="/Configuracion" element={<Configuracion />} />
           <Route path="/MiZona" element={<MiZona />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
