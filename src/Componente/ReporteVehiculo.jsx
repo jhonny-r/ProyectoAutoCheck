@@ -33,7 +33,7 @@ const ReporteVehiculo =({setVehiculos}) =>{
             <h4>REPORTE VEHICULO ROBADO</h4>
             
             <div>
-                <label>Fecha</label>
+                
                 <input type="date" value={fecha} onChange={(e)=>setFecha(e.target.value)}/> 
             </div>
             <select value={tipo} onChange={(e)=>setTipo(e.target.value)}>
@@ -42,8 +42,7 @@ const ReporteVehiculo =({setVehiculos}) =>{
                 <option value="Moto">Moto</option>
                 <option value="Camioneta">Camioneta</option>
             </select>
-            <label>Placa</label>
-            <input type="text" value={placa} onChange={(e)=>setPlaca(e.target.value)}/>
+            <input type="text" placeholder="Placa" value={placa} onChange={(e)=>setPlaca(e.target.value)}/>
             <br/>
             <select value={marca} onChange={(e)=>setMarca(e.target.value)}>
                 <option value="">Marca</option>
@@ -53,10 +52,8 @@ const ReporteVehiculo =({setVehiculos}) =>{
             </select>
 
             <div className="fila">
-                <label>Modelo</label>
-                <input type="text" value={modelo} onChange={(e)=>setModelo(e.target.value)}/>
-                <label>Color</label>
-                <input type="text" value={color} onChange={(e)=>setColor(e.target.value)}/>
+                <input type="text" placeholder="Modelo" value={modelo} onChange={(e)=>setModelo(e.target.value)}/>
+                <input type="text" placeholder="Color" value={color} onChange={(e)=>setColor(e.target.value)}/>
             </div>
 
             <select value={barrio} onChange={(e)=>setBarrio(e.target.value)}>
