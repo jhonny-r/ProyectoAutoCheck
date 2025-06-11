@@ -1,0 +1,64 @@
+.reporte-vehiculo{
+    width: 90%;
+  max-width: 400px;
+  margin: auto;
+  background: #fefefe;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px #ccc;
+  font-family: sans-serif;
+}
+
+.reporte-vehiculo h4{
+    background-color: #9cf5c3;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.reporte-vehiculo label{
+  font-weight: bold;
+  display: block;
+  margin: 10px 0 4px;
+}
+
+.reporte-vehiculo input,
+.reporte-vehiculo select{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.fila{
+    display: flex;
+    gap: 10px;
+}
+
+.fila input{
+    flex:1;
+}
+
+.btnIngresar{
+    width: 100%;
+  background-color: #2ecc71;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btnCancelar{
+    display: block;
+  margin: auto;
+  background: none;
+  color: #00b894;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
