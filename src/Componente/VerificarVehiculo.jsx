@@ -59,8 +59,11 @@ function VerificarVehiculo({vehiculos,consultas,setConsultas}) {
             <input type="text" placeholder="Fecha del robo" value={fecha} readOnly/>
             <input type="text" placeholder="Barrio" value={barrio} readOnly/>
             <textarea placeholder="Descripcion" value={descripcion} readOnly/>
-            <button type="button" className="btnRegresar" onClick={()=>navigate("/Inicio")}>Volver al Inicio</button> 
-
+            <div className="botones-finales">
+                 <button type="button" className="btnLimpiar" onClick={()=>{setPlaca(""); setFecha("");setBarrio("");setDescripcion("")}}>Limpiar</button> 
+                 <button type="button" className="btnRegresar" onClick={()=>navigate("/Inicio")}>Volver al Inicio</button>
+            </div>
+           
         </form>
     );
 }
