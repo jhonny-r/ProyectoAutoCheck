@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../Estilos/Inicio.css';
 import fondo from '../Imagenes/fondo.jpg';
 import logo from '../Imagenes/logo-autocheck.png';
@@ -8,9 +9,10 @@ import reportar from '../Imagenes/reportar.png';
 import zonas from '../Imagenes/zonas.png';
 
 function Inicio() {
+  const navigate = useNavigate();
+
   return (
     <div className="home-container" style={{ backgroundImage: `url(${fondo})` }}>
-      {/* BARRA SUPERIOR */}
       <div className="header-menu">
         <div className="logo-container">
           <img src={logo} alt="Logo AutoCheck" className="logo-img" />
@@ -19,12 +21,11 @@ function Inicio() {
         <div className="nav-box">
           <span className="nav-item">Inicio</span>
           <span className="nav-item">Mi AutoCheck</span>
-          <span className="nav-item">Foro Vecinal</span>
-          <span className="nav-item">Configuración</span>
+          <span className="nav-item" onClick={() => navigate('/foro')}>Foro Vecinal</span>
+          <span className="nav-item" onClick={() => navigate('/configuracion')}>Configuración</span>
         </div>
       </div>
 
-      {/* CUERPO CENTRAL */}
       <main className="main-content">
         <h1>Protege tu Comunidad</h1>
         <p className="subtitulo">Verifica, Reporta y Mantente Informado</p>
@@ -50,7 +51,6 @@ function Inicio() {
         </div>
       </main>
 
-      {/* FOOTER */}
       <footer className="footer">
         <span>AutoCheck</span>
         <span>Juntos hacemos las calles más seguras</span>
@@ -60,5 +60,3 @@ function Inicio() {
 }
 
 export default Inicio;
-
-

@@ -1,0 +1,104 @@
+.foro-container {
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 2% 5%;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  color: #1d2ca3;
+  margin: 0.5rem 0;
+}
+
+.foro-controles {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.zona-select {
+  font-size: 16px;
+  padding: 6px 12px;
+}
+
+.publicar-btn {
+  background-color: #47b34d;
+  color: white;
+  font-weight: bold;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.publicaciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.pub-card {
+  background-color: #f1e6fb;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+}
+
+.pub-autor {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.pub-meta {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.pub-texto {
+  margin: 10px 0;
+}
+
+.pub-acciones {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pub-acciones button {
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.volver-btn {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 6px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  background: #2c2c74;
+  color: white;
+  font-size: 14px;
+  padding: 15px 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
