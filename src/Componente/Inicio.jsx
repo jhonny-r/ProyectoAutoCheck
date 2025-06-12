@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Estilos/Inicio.css';
 import fondo from '../Imagenes/fondo.jpg';
-import logo from '../Imagenes/logo-autocheck.png';
+import logo from '../Imagenes/LogoAzul.svg';
 import mapa from '../Imagenes/mapa.png';
 import verificar from '../Imagenes/verificar.png';
 import reportar from '../Imagenes/reportar.png';
@@ -16,7 +16,6 @@ function Inicio({usuarioActivo}) {
       <div className="header-menu">
         <div className="logo-container">
           <img src={logo} alt="Logo AutoCheck" className="logo-img" />
-          <span className="logo-text">AutoCheck</span>
         </div>
         <div className="nav-box">
           <span className="nav-item" onClick={() => navigate('/ForoVecinal')}>Foro Vecinal</span>
