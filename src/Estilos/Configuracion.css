@@ -2,52 +2,65 @@
   background-size: cover;
   background-position: center;
   min-height: 100vh;
-  padding: 40px 20px 100px;
+  padding: 40px 20px 120px;
+  font-family: 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .titulo {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: bold;
-  margin-bottom: 30px;
-  color: #1d1d1d;
+  color: #1e1e8f;
+  margin-bottom: 40px;
 }
 
-.seccion-row {
+.fila-config {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 40px;
   margin-bottom: 30px;
 }
 
-.seccion-box {
+.box-config {
   background: white;
-  padding: 25px;
+  padding: 25px 30px;
   border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  min-width: 320px;
-  max-width: 420px;
-  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.grande {
-  font-size: 16px;
+.box-config h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #0b0b55;
 }
 
-.switch-label {
+.fila-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 12px 0;
+  font-size: 15px;
+}
+
+.texto-frecuencia {
+  color: #333;
+}
+
+.frecuencia {
+  font-weight: bold;
 }
 
 .switch {
   position: relative;
   display: inline-block;
-  width: 46px;
+  width: 44px;
   height: 24px;
 }
 
@@ -62,13 +75,13 @@
   cursor: pointer;
   top: 0; left: 0; right: 0; bottom: 0;
   background-color: #ccc;
-  border-radius: 34px;
   transition: .4s;
+  border-radius: 24px;
 }
 
 .slider:before {
-  position: absolute;
   content: "";
+  position: absolute;
   height: 18px;
   width: 18px;
   left: 3px;
@@ -83,73 +96,69 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  transform: translateX(22px);
+  transform: translateX(20px);
 }
 
-.boton-secundario, .boton-rojo {
+.boton-secundario,
+.boton-rojo {
   padding: 10px 20px;
-  margin: 8px 5px;
   border: none;
+  font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 14px;
 }
 
 .boton-secundario {
-  background: #fff;
-  border: 1px solid #333;
+  background-color: white;
+  border: 1px solid #222;
 }
 
 .boton-rojo {
-  background: #fff;
-  color: #e74c3c;
-  border: 1px solid #e74c3c;
+  background-color: white;
+  color: #c0392b;
+  border: 1px solid #c0392b;
 }
 
 .botones-cuenta {
   display: flex;
-  gap: 12px;
+  gap: 15px;
   flex-wrap: wrap;
-  justify-content: center;
   margin-top: 10px;
 }
 
-/* BOTÓN VOLVER */
-.boton-lateral {
-  position: fixed;
-  right: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-}
-
-.volver-lateral {
+.btn-volver {
   background-color: black;
   color: white;
-  padding: 12px 26px;
+  padding: 8px 20px;
+  border-radius: 18px;
   border: none;
-  border-radius: 8px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  margin: 40px auto 20px;
+  display: block;
+  text-align: center;
+  width: 10px;
+  height: 40px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   transition: background-color 0.3s ease;
 }
 
-.volver-lateral:hover {
-  background-color: #333;
+.btn-volver:hover {
+  background-color: #222;
+  color: #ffffff;
 }
 
-/* FOOTER */
+
 .footer {
-  padding: 20px 40px;
-  background: #2c2c74;
-  color: white;
-  font-size: 30px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
   position: fixed;
   bottom: 0;
-  left: 0;
+  width: 100%;
+  background-color: #23207d;
+  color: white;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
 }
