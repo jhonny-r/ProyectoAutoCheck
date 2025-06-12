@@ -19,8 +19,6 @@ function Inicio({usuarioActivo}) {
           <span className="logo-text">AutoCheck</span>
         </div>
         <div className="nav-box">
-          <span className="nav-item">Inicio</span>
-          <span className="nav-item">Mi AutoCheck</span>
           <span className="nav-item" onClick={() => navigate('/ForoVecinal')}>Foro Vecinal</span>
           <span className="nav-item" onClick={() => navigate('/configuracion')}>Configuración</span>
           <span className="nav-item" onClick={() => navigate('/MiAutoCheck')}>MiAutoCheck</span>
