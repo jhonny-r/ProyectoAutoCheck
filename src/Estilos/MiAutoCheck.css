@@ -6,26 +6,29 @@
   padding: 0;
   border-radius: 12px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
+/* ENCABEZADO */
 .encabezado {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   background-color: #b2f3c0;
   border-radius: 12px 12px 0 0;
-  padding: 20px 40px;
+  padding: 20px 30px;
 }
 
 .encabezado img {
   width: 80px;
   height: 80px;
   border-radius: 14px;
+  object-fit: cover;
 }
 
 .encabezado-texto {
   flex-grow: 1;
-  margin-left: 20px;
   text-align: center;
 }
 
@@ -41,11 +44,43 @@
   font-size: 13px;
 }
 
+/* CONTENIDO CENTRAL */
+.contenido {
+  display: flex;
+  padding: 30px 40px;
+  gap: 60px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* BOTONES LATERALES */
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.botones button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  width: 160px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* COLUMNA DERECHA DE CONSULTAS Y VERIFICACIONES */
+.panel-derecho {
+  flex: 1;
+}
+
 .secciones {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   gap: 40px;
-  padding: 30px 40px;
 }
 
 .columna {
@@ -90,34 +125,36 @@
   font-weight: bold;
 }
 
+/* ZONA DE ALERTAS Y ZONA DEL USUARIO */
 .alertas-zona {
   display: flex;
-  justify-content: center;
-  gap: 100px;
-  margin: 20px 0;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 10px 0;
   font-size: 14px;
+  gap: 40px;
 }
 
-.botones {
+.alertas-zona .columna {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-left: 40px;
-  margin-bottom: 30px;
+  align-items: flex-start; /* icono alineado como títulos */
 }
 
-.botones button {
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
+.alertas-zona .columna .etiqueta {
+  display: flex;
+  align-items: center;
   font-weight: bold;
-  width: 160px;
-  text-align: center;
-  cursor: pointer;
+  gap: 6px;
+  margin-bottom: 5px;
 }
 
+.alertas-zona .columna .contenido {
+  margin-left: 24px; /* desplazamiento visual similar a subtítulos */
+}
+
+/* PIE DE PÁGINA */
 .footer {
   margin-top: 40px;
   background-color: #2d2d3f;
