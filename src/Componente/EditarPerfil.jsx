@@ -65,7 +65,7 @@ const EditarPerfil = () => {
 
           <div className="form-buttons">
             <button className="guardar">Guardar Cambios</button>
-            <button className="cancelar" onClick={() => navigate('/')}>Cancelar</button>
+            <button className="cancelar" onClick={() => navigate('/Inicio')}>Cancelar</button>
           </div>
         </div>
       </div>
