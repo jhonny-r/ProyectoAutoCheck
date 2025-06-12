@@ -8,7 +8,7 @@ const EditarPerfil = () => {
 
   return (
     <div className="perfil-container">
-      <button className="volver-btn" onClick={() => navigate('/')}>Volver al Inicio</button>
+      <button className="volver-btn" onClick={() => navigate('/Inicio')}>Volver al Inicio</button>
 
       <h1 className="perfil-title">Editar Perfil</h1>
 

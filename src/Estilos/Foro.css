@@ -1,159 +1,181 @@
 .foro-container {
+  background-image: url('../Imagenes/fondo-foro.png');
   background-size: cover;
-  background-position: center;
   min-height: 100vh;
-  padding: 1rem;
+  font-family: sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* BARRA SUPERIOR GRIS */
 .foro-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  padding: 0.5rem 1rem;
-  background-color: #e6e6e6;
-  border-radius: 8px;
+  width: 100%;
+  background-color: transparent; /* ✅ QUITA LA VERDE */
+  padding: 0; /* o ajústalo si quieres espacio */
+}
+.foro-container > .foro-header {
+  background-color: transparent !important;
+  padding: 0 !important;
 }
 
-.logo-section {
+
+.barra-header {
+  background-color: #dadada;
   display: flex;
   align-items: center;
+  padding: 10px 20px;
 }
 
-.logo-foro {
-  width: 40px;
+.logo-header {
+  width: 30px;
   height: auto;
-  margin-right: 0.5rem;
+  margin-right: 10px;
 }
 
-.autocheck-text {
+.texto-header {
+  font-size: 18px;
   font-weight: bold;
-  font-size: 1.2rem;
+  color: #1c267b;
 }
 
-.foro-title {
-  font-size: 1.5rem;
-  color: #1a237e;
-  font-weight: bold;
-  margin: 0;
+/* TÍTULO + SELECT + BOTÓN */
+.foro-header-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 25px;
 }
 
-.volver-btn {
-  background-color: black;
-  color: white;
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+.contenido-col {
+  text-align: center;
 }
 
-.foro-sub {
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  color: #1a237e;
-  font-weight: 500;
+.foro-titulo {
+  color: #1c267b;
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.foro-subtitulo {
+  color: #2c2c6c;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .foro-controles {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
-  margin: 1rem 0;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .zona-select {
-  padding: 0.4rem;
-  font-size: 1rem;
+  padding: 6px;
+  border-radius: 5px;
 }
 
 .publicar-btn {
   background-color: #4CAF50;
   color: white;
+  padding: 6px 12px;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
-  font-weight: 600;
 }
 
-.foro-grid {
+/* ✅ BOTÓN AL FINAL */
+.boton-inferior {
+  width: 100%;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.volver-btn {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 110px; /* ✅ Lo baja visualmente */
+  position: relative; /* ✅ Ya no está flotando encima */
+}
+
+
+/* PUBLICACIONES */
+.publicaciones-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.2rem;
-  width: 90%;
-  margin: 1rem auto;
+  gap: 25px;
+  margin: 2rem;
 }
 
 .pub-card {
-  display: flex;
-  background-color: #f1e7fa;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  background-color: #f0e8ff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 
-.pub-avatar {
-  width: 50px;
-  height: 50px;
+.pub-img-user {
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
-  margin-right: 1rem;
-}
-
-.pub-content {
-  flex: 1;
+  margin-bottom: 10px;
 }
 
 .pub-autor {
   font-weight: bold;
-  margin: 0;
+  margin-bottom: 5px;
 }
 
 .pub-meta {
-  font-size: 0.85rem;
-  color: #555;
-  margin: 0.2rem 0;
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 8px;
 }
 
 .pub-texto {
-  margin: 0.5rem 0;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .pub-img {
-  width: 100%;
-  max-width: 150px;
-  border-radius: 8px;
-  margin: 0.5rem 0;
+  width: 150px;
+  margin: 10px auto;
+  display: block;
+  border-radius: 10px;
 }
 
 .pub-acciones {
   display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 10px;
 }
 
 .pub-acciones button {
-  padding: 0.3rem 0.7rem;
-  border-radius: 6px;
-  border: none;
+  padding: 5px 10px;
+  background-color: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 5px;
   cursor: pointer;
-  font-weight: 500;
 }
 
-.pub-acciones button:hover {
-  opacity: 0.9;
-  background-color: #ccc;
-}
-
+/* FOOTER */
 .footer {
-  margin-top: auto;
+  background-color: #1c267b;
+  color: white;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
-  background-color: #0d5302;
-  color: white;
+  font-size: 14px;
   width: 100%;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.9rem;
 }
