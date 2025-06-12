@@ -39,6 +39,12 @@ const [BarriosPeligrosos, setBarriosPeligrosos] = useState([
   { barrio: 'El bosque', peligrosidad: '3' }
 ]);
 
+const [usuarioActivo, setUsuarioActivo] = useState(
+  JSON.parse(localStorage.getItem('usuarioActivo')) || null
+);
+const [consultas, setConsultas] = useState(
+  JSON.parse(localStorage.getItem('consultas')) || []
+);
 
 
 const agregarUsuario = (nuevoUsuario) => {
@@ -49,6 +55,13 @@ const agregarVehiculo = (nuevoVehiculo) => {
   setVehiculos([...vehiculos, nuevoVehiculo]);
 };
 
+const eliminarConsulta = (placa)=>{
+  const nuevasConsultas = consultas.filter(c=>c.placa !== placa);
+  setConsultas(nuevasConsultas);
+  localStorage.setItem("consultas",JSON.stringify(nuevasConsultas));
+
+};
+
   return (
     <div className="App">
 
@@ -56,17 +69,17 @@ const agregarVehiculo = (nuevoVehiculo) => {
         <Routes>
 
           {/* Login es la ruta por defecto */}
-          <Route path="/" element={<Login usuarios={usuarios} />} />
+          <Route path="/" element={<Login usuarios={usuarios} setUsuarioActivo={setUsuarioActivo} />} />
 
-          <Route path="/Inicio" element={<Inicio />} />
+          <Route path="/Inicio" element={<Inicio usuario={usuarioActivo}/>} />
           <Route path="/Registro" element={<Registro agregarUsuario={agregarUsuario} />} />
-          <Route path="/MiAutoCheck" element={<MiAutoCheck />} />
+          <Route path="/MiAutoCheck" element={<MiAutoCheck usuario={usuarioActivo} consultas={consultas} eliminarConsulta={eliminarConsulta} setUsuarioActivo={setUsuarioActivo} setConsultas={setConsultas}/>} />
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo agregarVehiculo={agregarVehiculo} />} />
           <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={BarriosPeligrosos} />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo />} />
-          <Route path="/VerificarVehiculo" element={<VerificarVehiculo vehiculos={vehiculos} />} />
+          <Route path="/VerificarVehiculo" element={<VerificarVehiculo vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} />} />
           <Route path="/Configuracion" element={<Configuracion />} />
           <Route path="/MiZona" element={<MiZona />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />

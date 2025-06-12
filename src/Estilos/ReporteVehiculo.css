@@ -15,6 +15,7 @@
   text-align: center;
   border-radius: 8px;
   margin-bottom: 20px;
+   text-transform: uppercase;
 }
 
 .reporte-vehiculo label{
@@ -29,6 +30,7 @@
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #f1f3f5;
+  background-color: #f1f3f5;
   border-radius: 6px;
 }
 

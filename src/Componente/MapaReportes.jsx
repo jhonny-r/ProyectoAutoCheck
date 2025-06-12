@@ -14,6 +14,8 @@ function MapaReportes({ BarriosPeligrosos }) {
     })
     .slice(0, 6); // 6 para que se vea completo
 
+
+
   return (
     <div className="mapa-reportes-container">
       <div className="encabezado">
@@ -40,9 +42,12 @@ function MapaReportes({ BarriosPeligrosos }) {
         <div>
           <h2>Autos más robados</h2>
           <ul>
-            {barriosOrdenados.map((barrio, index) => (
-              <li key={index}>{barrio.barrio}</li> // Reutilizando la lista como pediste
-            ))}
+            <li>Chevrolet Luv Dmax</li>
+            <li>Kia Rio</li>
+            <li>Chevrolet Sail</li>
+            <li>Mitsubishi Lx</li>
+            <li>Ford F150</li>
+            <li>Kia Soluto</li>
           </ul>
         </div>
       </div>
