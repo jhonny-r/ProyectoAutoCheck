@@ -8,7 +8,7 @@ import verificar from '../Imagenes/verificar.png';
 import reportar from '../Imagenes/reportar.png';
 import zonas from '../Imagenes/zonas.png';
 
-function Inicio() {
+function Inicio({usuarioActivo}) {
   const navigate = useNavigate();
 
   return (
