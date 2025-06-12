@@ -35,15 +35,15 @@ function Inicio({usuarioActivo}) {
         </div>
 
         <div className="opciones">
-          <div className="opcion">
-            <img src={verificar} alt="Verificar Vehículo" />
+          <div className="opcion" onClick={() => navigate('/VerificarVehiculo')}>
+            <img src={verificar} alt="Verificar Vehículo"  />
             <p>Verificar Vehículo</p>
           </div>
-          <div className="opcion">
+          <div className="opcion" onClick={() => navigate('/ReporteVehiculo')}>
             <img src={reportar} alt="Reportar Vehículo" />
             <p>Reportar Vehículo</p>
           </div>
-          <div className="opcion">
+          <div className="opcion" onClick={() => navigate('/MapaReportes')}>
             <img src={zonas} alt="Zonas Conflictivas" />
             <p>Mapa de Zonas Conflictivas</p>
           </div>
