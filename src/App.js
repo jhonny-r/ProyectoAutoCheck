@@ -14,6 +14,7 @@ import VerificarVehiculo from './Componente/VerificarVehiculo.jsx';
 import Configuracion from './Componente/Configuracion.jsx';
 import MiZona from './Componente/MiZona.jsx';
 import RecuperacionContra from './Componente/RecuperacionContra.jsx';
+import NuevaEntradaForo from './Componente/NuevaEntradaForo.jsx';
 
 
 function App() {
@@ -83,6 +84,7 @@ const eliminarConsulta = (placa)=>{
           <Route path="/Configuracion" element={<Configuracion />} />
           <Route path="/MiZona" element={<MiZona />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
+          <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
         </Routes>
       </BrowserRouter>
 
