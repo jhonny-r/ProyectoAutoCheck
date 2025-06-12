@@ -1,0 +1,163 @@
+.zona-container {
+  background-image: url('../Imagenes/mi_zona.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.volver-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.zona-titulo {
+  text-align: center;
+  color: #1233bb;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.zona-subtitulo {
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.zona-centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.zona-mapa-contenedor {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.zona-mapa {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.zona-select {
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.mensaje-exito {
+  margin-top: 12px;
+  background-color: #e6ffe6;
+  color: #0c7c0c;
+  font-weight: bold;
+  border-left: 5px solid green;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.zona-botones {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.btn-verde {
+  background-color: #1da547;
+  color: white;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-azul {
+  background-color: #252bb3;
+  color: white;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.zona-estadisticas {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.card-alerta,
+.card-reporte,
+.card-sospechoso {
+  padding: 18px 25px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 12px;
+  width: 180px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.card-alerta {
+  border: 2px solid red;
+  color: red;
+  background-color: #fff5f5;
+}
+
+.card-reporte {
+  border: 2px solid orange;
+  color: orange;
+  background-color: #fffaf0;
+}
+
+.card-sospechoso {
+  border: 2px solid #1d33c2;
+  color: #1d33c2;
+  background-color: #f4f7ff;
+}
+
+.valor {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #23207d;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+  font-size: 0.85rem;
+}
