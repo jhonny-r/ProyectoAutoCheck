@@ -31,7 +31,7 @@ function Inicio({usuarioActivo}) {
 
         <div className="mapa-container">
           <img src={mapa} alt="Mapa" className="imagen-mapa" />
-          <button className="btn-mizona">Mi zona</button>
+          <button className="btn-mizona" onClick={() => navigate('/MiZona')}>Mi zona</button>
         </div>
 
         <div className="opciones">
