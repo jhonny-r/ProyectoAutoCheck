@@ -21,8 +21,9 @@ function Inicio() {
         <div className="nav-box">
           <span className="nav-item">Inicio</span>
           <span className="nav-item">Mi AutoCheck</span>
-          <span className="nav-item" onClick={() => navigate('/foro')}>Foro Vecinal</span>
+          <span className="nav-item" onClick={() => navigate('/ForoVecinal')}>Foro Vecinal</span>
           <span className="nav-item" onClick={() => navigate('/configuracion')}>Configuración</span>
+           <span className="nav-item" onClick={() => navigate('/MiAutoCheck')}>MiAutoCheck</span>
         </div>
       </div>
 
