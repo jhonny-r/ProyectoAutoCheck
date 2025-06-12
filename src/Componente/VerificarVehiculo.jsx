@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import '../Estilos/VerificarVehiculo.css';
+import { useNavigate } from "react-router-dom";
 
-function VerificarVehiculo({vehiculos}) {
+function VerificarVehiculo({vehiculos,consultas,setConsultas}) {
+    const navigate = useNavigate();
     
     const [placa,setPlaca] = useState("");
     const [fecha,setFecha] = useState("");
@@ -14,11 +16,34 @@ function VerificarVehiculo({vehiculos}) {
         if (vehiculo) {
            setFecha(vehiculo.fecha);
            setBarrio(vehiculo.barrio);
-           setDescripcion(`El vehículo con placa ${vehiculo.placa} de color ${vehiculo.color} fue reportado en el barrio ${vehiculo.barrio}.`);
+           setDescripcion(`El vehículo con placa ${vehiculo.placa} de color ${vehiculo.color} fue reportado como robado en el barrio ${vehiculo.barrio}.`);
+           const nuevaConsulta = { //Se añadio esta nueva parte del codigo
+            placa: vehiculo.placa,
+            fecha: vehiculo.fecha,
+            alerta: true
+           };
+           setConsultas((prev)=>{
+            //Nueva parte de codigo para que no se sobre escriba la consulta cuando se renderice
+            const actualiza= [...prev,nuevaConsulta];
+            localStorage.setItem("consultas",JSON.stringify(actualiza));
+            return actualiza;
+        });
         }else{
             setFecha("");
             setBarrio("");
             setDescripcion("Vehiculo no encontrado.");
+            const nuevaConsulta = { 
+                placa: placa.toUpperCase(),
+                fecha: new Date().toLocaleDateString(),
+                alerta: false
+
+            };
+            setConsultas((prev)=>{
+            //Nueva parte de codigo para que no se sobre escriba la consulta cuando se renderice
+            const actualiza= [...prev,nuevaConsulta];
+            localStorage.setItem("consultas",JSON.stringify(actualiza));
+            return actualiza;
+        });
         }
   
     };
@@ -34,6 +59,7 @@ function VerificarVehiculo({vehiculos}) {
             <input type="text" placeholder="Fecha del robo" value={fecha} readOnly/>
             <input type="text" placeholder="Barrio" value={barrio} readOnly/>
             <textarea placeholder="Descripcion" value={descripcion} readOnly/>
+            <button type="button" className="btnRegresar" onClick={()=>navigate("/Inicio")}>Volver al Inicio</button> 
 
         </form>
     );
