@@ -21,27 +21,36 @@ function MiZona() {
   return (
     <div className="zona-container">
       <button className="volver-btn" onClick={() => navigate('/Inicio')}>Volver al Inicio</button>
+
       <h1 className="zona-titulo">Mi Zona</h1>
-      <p className="zona-subtitulo">Gestiona la zona que deseas monitorear y mantente informado de lo que ocurre a tu alrededor.</p>
+      <p className="zona-subtitulo">
+        Gestiona la zona que deseas monitorear y mantente informado de lo que ocurre a tu alrededor.
+      </p>
 
       <div className="zona-centro">
-        <div className="zona-mapa-contenedor">
-          <img src={mapa} alt="Mapa" className="zona-mapa" />
-          {mostrarCombo && (
-            <select value={zonaSeleccionada} onChange={(e) => setZonaSeleccionada(e.target.value)} className="zona-select">
-              <option>La Floresta</option>
-              <option>El Batán</option>
-              <option>El Recreo</option>
-              <option>Carcelén</option>
-              <option>La Mariscal</option>
-            </select>
-          )}
-          {mensajeZona && <div className="mensaje-exito">{mensajeZona}</div>}
-        </div>
+        <div className="zona-mapa-botones">
+          <div className="zona-mapa-contenedor">
+            <img src={mapa} alt="Mapa" className="zona-mapa" />
+            {mostrarCombo && (
+              <select
+                value={zonaSeleccionada}
+                onChange={(e) => setZonaSeleccionada(e.target.value)}
+                className="zona-select"
+              >
+                <option>La Floresta</option>
+                <option>El Batán</option>
+                <option>El Recreo</option>
+                <option>Carcelén</option>
+                <option>La Mariscal</option>
+              </select>
+            )}
+            {mensajeZona && <div className="mensaje-exito">{mensajeZona}</div>}
+          </div>
 
-        <div className="zona-botones">
-          <button className="btn-verde" onClick={cambiarZona}>Cambiar Zona</button>
-          <button className="btn-azul" onClick={establecerZona}>Establecer como Principal</button>
+          <div className="zona-botones-vertical">
+            <button className="btn-verde" onClick={cambiarZona}>Cambiar Zona</button>
+            <button className="btn-azul" onClick={establecerZona}>Establecer como Principal</button>
+          </div>
         </div>
       </div>
 
