@@ -58,3 +58,13 @@
 .btnConsultar:hover{
     background-color: #51cf66;
 }
+
+.btnRegresar{
+      display: block;
+  margin: auto;
+  background: none;
+  color: #00b894;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}

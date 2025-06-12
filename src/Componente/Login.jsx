@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LogoBlanco from '../Imagenes/LogoBlanco.svg';
 
-function Login({ usuarios }) {
+function Login({ usuarios,setUsuarioActivo }) {
     const navigate = useNavigate();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -14,6 +14,8 @@ function Login({ usuarios }) {
         const usuarioValido = usuarios.find(u => u.email === email && u.contraseña === password);
         console.log(usuarioValido);
         if (usuarioValido) {
+            localStorage.setItem("usuarioActivo",JSON.stringify(usuarioValido));
+            setUsuarioActivo(usuarioValido);
             navigate("/inicio");
         } else {
             alert("Usuario o contraseña no válidos");

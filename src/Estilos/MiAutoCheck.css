@@ -1,0 +1,129 @@
+.mi-auto {
+  max-width: 1000px;
+  margin: auto;
+  background-color: white;
+  font-family: "Segoe UI", sans-serif;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #b2f3c0;
+  border-radius: 12px 12px 0 0;
+  padding: 20px 40px;
+}
+
+.encabezado img {
+  width: 80px;
+  height: 80px;
+  border-radius: 14px;
+}
+
+.encabezado-texto {
+  flex-grow: 1;
+  margin-left: 20px;
+  text-align: center;
+}
+
+.titulo {
+  font-size: 22px;
+  color: #1a237e;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.subtitulo {
+  color: #3f51b5;
+  font-size: 13px;
+}
+
+.secciones {
+  display: flex;
+  justify-content: space-around;
+  gap: 40px;
+  padding: 30px 40px;
+}
+
+.columna {
+  flex: 1;
+}
+
+.columna h3 {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fila-consulta,
+.fila-historial {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.btnEliminar {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.alerta-verde {
+  color: green;
+  font-weight: bold;
+}
+
+.alerta-roja {
+  color: red;
+  font-weight: bold;
+}
+
+.alertas-zona {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-left: 40px;
+  margin-bottom: 30px;
+}
+
+.botones button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  width: 160px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: 40px;
+  background-color: #2d2d3f;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 0 0 12px 12px;
+  font-weight: 500;
+}
