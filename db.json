@@ -63,5 +63,27 @@
       "email": "asdsdf@sdsd",
       "contraseña": "123"
     }
+  ],
+  "zonas": [
+    {
+      "id": 1,
+      "nombreBarrio": "La Mariscal"
+    },
+    {
+      "id": 2,
+      "nombreBarrio": "El Inca"
+    },
+    {
+      "id": "405d",
+      "nombreBarrio": "Barrio San Juan"
+    },
+    {
+      "id": "4227",
+      "nombreBarrio": "San José de Condado"
+    },
+    {
+      "id": "15ff",
+      "nombreBarrio": "Carcelen"
+    }
   ]
 }

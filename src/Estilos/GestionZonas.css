@@ -1,0 +1,40 @@
+.zonas-container {
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.zonas-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.zonas-container input {
+  width: 60%;
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.zonas-container button {
+  padding: 8px 12px;
+  margin: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #1d1d1d;
+  color: white;
+}
+
+td, th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}

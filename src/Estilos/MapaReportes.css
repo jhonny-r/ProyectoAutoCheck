@@ -57,7 +57,7 @@
 }
 
 .listas-dos-columnas ul {
-  list-style-type: disc;
+  list-style-type: disc;/*tipo de viñeta de la lista*/
   padding-left: 20px;
 }
 

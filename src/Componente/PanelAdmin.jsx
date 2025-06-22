@@ -2,6 +2,7 @@ import React from "react";
 import '../Estilos/PanelAdmin.css';
 import { useNavigate } from "react-router-dom";
 
+
 function PanelAdmin() {
   const navigate = useNavigate();
 
@@ -10,6 +11,7 @@ function PanelAdmin() {
       <div className="panel-box">
         <div className="panel-header">PANEL DE ADMINISTRACIÓN</div>
         <button className="panel-button" onClick={() => navigate("/usuarios")}>Gestionar Usuarios</button>
+        <button className="panel-button" onClick={() => navigate("/zonas")}>Gestionar Zonas</button>
         <button className="panel-button" onClick={() => navigate("/reportes")}>Ver Reportes</button>
         <button className="panel-button" onClick={() => navigate("/")}>Cerrar Sesión</button>
       </div>

@@ -3,17 +3,17 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to bottom, #0099cc, #003366);
+    background: linear-gradient(to bottom, #0099cc, #003366);/*degradado de color de arriba hacia abajo*/
     font-family: Arial, sans-serif;
 }
 
 .login-box {
     background-color: white;
     border-radius: 10px;
-    padding: 30px;
-    width: 300px;
+    padding: 60px;
+    width: 500px;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /*sombra al elemento para dar profundidad visual "flotando"*/
     background: transparent;
     color: white;
 }
@@ -62,7 +62,7 @@
     text-decoration: none;
 }
 
-.login-links a:hover {
+.login-links a:hover { /*se subraya el elemento al colocar el mouse encima*/
     text-decoration: underline;
 }
 
@@ -74,5 +74,5 @@
 
 .login-input,
 .login-button {
-  box-sizing: border-box;
+  box-sizing: border-box; /*evita que los elementos crezcan de forma inesperada-- se aplica en el pading o borde*/
 }

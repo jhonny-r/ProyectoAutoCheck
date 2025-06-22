@@ -62,6 +62,12 @@ function ReporteVehiculo({agregarVehiculo}){
                 <option value="Carcelén">Carcelén</option>
                 <option value="Solanda">Solanda</option>
             </select>
+
+            <label className="label-file">
+          
+          <input type="file" accept="image/*"  />
+        </label>
+
             <br/>
             <br/>
             <button type="submit" className="btnIngresar">INGRESAR</button>

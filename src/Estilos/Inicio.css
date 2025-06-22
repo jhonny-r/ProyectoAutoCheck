@@ -55,7 +55,7 @@ html, body {
 
 .nav-box {
   display: flex;
-  gap: 35px;
+  gap: 35px; /*espacio entre elementos hijos de un contenedor*/
   background-color: white;
   padding: 12px 35px;
   border-radius: 25px;
@@ -89,7 +89,7 @@ h1 {
 
 /* MAPA */
 .mapa-container {
-  background-color: white;
+  background-color: whitesmoke;
   margin: 25px auto;
   padding: 25px;
   width: 440px;
@@ -143,7 +143,7 @@ h1 {
 .opcion img {
   width: 35%;
   height: auto;
-  object-fit: contain;
+  object-fit: contain;/*muestra las imagenes de forma proporcional dentro del contenedor*/
 }
 
 .opcion p {
