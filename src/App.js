@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import Inicio from './Componente/Inicio.jsx';
@@ -15,14 +15,24 @@ import Configuracion from './Componente/Configuracion.jsx';
 import MiZona from './Componente/MiZona.jsx';
 import RecuperacionContra from './Componente/RecuperacionContra.jsx';
 import NuevaEntradaForo from './Componente/NuevaEntradaForo.jsx';
-
+import axios from 'axios';
 
 function App() {
 
-const [usuarios, setUsuarios] = useState([
-  { nombre: 'Jhonny', alias: 'jhonny', telefono: '0956369896',direccion:'Centro', email: 'jhonny.ruiz@epn.edu.ec', contraseña: '123456' },
-  { nombre: 'Gustavo', alias: 'gustavo', telefono: '0987654321',direccion:'Norte', email: 'gustavo.herrera@epn.edu.ec', contraseña: '123456' }
-]);
+useEffect(() => {
+axios.get('http://localhost:3001/Usuario')
+.then(response => {
+setUsuarios(response.data);
+})
+.catch(error => {
+
+console.error('Error al obtener los usuarios:', error);
+})
+
+}, []);
+
+
+const [usuarios, setUsuarios] = useState([]);
 
 const [vehiculos, setVehiculos] = useState([
   { fecha: '2023-10-01', tipo: 'Auto', placa: 'ABC123', marca: 'Chevrolet', modelo: 'Sonic', color: 'Rojo', barrio: 'Solanda' },
@@ -48,9 +58,17 @@ const [consultas, setConsultas] = useState(
 );
 
 
-const agregarUsuario = (nuevoUsuario) => {
-  setUsuarios([...usuarios, nuevoUsuario]);
-};
+const agregarUsuario = (nuevo) => {
+
+     axios.post('http://localhost:3001/Usuario', nuevo)
+      .then(response => {
+            setUsuarios(prev => [...prev, response.data]);
+      })
+      .catch(error => {
+        console.error('Error al agregar el usuario:', error);
+      });
+
+  };
 
 const agregarVehiculo = (nuevoVehiculo) => {
   setVehiculos([...vehiculos, nuevoVehiculo]);
@@ -73,7 +91,7 @@ const eliminarConsulta = (placa)=>{
           <Route path="/" element={<Login usuarios={usuarios} setUsuarioActivo={setUsuarioActivo} />} />
 
           <Route path="/Inicio" element={<Inicio usuario={usuarioActivo}/>} />
-          <Route path="/Registro" element={<Registro agregarUsuario={agregarUsuario} />} />
+          <Route path="/Registro" element={<Registro agregarUsuario={agregarUsuario} usuarios={usuarios} />} />
           <Route path="/MiAutoCheck" element={<MiAutoCheck usuario={usuarioActivo} consultas={consultas} eliminarConsulta={eliminarConsulta} setUsuarioActivo={setUsuarioActivo} setConsultas={setConsultas}/>} />
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />

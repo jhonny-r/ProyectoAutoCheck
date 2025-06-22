@@ -2,8 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import '../Estilos/Registro.css';
 
-function Registro({agregarUsuario}) {
+function Registro({agregarUsuario,usuarios}) {
   const navigate = useNavigate(); 
+
+  const id = usuarios.length > 0 ? Math.max(...usuarios.map(u => Number(u.id))) + 1 : 1;
 
 const [nombre, setNombre] = React.useState("");
 const [alias, setAlias] = React.useState("");
@@ -16,12 +18,11 @@ const [confirmarContraseña, setConfirmarContraseña] = React.useState("");
 const handleSubmit = (e) => {
   e.preventDefault();
 
-if(alias === "") {
-  alias = nombre; 
-}
+  // Si no se ingresó alias, usar el nombre
+  const aliasFinal = alias.trim() === "" ? nombre : alias;
 
   if (contraseña === confirmarContraseña) {
-    agregarUsuario({ nombre, alias, telefono, direccion, email, contraseña });
+    agregarUsuario({ id,nombre, alias: aliasFinal, telefono, direccion, email, contraseña });
     navigate("/");
   } else {
     alert("Las contraseñas no coinciden");

@@ -1,0 +1,67 @@
+{
+  "Usuario": [
+    {
+      "id": "1",
+      "nombre": "Juan Perez",
+      "alias": "juanperez",
+      "telefono": "1234567890",
+      "direccion": "Calle Falsa 123",
+      "email": "juan.perez@epn.edu.ec",
+      "contraseña": "123456"
+    },
+    {
+      "id": "2",
+      "nombre": "Jhonny",
+      "alias": "jhonny",
+      "telefono": "0956369896",
+      "direccion": "Centro",
+      "email": "jhonny.ruiz@epn.edu.ec",
+      "contraseña": "123456"
+    },
+    {
+      "id": "3",
+      "nombre": "Gustavo",
+      "alias": "gustavo",
+      "telefono": "0987654321",
+      "direccion": "Norte",
+      "email": "gustavo.herrera@epn.edu.ec",
+      "contraseña": "123456"
+    },
+    {
+      "id": "4",
+      "nombre": "prueba",
+      "alias": "prueba",
+      "telefono": "123456789",
+      "direccion": "centro",
+      "email": "prueba@hotmail.com",
+      "contraseña": "123"
+    },
+    {
+      "id": "5",
+      "nombre": "nuevoUsuario",
+      "alias": "juan",
+      "telefono": "12365",
+      "direccion": "sdsd",
+      "email": "prueba@epn.edu.ec",
+      "contraseña": "123"
+    },
+    {
+      "id": 6,
+      "nombre": "prueba",
+      "alias": "sfsf",
+      "telefono": "4",
+      "direccion": "",
+      "email": "",
+      "contraseña": ""
+    },
+    {
+      "id": 7,
+      "nombre": "orue",
+      "alias": "dfsf",
+      "telefono": "454564",
+      "direccion": "sdsf",
+      "email": "asdsdf@sdsd",
+      "contraseña": "123"
+    }
+  ]
+}
