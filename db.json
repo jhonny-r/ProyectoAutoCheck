@@ -46,22 +46,13 @@
       "contraseña": "123"
     },
     {
-      "id": 6,
+      "id": "6",
       "nombre": "prueba",
       "alias": "sfsf",
       "telefono": "4",
       "direccion": "",
       "email": "",
       "contraseña": ""
-    },
-    {
-      "id": 7,
-      "nombre": "orue",
-      "alias": "dfsf",
-      "telefono": "454564",
-      "direccion": "sdsf",
-      "email": "asdsdf@sdsd",
-      "contraseña": "123"
     }
   ]
 }

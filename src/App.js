@@ -16,6 +16,7 @@ import MiZona from './Componente/MiZona.jsx';
 import RecuperacionContra from './Componente/RecuperacionContra.jsx';
 import NuevaEntradaForo from './Componente/NuevaEntradaForo.jsx';
 import PanelAdmin from './Componente/PanelAdmin.jsx';
+import ListaUsuarios from './Componente/ListaUsuarios.jsx';
 import axios from 'axios';
 
 function App() {
@@ -71,6 +72,16 @@ const agregarUsuario = (nuevo) => {
 
   };
 
+  const eliminarUsuario = (id) => {
+    axios.delete(`http://localhost:3001/Usuario/${Number(id)}`)
+      .then(() => {
+        setUsuarios(prev => prev.filter(usuario => usuario.id !== id));
+      })
+      .catch(error => {
+        console.error('Error al eliminar el usuario:', error);
+      });
+  };
+
 const agregarVehiculo = (nuevoVehiculo) => {
   setVehiculos([...vehiculos, nuevoVehiculo]);
 };
@@ -104,7 +115,8 @@ const eliminarConsulta = (placa)=>{
           <Route path="/MiZona" element={<MiZona />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
           <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
-          <Route path="/PanelAdmin" element={<PanelAdmin />} />
+          <Route path="/PanelAdmin" element={<PanelAdmin  />} />
+          <Route path="/ListaUsuarios" element={<ListaUsuarios usuarios={usuarios} eliminarUsuario={eliminarUsuario} />} />
         </Routes>
       </BrowserRouter>
 
