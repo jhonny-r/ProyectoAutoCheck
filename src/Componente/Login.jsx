@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LogoBlanco from '../Imagenes/LogoBlanco.svg';
 
-function Login({ usuarios,setUsuarioActivo }) {
+function Login({ usuarios, setUsuarioActivo }) {
     const navigate = useNavigate();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -14,12 +14,16 @@ function Login({ usuarios,setUsuarioActivo }) {
         const usuarioValido = usuarios.find(u => u.email === email && u.contraseña === password);
         console.log(usuarioValido);
         if (usuarioValido) {
-            localStorage.setItem("usuarioActivo",JSON.stringify(usuarioValido));
+            localStorage.setItem("usuarioActivo", JSON.stringify(usuarioValido));
             setUsuarioActivo(usuarioValido);
             navigate("/inicio");
         } else {
             alert("Usuario o contraseña no válidos");
         }
+    };
+
+    const entrarComoAdmin = () => {
+        navigate("/PanelAdmin");
     };
 
     return (
@@ -44,9 +48,11 @@ function Login({ usuarios,setUsuarioActivo }) {
                 />
 
                 <button className="login-button" onClick={handleLogin}>Iniciar sesión</button>
+                
+                <button className="admin-button" onClick={entrarComoAdmin}>Entrar como Administrador</button>
+
                 <div className="login-links">
-                    <Link to="/recuperacioncontra">Recuperar contraseña</Link><br />
-                   <br />
+                    <Link to="/recuperacioncontra">Recuperar contraseña</Link><br /><br />
                     <Link to="/registro">Crear Cuenta</Link>
                 </div>
             </div>

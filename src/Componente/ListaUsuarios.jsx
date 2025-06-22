@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import '../Estilos/ListaUsuarios.css';
 
 function ListaUsuarios({ usuarios, eliminarUsuario, actualizarUsuario, editarUsuario }) {
   const [modoEdicionId, setModoEdicionId] = useState(null);
   const [datosEditados, setDatosEditados] = useState({});
+  const navigate = useNavigate();
 
   const activarEdicion = (usuario) => {
     setModoEdicionId(usuario.id);
@@ -11,7 +13,7 @@ function ListaUsuarios({ usuarios, eliminarUsuario, actualizarUsuario, editarUsu
   };
 
   const guardarCambios = () => {
-    editarUsuario(datosEditados.id,datosEditados);
+    editarUsuario(datosEditados.id, datosEditados);
     setModoEdicionId(null);
   };
 
@@ -20,9 +22,17 @@ function ListaUsuarios({ usuarios, eliminarUsuario, actualizarUsuario, editarUsu
     setDatosEditados((prev) => ({ ...prev, [name]: value }));
   };
 
+  const irARegistro = () => {
+    navigate("/registro");
+  };
+
   return (
     <div className="usuarios-container">
-      <div className="usuarios-header">LISTA DE USUARIOS</div>
+      <div className="usuarios-header">
+        LISTA DE USUARIOS
+        <button className="btn-agregar" onClick={irARegistro}>Agregar Usuario</button>
+      </div>
+
       <div className="usuarios-grid">
         {usuarios.map((usuario) => {
           const enEdicion = modoEdicionId === usuario.id;
