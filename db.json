@@ -44,15 +44,6 @@
       "direccion": "sdsd",
       "email": "prueba@epn.edu.ec",
       "contraseña": "123"
-    },
-    {
-      "id": "6",
-      "nombre": "prueba",
-      "alias": "sfsf",
-      "telefono": "4",
-      "direccion": "",
-      "email": "",
-      "contraseña": ""
     }
   ]
 }

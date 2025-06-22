@@ -1,25 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import '../Estilos/ListaUsuarios.css';
 
-function ListaUsuarios({ usuarios, eliminarUsuario }) {
+function ListaUsuarios({ usuarios, eliminarUsuario, actualizarUsuario, editarUsuario }) {
+  const [modoEdicionId, setModoEdicionId] = useState(null);
+  const [datosEditados, setDatosEditados] = useState({});
+
+  const activarEdicion = (usuario) => {
+    setModoEdicionId(usuario.id);
+    setDatosEditados({ ...usuario });
+  };
+
+  const guardarCambios = () => {
+    editarUsuario(datosEditados.id,datosEditados);
+    setModoEdicionId(null);
+  };
+
+  const manejarCambio = (e) => {
+    const { name, value } = e.target;
+    setDatosEditados((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <div className="usuarios-container">
       <div className="usuarios-header">LISTA DE USUARIOS</div>
       <div className="usuarios-grid">
-        {usuarios.map((usuario) => (
-          <div key={usuario.id} className="usuario-card">
-            <p><strong>Nombre:</strong> {usuario.nombre}</p>
-            <p><strong>Alias:</strong> {usuario.alias}</p>
-            <p><strong>Teléfono:</strong> {usuario.telefono}</p>
-            <p><strong>Dirección:</strong> {usuario.direccion}</p>
-            <p><strong>Email:</strong> {usuario.email}</p>
-            <p><strong>Contraseña:</strong> {usuario.contraseña}</p>
-            <div className="usuario-botones">
-              <button className="btn-editar">Editar Usuario</button>
-              <button className="btn-eliminar" onClick={()=> eliminarUsuario(usuario.id)}>Eliminar Usuario</button>
+        {usuarios.map((usuario) => {
+          const enEdicion = modoEdicionId === usuario.id;
+          return (
+            <div key={usuario.id} className="usuario-card">
+              {["nombre", "alias", "telefono", "direccion", "email", "contraseña"].map((campo) => (
+                <div key={campo}>
+                  <strong>{campo.charAt(0).toUpperCase() + campo.slice(1)}:</strong>
+                  {enEdicion ? (
+                    <input
+                      type="text"
+                      name={campo}
+                      value={datosEditados[campo]}
+                      onChange={manejarCambio}
+                      className="input-edicion"
+                    />
+                  ) : (
+                    <p>{usuario[campo]}</p>
+                  )}
+                </div>
+              ))}
+
+              <div className="usuario-botones">
+                {enEdicion ? (
+                  <button className="btn-editar" onClick={guardarCambios}>
+                    Guardar
+                  </button>
+                ) : (
+                  <button className="btn-editar" onClick={() => activarEdicion(usuario)}>
+                    Editar Usuario
+                  </button>
+                )}
+                <button className="btn-eliminar" onClick={() => eliminarUsuario(usuario.id)}>
+                  Eliminar Usuario
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

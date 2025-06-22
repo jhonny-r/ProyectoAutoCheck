@@ -82,6 +82,16 @@ const agregarUsuario = (nuevo) => {
       });
   };
 
+  const editarUsuario = (id, actualizado) => {
+    axios.put(`http://localhost:3001/Usuario/${id}`, actualizado)
+      .then(response => {
+        setUsuarios(prev => prev.map(usuario => usuario.id === id ? response.data : usuario));
+      })
+      .catch(error => {
+        console.error('Error al editar el usuario:', error);
+      });
+  };
+
 const agregarVehiculo = (nuevoVehiculo) => {
   setVehiculos([...vehiculos, nuevoVehiculo]);
 };
@@ -116,7 +126,7 @@ const eliminarConsulta = (placa)=>{
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
           <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
           <Route path="/PanelAdmin" element={<PanelAdmin  />} />
-          <Route path="/ListaUsuarios" element={<ListaUsuarios usuarios={usuarios} eliminarUsuario={eliminarUsuario} />} />
+          <Route path="/ListaUsuarios" element={<ListaUsuarios usuarios={usuarios} eliminarUsuario={eliminarUsuario} editarUsuario={editarUsuario} />} />
         </Routes>
       </BrowserRouter>
 
