@@ -17,6 +17,7 @@ import RecuperacionContra from './Componente/RecuperacionContra.jsx';
 import NuevaEntradaForo from './Componente/NuevaEntradaForo.jsx';
 import PanelAdmin from './Componente/PanelAdmin.jsx';
 import axios from 'axios';
+import GestionZonas from './Componente/GestionZonas.jsx';
 
 function App() {
 
@@ -105,6 +106,7 @@ const agregarVehiculo = (nuevoVehiculo) => {
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
           <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
           <Route path="/PanelAdmin" element={<PanelAdmin />} />
+          <Route path="/GestionZonas" element={<GestionZonas />} />
         </Routes>
       </BrowserRouter>
 
