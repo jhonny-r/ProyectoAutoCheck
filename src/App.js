@@ -16,8 +16,6 @@ import MiZona from './Componente/MiZona.jsx';
 import RecuperacionContra from './Componente/RecuperacionContra.jsx';
 import NuevaEntradaForo from './Componente/NuevaEntradaForo.jsx';
 import PanelAdmin from './Componente/PanelAdmin.jsx';
-import GestionZonas from "./Componente/GestionZonas.jsx";
-
 import axios from 'axios';
 
 function App() {
@@ -73,9 +71,9 @@ function App() {
 
   };
 
-  const agregarVehiculo = (nuevoVehiculo) => {
-    setVehiculos([...vehiculos, nuevoVehiculo]);
-  };
+const agregarVehiculo = (nuevoVehiculo) => {
+  setVehiculos([...vehiculos, nuevoVehiculo]);
+};
 
   const eliminarConsulta = (placa) => {
     const nuevasConsultas = consultas.filter(c => c.placa !== placa);
@@ -107,8 +105,6 @@ function App() {
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
           <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
           <Route path="/PanelAdmin" element={<PanelAdmin />} />
-          <Route path="/zonas" element={<GestionZonas />} />
-
         </Routes>
       </BrowserRouter>
 
