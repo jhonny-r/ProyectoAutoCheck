@@ -15,6 +15,7 @@ import Configuracion from './Componente/Configuracion.jsx';
 import MiZona from './Componente/MiZona.jsx';
 import RecuperacionContra from './Componente/RecuperacionContra.jsx';
 import NuevaEntradaForo from './Componente/NuevaEntradaForo.jsx';
+import PanelAdmin from './Componente/PanelAdmin.jsx';
 import axios from 'axios';
 
 function App() {
@@ -103,6 +104,7 @@ const eliminarConsulta = (placa)=>{
           <Route path="/MiZona" element={<MiZona />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
           <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
+          <Route path="/PanelAdmin" element={<PanelAdmin />} />
         </Routes>
       </BrowserRouter>
 
