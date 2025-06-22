@@ -18,6 +18,7 @@ import NuevaEntradaForo from './Componente/NuevaEntradaForo.jsx';
 import PanelAdmin from './Componente/PanelAdmin.jsx';
 import axios from 'axios';
 import GestionZonas from './Componente/GestionZonas.jsx';
+import ListaUsuarios from './Componente/ListaUsuarios.jsx';
 
 function App() {
 
@@ -72,6 +73,31 @@ function App() {
 
   };
 
+  const eliminarUsuario = (id) => {
+    axios.delete(`http://localhost:3001/Usuario/${id}`)
+      .then(() => {
+        setUsuarios(prev => prev.filter(usuario => usuario.id !== id));
+      })
+      .catch(error => {
+        console.error('Error al eliminar el usuario:', error);
+      });
+  };
+
+  const editarUsuario = (id, datosActualizados) => {
+    axios.put(`http://localhost:3001/Usuario/${id}`, datosActualizados)
+      .then(response => {
+        setUsuarios(prev =>
+          prev.map(usuario =>
+            usuario.id === id ? response.data : usuario
+          )
+        );
+      })
+      .catch(error => {
+        console.error('Error al editar el usuario:', error);
+      });
+  };
+
+
 const agregarVehiculo = (nuevoVehiculo) => {
   setVehiculos([...vehiculos, nuevoVehiculo]);
 };
@@ -107,6 +133,7 @@ const agregarVehiculo = (nuevoVehiculo) => {
           <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
           <Route path="/PanelAdmin" element={<PanelAdmin />} />
           <Route path="/GestionZonas" element={<GestionZonas />} />
+          <Route path="/ListaUsuarios" element={<ListaUsuarios usuarios={usuarios} eliminarUsuario={eliminarUsuario} editarUsuario={editarUsuario} />} />
         </Routes>
       </BrowserRouter>
 

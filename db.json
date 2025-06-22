@@ -34,16 +34,7 @@
       "telefono": "123456789",
       "direccion": "centro",
       "email": "prueba@hotmail.com",
-      "contraseña": "123"
-    },
-    {
-      "id": "5",
-      "nombre": "nuevoUsuario",
-      "alias": "juan",
-      "telefono": "12365",
-      "direccion": "sdsd",
-      "email": "prueba@epn.edu.ec",
-      "contraseña": "123"
+      "contraseña": "1234"
     }
   ],
   "zonas": [
