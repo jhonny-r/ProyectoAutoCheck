@@ -54,5 +54,37 @@
       "id": "15ff",
       "nombreBarrio": "Carcelen Editado"
     }
+  ],
+  "vehiculos": [
+    {
+      "id": "1",
+      "fecha": "2023-10-01",
+      "tipo": "Auto",
+      "placa": "ABC123",
+      "marca": "Chevrolet",
+      "modelo": "Sonic",
+      "color": "Rojo",
+      "barrio": "Solanda"
+    },
+    {
+      "id": "2",
+      "fecha": "2023-10-02",
+      "tipo": "Moto",
+      "placa": "XYZ789",
+      "marca": "Kawasaki",
+      "modelo": "Ninja",
+      "color": "Verde",
+      "barrio": "Chillogallo"
+    },
+    {
+      "id": "3f4e",
+      "fecha": "2025-06-21",
+      "tipo": "Auto",
+      "placa": "FAE123",
+      "marca": "Chevrolet",
+      "modelo": "Aveo",
+      "color": "Blanco",
+      "barrio": "Carcelén"
+    }
   ]
 }

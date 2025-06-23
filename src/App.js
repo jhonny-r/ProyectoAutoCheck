@@ -19,6 +19,7 @@ import PanelAdmin from './Componente/PanelAdmin.jsx';
 import axios from 'axios';
 import GestionZonas from './Componente/GestionZonas.jsx';
 import ListaUsuarios from './Componente/ListaUsuarios.jsx';
+import ListaVehiculos from './Componente/ListaVehiculos.jsx';
 
 function App() {
 
@@ -34,13 +35,20 @@ function App() {
 
   }, []);
 
+  useEffect(()=>{
+    axios.get("http://localhost:3001/vehiculos")
+    .then(res =>{
+      setVehiculos(res.data);
+    })
+    .catch(error =>{
+      console.error("Error al obtener los vehiculos",error);
+    })
+
+  },[]);
 
   const [usuarios, setUsuarios] = useState([]);
 
-  const [vehiculos, setVehiculos] = useState([
-    { fecha: '2023-10-01', tipo: 'Auto', placa: 'ABC123', marca: 'Chevrolet', modelo: 'Sonic', color: 'Rojo', barrio: 'Solanda' },
-    { fecha: '2023-10-02', tipo: 'Moto', placa: 'XYZ789', marca: 'Kawasaki', modelo: 'Ninja', color: 'Verde', barrio: 'Chillogallo' }
-  ]);
+  const [vehiculos, setVehiculos] = useState([]);
 
   console.log(vehiculos);
 
@@ -99,7 +107,21 @@ function App() {
 
 
 const agregarVehiculo = (nuevoVehiculo) => {
-  setVehiculos([...vehiculos, nuevoVehiculo]);
+  axios.post("http://localhost:3001/vehiculos",nuevoVehiculo)
+  .then((res)=>setVehiculos(prev =>[...prev,res.data]))
+  .catch((error)=>console.error("Error al agregar el vehiculo:",error));
+};
+
+const eliminarVehiculo = (id)=>{
+  axios.delete("http://localhost:3001/vehiculos/" + id)
+  .then(()=>setVehiculos(prev=>prev.filter(rest=>rest.id !== id)))
+  .catch((error)=>console.error("Error al eliminar un vehiculo",error));
+};
+
+const editarVehiculo = (id,vehiculoActualizado)=>{
+  return axios.put("http://localhost:3001/vehiculos/" + id,vehiculoActualizado)
+  .then((res)=>setVehiculos(prev=>prev.map(rest=> rest.id == id ? res.data:rest)))
+  .catch((error)=>console.error("Error al actualizar el vehiculo",error))
 };
 
   const eliminarConsulta = (placa) => {
@@ -134,6 +156,7 @@ const agregarVehiculo = (nuevoVehiculo) => {
           <Route path="/PanelAdmin" element={<PanelAdmin />} />
           <Route path="/GestionZonas" element={<GestionZonas />} />
           <Route path="/ListaUsuarios" element={<ListaUsuarios usuarios={usuarios} eliminarUsuario={eliminarUsuario} editarUsuario={editarUsuario} />} />
+          <Route path="/ListaVehiculos" element={<ListaVehiculos vehiculos={vehiculos} eliminarVehiculo={eliminarVehiculo} editarVehiculo={editarVehiculo} />}/>
         </Routes>
       </BrowserRouter>
 

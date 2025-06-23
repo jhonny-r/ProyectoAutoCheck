@@ -25,7 +25,7 @@ function ReporteVehiculo({agregarVehiculo}){
             barrio
         };
         agregarVehiculo(nuevoVehiculo);
-        navigate("/Inicio");
+        navigate("/ListaVehiculos");
     };
 
     return (
@@ -65,7 +65,7 @@ function ReporteVehiculo({agregarVehiculo}){
 
             <label className="label-file">
           
-          <input type="file" accept="image/*"  />
+          
         </label>
 
             <br/>
