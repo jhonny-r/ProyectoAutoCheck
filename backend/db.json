@@ -1,0 +1,104 @@
+{
+  "usuarios": [
+    {
+      "id": "2",
+      "nombre": "Jhonny",
+      "alias": "jhonny",
+      "telefono": "0956369896",
+      "direccion": "Centro",
+      "email": "jhonny.ruiz@epn.edu.ec",
+      "contraseña": "123456"
+    },
+    {
+      "id": "3",
+      "nombre": "Gustavo",
+      "alias": "gustavo",
+      "telefono": "0987654321",
+      "direccion": "Norte",
+      "email": "gustavo.herrera@epn.edu.ec",
+      "contraseña": "123456"
+    },
+    {
+      "id": "4",
+      "nombre": "prueba",
+      "alias": "prueba",
+      "telefono": "123456789",
+      "direccion": "centro",
+      "email": "prueba@hotmail.com",
+      "contraseña": "1234"
+    }
+  ],
+  "zonas": [
+    {
+      "id": "1",
+      "nombreBarrio": "La Mariscal"
+    },
+    {
+      "id": "2",
+      "nombreBarrio": "El Inca"
+    },
+    {
+      "id": "4227",
+      "nombreBarrio": "San José de Condado"
+    },
+    {
+      "id": "15ff",
+      "nombreBarrio": "Carcelen Editado YSs"
+    },
+    {
+      "id": "1750830877354",
+      "nombreBarrio": "loma grande"
+    }
+  ],
+  "vehiculos": [
+    {
+      "id": "1",
+      "fecha": "2023-10-01",
+      "tipo": "Auto",
+      "placa": "ABC123",
+      "marca": "Chevrolet",
+      "modelo": "Sonic",
+      "color": "Rojo",
+      "barrio": "Solanda"
+    },
+    {
+      "id": "2",
+      "fecha": "2023-10-02",
+      "tipo": "Moto",
+      "placa": "XYZ789",
+      "marca": "Kawasaki",
+      "modelo": "Ninja",
+      "color": "Verde",
+      "barrio": "Chillogallo"
+    },
+    {
+      "id": "6387",
+      "fecha": "2025-06-21",
+      "tipo": "Auto",
+      "placa": "FAE123",
+      "marca": "Chevrolet",
+      "modelo": "Aveo",
+      "color": "Blanco",
+      "barrio": "Carcelén"
+    },
+    {
+      "id": "1750827989876",
+      "fecha": "2025-06-25",
+      "tipo": "Camioneta",
+      "placa": "XYZ123",
+      "marca": "Toyota",
+      "modelo": "Hilux",
+      "color": "Blanco",
+      "barrio": "La Mariscal"
+    },
+    {
+      "id": "5",
+      "nombre": "prueba final",
+      "alias": "prueba final",
+      "telefono": "5456",
+      "direccion": "fdfs",
+      "email": "ff@sdsd",
+      "contraseña": "123"
+    }
+  ]
+}

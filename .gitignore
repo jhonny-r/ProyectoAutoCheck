@@ -23,7 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # json-server
-db.json
 /data/
 /mock-api/
 json-server.json
