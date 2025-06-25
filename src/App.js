@@ -24,7 +24,7 @@ import ListaVehiculos from './Componente/ListaVehiculos.jsx';
 function App() {
 
   useEffect(() => {
-    axios.get('http://localhost:3001/Usuario')
+    axios.get('http://localhost:3001/usuarios')
       .then(response => {
         setUsuarios(response.data);
       })
@@ -71,7 +71,7 @@ function App() {
 
   const agregarUsuario = (nuevo) => {
 
-    axios.post('http://localhost:3001/Usuario', nuevo)
+    axios.post('http://localhost:3001/usuarios', nuevo)
       .then(response => {
         setUsuarios(prev => [...prev, response.data]);
       })
@@ -82,7 +82,7 @@ function App() {
   };
 
   const eliminarUsuario = (id) => {
-    axios.delete(`http://localhost:3001/Usuario/${id}`)
+    axios.delete(`http://localhost:3001/usuarios/${id}`)
       .then(() => {
         setUsuarios(prev => prev.filter(usuario => usuario.id !== id));
       })
@@ -92,7 +92,7 @@ function App() {
   };
 
   const editarUsuario = (id, datosActualizados) => {
-    axios.put(`http://localhost:3001/Usuario/${id}`, datosActualizados)
+    axios.put(`http://localhost:3001/usuarios/${id}`, datosActualizados)
       .then(response => {
         setUsuarios(prev =>
           prev.map(usuario =>
