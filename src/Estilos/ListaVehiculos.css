@@ -41,49 +41,71 @@ body {
   background-color: #1976d2;
 }
 
-/* Lista sin estilos nativos */
-.lista-vehiculos-container ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-/* Tarjeta de vehículo */
-.lista-vehiculos-container li {
+/* Tabla de vehículos */
+.vehiculos-table {
+  width: 100%;
+  max-width: 1000px;
+  border-collapse: collapse;
   background-color: white;
-  padding: 20px;
-  border-radius: 15px;
-  width: 280px;
+  border-radius: 10px;
+  overflow: hidden;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.vehiculos-table th,
+.vehiculos-table td {
+  padding: 12px 15px;
   text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Texto negrita */
-.lista-vehiculos-container strong {
-  display: inline-block;
-  width: 90px;
-}
-
-/* Botón eliminar */
-.lista-vehiculos-container button {
+.vehiculos-table th {
   background-color: #36f498;
   color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 20px;
   font-weight: bold;
+}
+
+/* Fila hover */
+.vehiculos-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Botones en celdas */
+.vehiculos-table .acciones {
+  display: flex;
+  gap: 10px;
+}
+
+/* Botón común */
+.btnEditar,
+.btnEliminar {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  border: none;
   cursor: pointer;
-  margin-top: 10px;
   transition: background-color 0.3s;
 }
 
-.lista-vehiculos-container button:hover {
-  background-color: #2f55d3;
+.btnEditar {
+  background-color: #ffc107;
+  color: black;
 }
 
+.btnEditar:hover {
+  background-color: #e0a800;
+}
+
+.btnEliminar {
+  background-color: #f44336;
+  color: white;
+}
+
+.btnEliminar:hover {
+  background-color: #d32f2f;
+}
+
+/* Modal overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -97,6 +119,7 @@ body {
   z-index: 1000;
 }
 
+/* Modal contenido */
 .modal-content {
   background-color: white;
   padding: 30px;
@@ -114,6 +137,7 @@ body {
   border: 1px solid #ccc;
 }
 
+/* Botones del modal */
 .modal-buttons {
   margin-top: 15px;
   display: flex;
@@ -138,3 +162,9 @@ body {
   cursor: pointer;
 }
 
+.botones-acciones {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
