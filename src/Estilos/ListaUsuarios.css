@@ -1,5 +1,5 @@
-.usuarios-container {
-  padding: 40px;
+.usuarios-contenedor {
+  padding: 30px;
   background-color: #c8c0c0;
   min-height: 100vh;
   display: flex;
@@ -7,102 +7,164 @@
   align-items: center;
 }
 
-.usuarios-header {
-  font-size: 22px;
-  font-weight: bold;
+.titulo-zona {
   background-color: #b1f7b1;
-  color: #2c2c2c;
-  padding: 12px 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
+  padding: 15px 30px;
+  border-radius: 10px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 10px;
+  width: fit-content;
 }
 
-.btn-agregar {
-  margin-top: 15px;
-  padding: 10px 16px;
-  font-size: 14px;
+.contenedor-boton-agregar {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.btn-agregar-centrado {
+  padding: 10px 20px;
   background-color: #2077cf;
   color: white;
   border: none;
   border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.btn-agregar:hover {
+.btn-agregar-centrado:hover {
   background-color: #125aa0;
 }
 
-.usuarios-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+.tabla-usuarios {
+  border-collapse: collapse;
+  width: 90%;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  margin-bottom: 30px;
 }
 
-.usuario-card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  padding: 20px;
-  width: 280px;
-  text-align: left;
-  transition: transform 0.2s ease;
+.tabla-usuarios th,
+.tabla-usuarios td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
 }
 
-.usuario-card:hover {
-  transform: scale(1.02);
+.tabla-usuarios th {
+  background-color: #333;
+  color: white;
 }
 
-.usuario-card p {
-  margin: 8px 0;
-  color: #333;
-}
-
-.usuario-botones {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.btn-editar,
-.btn-eliminar {
-  padding: 8px 10px;
+.btn-tabla {
+  padding: 6px 12px;
+  border-radius: 6px;
   border: none;
-  border-radius: 20px;
-  font-size: 13px;
   cursor: pointer;
-  width: 48%;
-  transition: background-color 0.3s ease;
+  margin: 2px;
+  font-weight: bold;
 }
 
-.btn-editar {
+.btn-tabla.editar {
   background-color: #4caf50;
   color: white;
 }
 
-.btn-editar:hover {
-  background-color: #3da543;
-}
-
-.btn-eliminar {
+.btn-tabla.eliminar {
   background-color: #f44336;
   color: white;
 }
 
-.btn-eliminar:hover {
-  background-color: #d32f2f;
+.contenedor-boton-volver {
+  text-align: center;
+  margin-top: 10px;
 }
 
-.input-edicion {
-  width: 100%;
-  padding: 6px;
-  margin-top: 4px;
-  margin-bottom: 8px;
-  border-radius: 6px;
+.btn-volver {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 10px 25px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-volver:hover {
+  background-color: #333;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-contenido {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-contenido h3 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 8px;
+  border-radius: 4px;
   border: 1px solid #ccc;
+}
+
+.modal-botones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-modal {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-modal.guardar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-modal.cancelar {
+  background-color: #f44336;
+  color: white;
 }
