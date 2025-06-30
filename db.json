@@ -1,5 +1,5 @@
 {
-  "usuarios": [
+  "Usuario": [
     {
       "id": "2",
       "nombre": "Jhonny",
@@ -44,10 +44,6 @@
     {
       "id": "15ff",
       "nombreBarrio": "Carcelen Editado YSs"
-    },
-    {
-      "id": "1750830877354",
-      "nombreBarrio": "loma grande"
     }
   ],
   "vehiculos": [
@@ -80,16 +76,7 @@
       "modelo": "Aveo",
       "color": "Blanco",
       "barrio": "Carcelén"
-    },
-    {
-      "id": "1750827989876",
-      "fecha": "2025-06-25",
-      "tipo": "Camioneta",
-      "placa": "XYZ123",
-      "marca": "Toyota",
-      "modelo": "Hilux",
-      "color": "Blanco",
-      "barrio": "La Mariscal"
     }
   ]
+  
 }
