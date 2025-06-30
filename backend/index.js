@@ -37,8 +37,13 @@ app.post('/vehiculos', (req, res) => {
     if (!fecha || !tipo || !placa || !marca || !modelo || !color || !barrio) {
       return res.status(400).json({ error: "Faltan campos requeridos" });
     }
-
     const db = leerDB();
+
+    const placaExistente = db.vehiculos.some((v) => v.placa.toLowerCase() === placa.toLowerCase());
+    if (placaExistente) {
+    return res.status(409).json({ error: "Ya existe un vehículo con esa placa" });
+    }
+
     const nuevo = {id: Date.now().toString(), ...req.body};
     db.vehiculos.push(nuevo);
     escribirDB(db);
