@@ -26,7 +26,7 @@ app.get('/vehiculos', (req, res) => {
     const db = leerDB();
     res.json(db.vehiculos);
   } catch (err){
-    res.status(500).json({error:"Error al leer la base de datos"});
+    res.status(500).json({error:"Error al obtener los vehículos"});
 
   }
 });
