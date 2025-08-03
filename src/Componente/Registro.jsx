@@ -6,9 +6,9 @@ function Registro({ agregarUsuario, usuarios }) {
   const navigate = useNavigate();
 
   // ID como string para compatibilidad con json-server
-  const id = (
+  const _id = (
     usuarios.length > 0
-      ? Math.max(...usuarios.map(u => Number(u.id))) + 1
+      ? Math.max(...usuarios.map(u => Number(u._id))) + 1
       : 1
   ).toString();
 
@@ -17,28 +17,32 @@ function Registro({ agregarUsuario, usuarios }) {
   const [telefono, setTelefono] = React.useState("");
   const [direccion, setDireccion] = React.useState("");
   const [email, setEmail] = React.useState("");
-  const [contraseña, setContraseña] = React.useState("");
-  const [confirmarContraseña, setConfirmarContraseña] = React.useState("");
+  const [contrasena, setContrasena] = React.useState("");
+  // Nuevo estado para confirmar contraseña
+  const [confirmarContrasena, setConfirmarContrasena] = React.useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const aliasFinal = alias.trim() === "" ? nombre : alias;
 
-    if (contraseña !== confirmarContraseña) {
+    if (contrasena !== confirmarContrasena) {
       alert("Las contraseñas no coinciden");
       return;
     }
 
     // Armar nuevo usuario y enviarlo
     const nuevoUsuario = {
-      id,
+      _id,
       nombre,
       alias: aliasFinal,
       telefono,
       direccion,
       email,
-      contraseña,
+      contrasena,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+
     };
 
     agregarUsuario(nuevoUsuario);
@@ -87,15 +91,15 @@ function Registro({ agregarUsuario, usuarios }) {
         <input
           type="password"
           placeholder="CONTRASEÑA"
-          value={contraseña}
-          onChange={(e) => setContraseña(e.target.value)}
+          value={contrasena}
+          onChange={(e) => setContrasena(e.target.value)}
           required
         />
         <input
           type="password"
           placeholder="CONFIRMAR CONTRASEÑA"
-          value={confirmarContraseña}
-          onChange={(e) => setConfirmarContraseña(e.target.value)}
+          value={confirmarContrasena}
+          onChange={(e) => setConfirmarContrasena(e.target.value)}
           required
         />
 
