@@ -23,9 +23,10 @@ import ListaVehiculos from './Componente/ListaVehiculos.jsx';
 function App() {
 
   useEffect(() => {
-    axios.get('http://localhost:3001/usuarios')
+    axios.get('http://localhost:8000/api/usuarios')
       .then(response => {
         setUsuarios(response.data);
+        console.log('Usuarios obtenidos:', response.data);
       })
       .catch(error => {
 
@@ -70,7 +71,8 @@ function App() {
 
   const agregarUsuario = (nuevo) => {
 
-    axios.post('http://localhost:3001/usuarios', nuevo)
+    console.log("Nuevo usuario a agregar:", nuevo);
+    axios.post('http://localhost:8000/api/usuarios', nuevo)
       .then(response => {
         setUsuarios(prev => [...prev, response.data]);
       })
@@ -81,7 +83,7 @@ function App() {
   };
 
   const eliminarUsuario = (id) => {
-    axios.delete(`http://localhost:3001/usuarios/${id}`)
+    axios.delete(`http://localhost:8000/api/usuarios/${id}`)
       .then(() => {
         setUsuarios(prev => prev.filter(usuario => usuario.id !== id));
       })
@@ -91,7 +93,7 @@ function App() {
   };
 
   const editarUsuario = (id, datosActualizados) => {
-    axios.put(`http://localhost:3001/usuarios/${id}`, datosActualizados)
+    axios.put(`http://localhost:8000/api/usuarios/${id}`, datosActualizados)
       .then(response => {
         setUsuarios(prev =>
           prev.map(usuario =>
@@ -106,19 +108,19 @@ function App() {
 
 
 const agregarVehiculo = (nuevoVehiculo) => {
-  axios.post("http://localhost:3001/vehiculos",nuevoVehiculo)
+  axios.post("http://localhost:8000/api/vehiculos",nuevoVehiculo)
   .then((res)=>setVehiculos(prev =>[...prev,res.data]))
   .catch((error)=>console.error("Error al agregar el vehiculo:",error));
 };
 
 const eliminarVehiculo = (id)=>{
-  axios.delete("http://localhost:3001/vehiculos/" + id)
+  axios.delete("http://localhost:8000/api/vehiculos/" + id)
   .then(()=>setVehiculos(prev=>prev.filter(rest=>rest.id !== id)))
   .catch((error)=>console.error("Error al eliminar un vehiculo",error));
 };
 
 const editarVehiculo = (id,vehiculoActualizado)=>{
-  return axios.put("http://localhost:3001/vehiculos/" + id,vehiculoActualizado)
+  return axios.put("http://localhost:8000/api/vehiculos/" + id,vehiculoActualizado)
   .then((res)=>setVehiculos(prev=>prev.map(rest=> rest.id == id ? res.data:rest)))
   .catch((error)=>console.error("Error al actualizar el vehiculo",error))
 };

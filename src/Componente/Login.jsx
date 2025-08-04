@@ -5,14 +5,17 @@ import { Link } from "react-router-dom";
 import LogoBlanco from '../Imagenes/LogoBlanco.svg';
 
 function Login({ usuarios, setUsuarioActivo }) {
+
+    console.log("Usuarios en Login:", usuarios);
     const navigate = useNavigate();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
     const handleLogin = (e) => {
         e.preventDefault();
-        const usuarioValido = usuarios.find(u => u.email === email && u.contraseña === password);
-        console.log(usuarioValido);
+        console.log("Intentando iniciar sesión con:", email, password);
+        const usuarioValido = usuarios.find(u => u.email === email && u.contrasena === password);
+        console.log("usuario valido "+ usuarioValido);
         if (usuarioValido) {
             localStorage.setItem("usuarioActivo", JSON.stringify(usuarioValido));
             setUsuarioActivo(usuarioValido);

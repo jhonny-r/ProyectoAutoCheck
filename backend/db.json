@@ -103,15 +103,6 @@
       "modelo": "Hilux",
       "color": "Blanco",
       "barrio": "La Mariscal"
-    },
-    {
-      "id": "5",
-      "nombre": "prueba final",
-      "alias": "prueba final",
-      "telefono": "5456",
-      "direccion": "fdfs",
-      "email": "ff@sdsd",
-      "contraseña": "123"
     }
   ]
 }
