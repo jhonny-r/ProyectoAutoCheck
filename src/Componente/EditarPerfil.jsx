@@ -3,8 +3,10 @@ import '../Estilos/EditarPerfil.css';
 import editarPerfil from '../Imagenes/editarPerfil.png';
 import lapiz from '../Imagenes/lapiz.png';
 import logo from '../Imagenes/LogoBlanco.svg';
+import { useNavigate } from 'react-router-dom';
 
-const EditarPerfil = ({ onClose }) => {
+const EditarPerfil = () => {
+  const navigate = useNavigate();
   const [imagenPerfil, setImagenPerfil] = useState(editarPerfil);
 
   const manejarCambioImagen = (e) => {
@@ -18,29 +20,27 @@ const EditarPerfil = ({ onClose }) => {
     }
   };
 
-  const manejarClickOverlay = (e) => {
-    if (e.target.classList.contains('modal-overlay')) {
-      onClose();
-    }
-  };
-
   return (
-    <div className="modal-overlay" onClick={manejarClickOverlay}>
-      <div className="modal-content">
-        <div className="modal-header">
-          <div className="modal-logo">
-            <img src={logo} alt="AutoCheck Logo" />
-            <span>AutoCheck</span>
-          </div>
+    <div className="perfil-page-container">
+      <div className="perfil-page-header">
+        <div className="perfil-logo">
+          <img src={logo} alt="AutoCheck Logo" />
+          <span>AutoCheck</span>
         </div>
+        <button className="volver-btn" onClick={() => navigate('/inicio')}>
+          ⬅ Volver al Inicio
+        </button>
+      </div>
 
-        <div className="perfil-card">
-          <h1 className="perfil-title">👤 Editar Perfil</h1>
-          
-          <div className="perfil-content">
-            <div className="avatar-section">
+      <div className="perfil-page-main">
+        <h1 className="page-title">👤 Editar Perfil</h1>
+        
+        <div className="perfil-content-page">
+          <form className="perfil-form-page">
+            {/* Sección Avatar */}
+            <div className="avatar-section-page">
               <div className="avatar-container">
-                <img src={imagenPerfil} alt="Avatar" className="avatar" />
+                <img src={imagenPerfil} alt="Avatar" className="avatar-page" />
                 <input 
                   type="file" 
                   accept="image/*" 
@@ -48,47 +48,60 @@ const EditarPerfil = ({ onClose }) => {
                   className="file-input"
                   id="archivo-imagen"
                 />
-                <label htmlFor="archivo-imagen" className="upload-btn">
+                <label htmlFor="archivo-imagen" className="upload-btn-page">
                   📷
                 </label>
               </div>
-              <label><b>Nombre Completo</b></label>
-              <div className="input-with-iconNombre">
-                <input type="text" placeholder="Nombre completo" />
+              <span className="avatar-text">Cambiar foto de perfil</span>
+            </div>
+
+            {/* Información Personal */}
+            <div className="form-section-page">
+              <h3 className="section-title">Información Personal</h3>
+              <div className="form-grid-page">
+                <div className="form-field">
+                  <label>Nombre Completo</label>
+                  <input type="text" placeholder="Nombre completo" />
+                </div>
+                <div className="form-field">
+                  <label>Alias</label>
+                  <input type="text" placeholder="Alias" />
+                </div>
+                <div className="form-field">
+                  <label>Fecha de Nacimiento</label>
+                  <input type="date" />
+                </div>
+                <div className="form-field">
+                  <label>Teléfono</label>
+                  <input type="tel" placeholder="0999999999" />
+                </div>
               </div>
             </div>
 
-            <div className="perfil-form">
-              <div className="form-row">
-                <div className="form-group">
+            {/* Información de Contacto */}
+            <div className="form-section-page">
+              <h3 className="section-title">Información de Contacto</h3>
+              <div className="form-grid-page">
+                <div className="form-field half-width">
                   <label>
                     Correo electrónico <span className="cambiar">Cambiar</span>
                   </label>
-                  <div className="input-with-icon">
-                    <input type="email" placeholder="correo@ejemplo.com" />
-                    <img src={lapiz} alt="editar" />
-                  </div>
+                  <input type="email" placeholder="correo@ejemplo.com" />
                 </div>
-
-                <div className="form-group">
-                  <label>Alias</label>
-                  <div className="input-with-icon">
-                    <input type="text" placeholder="Alias" />
-                    <img src={lapiz} alt="editar" />
-                  </div>
+                <div className="form-field">
+                  <label>Ciudad</label>
+                  <select>
+                    <option value="">Selecciona una ciudad</option>
+                    <option value="quito">Quito</option>
+                    <option value="guayaquil">Guayaquil</option>
+                    <option value="cuenca">Cuenca</option>
+                  </select>
                 </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Teléfono</label>
-                  <div className="input-with-icon">
-                    <input type="tel" placeholder="0999999999" />
-                    <img src={lapiz} alt="editar" />
-                  </div>
+                <div className="form-field half-width">
+                  <label>Dirección</label>
+                  <input type="text" placeholder="Dirección completa" />
                 </div>
-
-                <div className="form-group">
+                <div className="form-field">
                   <label>Sector</label>
                   <select>
                     <option value="">Selecciona un sector</option>
@@ -98,53 +111,31 @@ const EditarPerfil = ({ onClose }) => {
                   </select>
                 </div>
               </div>
+            </div>
 
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Dirección</label>
-                  <div className="input-with-icon">
-                    <input type="text" placeholder="Dirección completa" />
-                    <img src={lapiz} alt="editar" />
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label>Ciudad</label>
-                  <select>
-                    <option value="">Selecciona una ciudad</option>
-                    <option value="quito">Quito</option>
-                    <option value="guayaquil">Guayaquil</option>
-                    <option value="cuenca">Cuenca</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Fecha de Nacimiento</label>
-                  <div className="input-with-icon">
-                    <input type="date" />
-                    <img src={lapiz} alt="editar" />
-                  </div>
-                </div>
-
-                <div className="form-group">
+            {/* Seguridad */}
+            <div className="form-section-page">
+              <h3 className="section-title">Seguridad</h3>
+              <div className="form-grid-page">
+                <div className="form-field half-width">
                   <label>
                     Contraseña <span className="cambiar">Cambiar</span>
                   </label>
-                  <div className="input-with-icon">
-                    <input type="password" placeholder="••••••••" />
-                    <img src={lapiz} alt="editar" />
-                  </div>
+                  <input type="password" placeholder="••••••••" />
                 </div>
               </div>
-
-              <div className="form-buttons">
-                <button className="guardar">Guardar Cambios</button>
-                <button className="cancelar" onClick={onClose}>Cancelar</button>
-              </div>
             </div>
-          </div>
+
+            {/* Botones */}
+            <div className="form-buttons-page">
+              <button type="button" className="cancelar-page" onClick={() => navigate('/inicio')}>
+                Cancelar
+              </button>
+              <button type="submit" className="guardar-page">
+                Guardar Cambios
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
