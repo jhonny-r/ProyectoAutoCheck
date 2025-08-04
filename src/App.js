@@ -6,7 +6,6 @@ import Inicio from './Componente/Inicio.jsx';
 import Login from './Componente/Login.jsx';
 import Registro from './Componente/Registro.jsx';
 import MiAutoCheck from './Componente/MiAutoCheck.jsx';
-import EditarPerfil from './Componente/EditarPerfil.jsx';
 import ForoVecinal from './Componente/ForoVecinal.jsx';
 import MapaReportes from './Componente/MapaReportes.jsx';
 import ReporteVehiculo from './Componente/ReporteVehiculo.jsx';
@@ -143,7 +142,6 @@ const editarVehiculo = (id,vehiculoActualizado)=>{
           <Route path="/Inicio" element={<Inicio usuario={usuarioActivo} />} />
           <Route path="/Registro" element={<Registro agregarUsuario={agregarUsuario} usuarios={usuarios} />} />
           <Route path="/MiAutoCheck" element={<MiAutoCheck usuario={usuarioActivo} consultas={consultas} eliminarConsulta={eliminarConsulta} setUsuarioActivo={setUsuarioActivo} setConsultas={setConsultas} />} />
-          <Route path="/EditarPerfil" element={<EditarPerfil />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo agregarVehiculo={agregarVehiculo} />} />
           <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={BarriosPeligrosos} />} />

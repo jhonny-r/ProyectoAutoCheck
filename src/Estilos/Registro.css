@@ -1,75 +1,283 @@
-/* Fondo general */
+/* Modal overlay - fondo semi-transparente con logo de fondo */
 .registro-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #c8c0c0;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+  overflow-y: auto;
+  padding: 20px 0;
 }
 
-/* Contenedor del formulario */
+.registro-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background-image: url('../Imagenes/LogoBlanco.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Formulario modal más compacto con diseño mejorado y amigable */
 .registro-form {
   width: 90%;
-  max-width: 400px;
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 380px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+  backdrop-filter: blur(25px);
+  padding: 30px 25px;
+  border-radius: 20px;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  margin: auto;
+  position: relative;
 }
 
-/* Encabezado del formulario */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Encabezado moderno con colores profesionales sin animación */
 .registro-header {
-  background-color: #b2f2bb;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
   text-align: center;
-  padding: 15px;
-  font-weight: bold;
-  color: #2d6a4f;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  padding: 16px 20px;
+  font-weight: 600;
+  color: white;
+  margin: -30px -25px 25px -25px;
+  border-radius: 20px 20px 0 0;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 15px rgba(30, 41, 59, 0.4);
+  position: relative;
 }
 
-/* Campos de texto */
+/* Inputs con diseño moderno y amigable - más compactos */
 .registro-form input {
   width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  border: none;
-  background-color: #f1f3f5;
-  border-radius: 5px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  border: 2px solid rgba(148, 163, 184, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
   font-size: 14px;
   box-sizing: border-box;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  position: relative;
 }
 
-/* Botón "REGISTRARSE" */
+.registro-form input:focus {
+  outline: none;
+  border: 2px solid #3b82f6;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 
+    0 0 25px rgba(59, 130, 246, 0.15),
+    0 8px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.registro-form input::placeholder {
+  color: rgba(100, 116, 139, 0.7);
+  font-weight: 400;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.registro-form input:focus::placeholder {
+  color: rgba(59, 130, 246, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Efecto de validación visual amigable */
+.registro-form input:valid:not(:placeholder-shown) {
+  border-color: #10b981;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(236, 253, 245, 0.8) 100%);
+}
+
+.registro-form input:invalid:not(:placeholder-shown) {
+  border-color: #ef4444;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 242, 242, 0.8) 100%);
+}
+
+/* Botón REGISTRARSE más compacto con diseño amigable y profesional */
 .btn-registrarse {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  background-color: #69db7c;
+  padding: 14px 20px;
+  margin-top: 18px;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   border: none;
-  border-radius: 30px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  box-shadow: 
+    0 10px 30px rgba(5, 150, 105, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Hover del botón "REGISTRARSE" */
+.btn-registrarse::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-registrarse:hover::before {
+  left: 100%;
+}
+
+/* Hover del botón REGISTRARSE */
 .btn-registrarse:hover {
-  background-color: #51cf66;
+  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 15px 40px rgba(5, 150, 105, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
-/* Botón "CANCELAR" centrado */
+.btn-registrarse:active {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 
+    0 8px 25px rgba(5, 150, 105, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Botón CANCELAR más compacto amigable pero profesional */
 .btn-cancelar {
   width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: none;
-  color: #38b000;
-  border: none;
-  font-weight: bold;
+  padding: 12px 20px;
+  margin-top: 12px;
+  background: transparent;
+  color: #64748b;
+  border: 2px solid rgba(148, 163, 184, 0.3);
+  font-weight: 500;
   cursor: pointer;
   display: block;
   text-align: center;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  position: relative;
+}
+
+.btn-cancelar::before {
+  content: "← ";
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+}
+
+.btn-cancelar:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.btn-cancelar:hover {
+  background: rgba(148, 163, 184, 0.08);
+  border-color: #64748b;
+  color: #475569;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(148, 163, 184, 0.15);
+}
+
+/* Responsividad para pantallas pequeñas con toques amigables */
+@media (max-width: 480px) {
+  .registro-container {
+    padding: 15px 0;
+  }
+  
+  .registro-form {
+    width: 95%;
+    padding: 25px 20px;
+    margin: 10px;
+    border-radius: 18px;
+  }
+  
+  .registro-header {
+    margin: -25px -20px 20px -20px;
+    padding: 15px 18px;
+    font-size: 15px;
+  }
+  
+  .registro-form input {
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    font-size: 13px;
+  }
+  
+  .btn-registrarse {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+  
+  .btn-cancelar {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+}
+
+/* Animación de entrada más suave */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-10px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mejora en la experiencia de carga */
+.registro-form {
+  animation-fill-mode: both;
 }

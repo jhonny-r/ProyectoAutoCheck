@@ -16,17 +16,9 @@ function Configuracion() {
   const [contraNueva, setContraNueva] = useState('');
   const [mensajeCambio, setMensajeCambio] = useState('');
 
-  const [mostrarEliminar, setMostrarEliminar] = useState(false);
-
   const handleGuardarCambio = () => {
     setMensajeCambio('Contraseña actualizada correctamente.');
     setTimeout(() => setMensajeCambio(''), 3000);
-  };
-
-  const handleEliminarCuenta = () => {
-    if (window.confirm('Estás seguro de eliminar tu cuenta? Esta acción es irreversible.')) {
-      navigate('/');
-    }
   };
 
   return (
@@ -105,16 +97,8 @@ function Configuracion() {
         <div className="seccion-box grande">
           <h2>⚙️ Cuenta</h2>
           <div className="botones-cuenta">
-            <button className="boton-rojo" onClick={() => setMostrarEliminar(!mostrarEliminar)}>Eliminar cuenta</button>
             <button className="boton-secundario">Cerrar sesión</button>
           </div>
-
-          {mostrarEliminar && (
-            <div className="eliminar-aviso">
-              <p>⚠️ Esta acción eliminará permanentemente tu cuenta.</p>
-              <button className="boton-rojo" onClick={handleEliminarCuenta}>Confirmar eliminación</button>
-            </div>
-          )}
         </div>
       </div>
 

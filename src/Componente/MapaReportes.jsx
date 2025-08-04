@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import '../Estilos/MapaReportes.css';
 import { useNavigate } from 'react-router-dom';
 
-function MapaReportes({ BarriosPeligrosos }) {
+function MapaReportes({ BarriosPeligrosos, onClose }) {
   const navigate = useNavigate();
+  const [barrioDesplegado, setBarrioDesplegado] = useState(false);
+  const [autosDesplegado, setAutosDesplegado] = useState(false);
 
   const barriosOrdenados = [...BarriosPeligrosos]
     .sort((a, b) => {
@@ -14,46 +16,73 @@ function MapaReportes({ BarriosPeligrosos }) {
     })
     .slice(0, 6); // 6 para que se vea completo
 
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      navigate('/');
+    }
+  };
 
+  const toggleBarrios = () => {
+    setBarrioDesplegado(!barrioDesplegado);
+  };
+
+  const toggleAutos = () => {
+    setAutosDesplegado(!autosDesplegado);
+  };
 
   return (
-    <div className="mapa-reportes-container">
-      <div className="encabezado">
-        <h1>Mapa de reportes</h1>
-        <button className="btn-negro" onClick={() => navigate('/Inicio')}>
-          Regresar al inicio
-        </button>
-      </div>
-
-      <iframe
-        className="mapa-redondeado"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-78.48%2C0.17%2C-78.45%2C0.19&layer=mapnik&marker=0.1807,-78.4678">
-      </iframe>
-
-      <div className="listas-dos-columnas">
-        <div>
-          <h2>Barrios más peligrosos</h2>
-          <ul>
-            {barriosOrdenados.map((barrio, index) => (
-              <li key={index}>{barrio.barrio}</li>
-            ))}
-          </ul>
+    <div className="mapa-reportes-modal">
+      <div className="mapa-reportes-container">
+        <div className="encabezado">
+          <h1>🗺️ Mapa de reportes</h1>
+          <button className="btn-negro" onClick={handleClose}>
+            Regresar al inicio
+          </button>
         </div>
-        <div>
-          <h2>Autos más robados</h2>
-          <ul>
-            <li>Chevrolet Luv Dmax</li>
-            <li>Kia Rio</li>
-            <li>Chevrolet Sail</li>
-            <li>Mitsubishi Lx</li>
-            <li>Ford F150</li>
-            <li>Kia Soluto</li>
-          </ul>
-        </div>
-      </div>
 
-      <div className="pie-boton">
-        <button className="btn-verde">Contrata un seguro ya</button>
+        <div className="contenido-principal">
+          <div className="mapa-container-modal">
+            <iframe
+              className="mapa-redondeado"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-81.0%2C-5.0%2C-75.0%2C2.0&layer=mapnik"
+              title="Mapa de Ecuador">
+            </iframe>
+          </div>
+
+          <div className="listas-container">
+            <div className="lista-seccion">
+              <div className="lista-header" onClick={toggleBarrios}>
+                <h2>Barrios más peligrosos</h2>
+                <span className={`toggle-icon ${barrioDesplegado ? 'rotated' : ''}`}>▼</span>
+              </div>
+              <div className={`lista-content ${barrioDesplegado ? 'expanded' : 'collapsed'}`}>
+                <ul>
+                  {barriosOrdenados.map((barrio, index) => (
+                    <li key={index}>{barrio.barrio}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="lista-seccion">
+              <div className="lista-header" onClick={toggleAutos}>
+                <h2>Autos más robados</h2>
+                <span className={`toggle-icon ${autosDesplegado ? 'rotated' : ''}`}>▼</span>
+              </div>
+              <div className={`lista-content ${autosDesplegado ? 'expanded' : 'collapsed'}`}>
+                <ul>
+                  <li>Chevrolet Luv Dmax</li>
+                  <li>Kia Rio</li>
+                  <li>Chevrolet Sail</li>
+                  <li>Mitsubishi Lx</li>
+                  <li>Ford F150</li>
+                  <li>Kia Soluto</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
