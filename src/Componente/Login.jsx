@@ -3,6 +3,7 @@ import '../Estilos/login.css';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LogoBlanco from '../Imagenes/LogoBlanco.svg';
+import axios from "axios";
 
 function Login({ usuarios, setUsuarioActivo }) {
 
@@ -11,17 +12,25 @@ function Login({ usuarios, setUsuarioActivo }) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
+
         console.log("Intentando iniciar sesión con:", email, password);
-        const usuarioValido = usuarios.find(u => u.email === email && u.contrasena === password);
-        console.log("usuario valido "+ usuarioValido);
-        if (usuarioValido) {
-            localStorage.setItem("usuarioActivo", JSON.stringify(usuarioValido));
-            setUsuarioActivo(usuarioValido);
-            navigate("/inicio");
-        } else {
-            alert("Usuario o contraseña no válidos");
+        try {
+            const response = await axios.post("http://localhost:8000/api/usuarios/login", {
+                email,
+                contrasena: password
+            });
+            const data = response.data;
+            if (data.msg === "Ingreso exitoso") {
+                localStorage.setItem("usuarioActivo", JSON.stringify(data));
+                setUsuarioActivo(data);
+                navigate("/inicio");
+            } else {
+                alert("Usuario o contraseña no válidos");
+            }
+        } catch (error) {
+            alert("Error al conectar con el servidor");
         }
     };
 

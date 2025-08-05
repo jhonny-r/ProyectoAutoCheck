@@ -85,7 +85,7 @@ function App() {
   const eliminarUsuario = (id) => {
     axios.delete(`http://localhost:8000/api/usuarios/${id}`)
       .then(() => {
-        setUsuarios(prev => prev.filter(usuario => usuario.id !== id));
+        setUsuarios(prev => prev.filter(usuario => usuario._id !== id));
       })
       .catch(error => {
         console.error('Error al eliminar el usuario:', error);

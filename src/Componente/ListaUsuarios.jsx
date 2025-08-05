@@ -103,8 +103,8 @@ function ListaUsuarios({ usuarios, eliminarUsuario, editarUsuario, agregarUsuari
         </thead>
         <tbody>
           {usuarios.map((usuario) => (
-            <tr key={usuario.id}>
-              <td>{usuario.id}</td>
+            <tr key={usuario._id}>
+              <td>{usuario._id}</td>
               <td>{usuario.nombre}</td>
               <td>{usuario.alias}</td>
               <td>{usuario.telefono}</td>
@@ -112,7 +112,7 @@ function ListaUsuarios({ usuarios, eliminarUsuario, editarUsuario, agregarUsuari
               <td>{usuario.direccion}</td>
               <td>
                 <button onClick={() => abrirModalEditar(usuario)} className="btn-tabla editar">Editar</button>
-                <button onClick={() => eliminarUsuario(usuario.id)} className="btn-tabla eliminar">Eliminar</button>
+                <button onClick={() => eliminarUsuario(usuario._id)} className="btn-tabla eliminar">Eliminar</button>
               </td>
             </tr>
           ))}

@@ -40,11 +40,10 @@ function Registro({ agregarUsuario, usuarios }) {
       direccion,
       email,
       contrasena,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-
+      confirmarContrasena
     };
 
+    console.log("Nuevo usuario a registrar:", nuevoUsuario);
     agregarUsuario(nuevoUsuario);
     navigate("/");
   };
