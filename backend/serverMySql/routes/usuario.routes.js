@@ -1,6 +1,6 @@
 const UsuarioController = require('../controllers/usuario.controller');
 
-module.exports = (app) => {
+module.exports = (app) => { 
     app.post('/api/usuarios', UsuarioController.createUsuario);
     app.get('/api/usuarios', UsuarioController.getAllUsuarios);
     app.get('/api/usuarios/:id', UsuarioController.getUsuario);
