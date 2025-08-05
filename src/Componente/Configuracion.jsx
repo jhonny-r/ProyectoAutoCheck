@@ -3,7 +3,7 @@ import '../Estilos/Configuracion.css';
 import { useNavigate } from 'react-router-dom';
 import fondo from '../Imagenes/fondo-configuracion.png';
 
-function Configuracion() {
+function Configuracion({ onClose }) {
   const navigate = useNavigate();
 
   const [correo, setCorreo] = useState(true);
@@ -22,55 +22,58 @@ function Configuracion() {
   };
 
   return (
-    <div className="config-container" style={{ backgroundImage: `url(${fondo})` }}>
-      <h1 className="titulo">Configuración</h1>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-configuracion" onClick={(e) => e.stopPropagation()}>
+        <h1 className="titulo">Configuración</h1>
 
-      <div className="seccion-row">
-        <div className="seccion-box grande">
-          <h2>🔔 Notificaciones</h2>
-          <label className="switch-label">
-            <span>Notificaciones por correo</span>
+        {/* Sección Notificaciones */}
+        <div className="seccion-modal">
+          <h2 className="seccion-titulo">🔔 Notificaciones</h2>
+          
+          <div className="opcion-configuracion">
+            <span className="opcion-texto">Notificaciones por correo</span>
             <label className="switch">
               <input type="checkbox" checked={correo} onChange={() => setCorreo(!correo)} />
               <span className="slider"></span>
             </label>
-          </label>
+          </div>
 
-          <label className="switch-label">
-            <span>Notificaciones en el navegador</span>
+          <div className="opcion-configuracion">
+            <span className="opcion-texto">Notificaciones en el navegador</span>
             <label className="switch">
               <input type="checkbox" checked={navegador} onChange={() => setNavegador(!navegador)} />
               <span className="slider"></span>
             </label>
-          </label>
+          </div>
 
-          <p>Frecuencia de alertas: <strong>Diario</strong></p>
+          <p className="frecuencia-texto">Frecuencia de alertas: <strong>Diario</strong></p>
         </div>
 
-        <div className="seccion-box grande">
-          <h2>🔑 Privacidad</h2>
-          <label className="switch-label">
-            <span>Realizar reportes anónimamente</span>
+        {/* Sección Privacidad */}
+        <div className="seccion-modal">
+          <h2 className="seccion-titulo">🔑 Privacidad</h2>
+          
+          <div className="opcion-configuracion">
+            <span className="opcion-texto">Realizar reportes anónimamente</span>
             <label className="switch">
               <input type="checkbox" checked={anonimo} onChange={() => setAnonimo(!anonimo)} />
               <span className="slider"></span>
             </label>
-          </label>
+          </div>
 
-          <label className="switch-label">
-            <span>Permitir mensajes directos</span>
+          <div className="opcion-configuracion">
+            <span className="opcion-texto">Permitir mensajes directos</span>
             <label className="switch">
               <input type="checkbox" checked={mensajes} onChange={() => setMensajes(!mensajes)} />
               <span className="slider"></span>
             </label>
-          </label>
+          </div>
         </div>
-      </div>
 
-      <div className="seccion-row">
-        <div className="seccion-box grande">
-          <h2>🔒 Seguridad</h2>
-          <button className="boton-secundario" onClick={() => setMostrarCambio(!mostrarCambio)}>
+        {/* Sección Seguridad */}
+        <div className="seccion-modal">
+          <h2 className="seccion-titulo">🔒 Seguridad</h2>
+          <button className="boton-cambiar-password" onClick={() => setMostrarCambio(!mostrarCambio)}>
             Cambiar contraseña
           </button>
 
@@ -94,24 +97,13 @@ function Configuracion() {
           )}
         </div>
 
-        <div className="seccion-box grande">
-          <h2>⚙️ Cuenta</h2>
-          <div className="botones-cuenta">
-            <button className="boton-secundario">Cerrar sesión</button>
-          </div>
+        {/* Botón Volver al Inicio */}
+        <div className="botones-modal">
+          <button className="boton-volver-inicio" onClick={onClose}>
+            ⬅ Volver al Inicio
+          </button>
         </div>
       </div>
-
-      <div className="boton-lateral">
-        <button className="volver-lateral" onClick={() => navigate('/inicio')}>
-          ⬅ Volver al Inicio
-        </button>
-      </div>
-
-      <footer className="footer">
-        <span>AutoCheck</span>
-        <span>Juntos hacemos las calles más seguras</span>
-      </footer>
     </div>
   );
 }
