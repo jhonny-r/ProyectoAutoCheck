@@ -97,7 +97,7 @@ function App() {
       .then(response => {
         setUsuarios(prev =>
           prev.map(usuario =>
-            usuario.id === id ? response.data : usuario
+            usuario._id === id ? response.data : usuario
           )
         );
       })

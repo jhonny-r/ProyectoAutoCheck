@@ -1,9 +1,9 @@
 const Barrio = require('../models/barrio.model.js');
 
 module.exports.createBarrio = async (req, res) => {
-    const { nombre } = req.body;
+    const { nombre, sector, riesgo } = req.body;
     try {
-        const nuevoBarrio = await Barrio.create({ nombre });
+        const nuevoBarrio = await Barrio.create({ nombre, sector, riesgo });
         res.status(201).json(nuevoBarrio);
     } catch (error) {
         res.status(500).json({ message: 'Error al crear el barrio' });

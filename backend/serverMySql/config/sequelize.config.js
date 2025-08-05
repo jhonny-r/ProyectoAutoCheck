@@ -16,8 +16,8 @@ const sequelize = new Sequelize(bdd_name, username, password, {
     dialect: 'mysql'
 });
 // Se sincroniza los modelos con la base de datos
-sequelize.sync().then(() => {
-    console.log('Base de datos sincronizada');
+sequelize.sync({ alter: true }).then(() => {
+    console.log('Base de datos sincronizada (tablas alteradas)');
 }).catch(err => {
     console.log('Error al sincronizar la BDD', err);
 });
