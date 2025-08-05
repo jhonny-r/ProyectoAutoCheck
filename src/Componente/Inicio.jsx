@@ -103,9 +103,8 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
           <span className="logo-text">AutoCheck</span>
         </div>
         <div className="nav-box">
-          <span className="nav-item" onClick={() => navigate('/')}>🏠 Inicio</span>
+          <span className="nav-item" onClick={() => navigate('/')}>🏠 Salir</span>
           <span className="nav-item" onClick={() => navigate('/ForoVecinal')}>💬 Foro Vecinal</span>
-          <span className="nav-item" onClick={() => navigate('/configuracion')}>⚙️ Configuración</span>
           <span className="nav-item" onClick={() => navigate('/MiAutoCheck')}>🚗 MiAutoCheck</span>
           {usuario && usuario.rol === 'administrador' && (
             <span className="nav-item" onClick={() => navigate('/PanelAdmin')}>👤 Administrador</span>

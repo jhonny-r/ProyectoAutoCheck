@@ -7,4 +7,5 @@ module.exports = (app) => {
     app.put('/api/barrios/:id', BarrioController.updateBarrio);
     app.delete('/api/barrios/:id', BarrioController.deleteBarrio);
     app.get('/api/top/barrios', BarrioController.TopBarrios);
+    
 };

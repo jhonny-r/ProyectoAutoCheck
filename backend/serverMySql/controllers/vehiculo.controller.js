@@ -149,3 +149,23 @@ module.exports.topVehiculos = async (_, res) => {
         res.status(500).json({ message: 'Error al obtener los autos más repetidos' });
     }
 };
+
+module.exports.ReportesPorBarrio = async (req, res) => {
+    try {
+        console.log('Body recibido:', req.body);
+        const { barrio } = req.body;
+        
+        if (!barrio) {
+            return res.status(400).json({ message: 'El parámetro barrio es requerido' });
+        }
+        
+        console.log('Buscando reportes para el barrio:', barrio);
+        const count = await Vehiculo.count({ where: { barrio } });
+        console.log('Cantidad encontrada:', count);
+        
+        res.status(200).json({ barrio, cantidad: count });
+    } catch (error) {
+        console.error('Error en ReportesPorBarrio:', error);
+        res.status(500).json({ message: 'Error al obtener el número de reportes por barrio', error: error.message });
+    }
+};

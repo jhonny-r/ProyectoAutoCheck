@@ -10,5 +10,6 @@ module.exports = (app) => {
     app.get('/api/vehiculos/mas/robados', VehiculoController.getModelosRobados);
     app.get('/api/barrios/mas/robados', VehiculoController.getBarriosPeligrosos);
     app.get('/api/top/vehiculos', VehiculoController.topVehiculos);
+    app.post('/api/reportes/barrios', VehiculoController.ReportesPorBarrio);
 };
 
