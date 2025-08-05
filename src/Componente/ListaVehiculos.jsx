@@ -2,106 +2,156 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../Estilos/ListaVehiculos.css';
 
-function ListaVehiculos({ vehiculos, eliminarVehiculo, editarVehiculo }) {
-  const navigate = useNavigate();
+function ListaVehiculos({ vehiculos, eliminarVehiculo, editarVehiculo, agregarVehiculo }) {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [vehiculoEditado, setVehiculoEditado] = useState(null);
+  const [modoAgregar, setModoAgregar] = useState(false);
+  const navigate = useNavigate();
 
-  const abrirModal = (vehiculo) => {
-    setVehiculoEditado(vehiculo);
+  const campos = ["fecha", "tipo", "placa", "marca", "modelo", "color", "barrio"];
+
+  const abrirModalEditar = (vehiculo) => {
+    const vehiculoConFechaFormateada = {
+      ...vehiculo,
+      fecha: vehiculo.fecha ? vehiculo.fecha.split('T')[0] : ""
+    };
+    setVehiculoEditado(vehiculoConFechaFormateada);
+    setModoAgregar(false);
+    setMostrarModal(true);
+  };
+
+  const abrirModalAgregar = () => {
+    setVehiculoEditado({
+      fecha: "",
+      tipo: "",
+      placa: "",
+      marca: "",
+      modelo: "",
+      color: "",
+      barrio: ""
+    });
+    setModoAgregar(true);
     setMostrarModal(true);
   };
 
   const cerrarModal = () => {
     setMostrarModal(false);
     setVehiculoEditado(null);
+    setModoAgregar(false);
   };
 
-  const handleChange = (e) => {
+  const manejarCambio = (e) => {
     const { name, value } = e.target;
-    setVehiculoEditado((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setVehiculoEditado((prev) => ({ ...prev, [name]: value }));
   };
 
   const guardarCambios = () => {
-    editarVehiculo(vehiculoEditado.id, vehiculoEditado);
+    if (modoAgregar) {
+      agregarVehiculo(vehiculoEditado);
+    } else {
+      editarVehiculo(vehiculoEditado._id, vehiculoEditado);
+    }
     cerrarModal();
   };
 
-  const reporVehiculo = () => {
-    navigate("/ReporteVehiculo");
-  };
-
-  const regresarPanel = () => {
+  const irAPanelAdmin = () => {
     navigate("/PanelAdmin");
   };
 
   return (
-    <div className="lista-vehiculos-container">
-      <h2>Lista de Vehículos</h2>
+    <div className="vehiculos-contenedor">
+      <div className="titulo-zona">
+        <h2>Gestión de Vehículos</h2>
+      </div>
 
-      {vehiculos.length === 0 ? (
-        <p>No hay vehículos registrados.</p>
-      ) : (
-        <table className="vehiculos-table">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Tipo</th>
-              <th>Placa</th>
-              <th>Marca</th>
-              <th>Modelo</th>
-              <th>Color</th>
-              <th>Barrio</th>
-              <th></th>
+      <div className="contenedor-boton-agregar">
+        <button className="btn-agregar-centrado" onClick={abrirModalAgregar}>
+          Agregar Vehículo
+        </button>
+      </div>
+
+      <table className="tabla-vehiculos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Color</th>
+            <th>Barrio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {vehiculos.map((vehiculo) => (
+            <tr key={vehiculo._id}>
+              <td>{vehiculo._id}</td>
+              <td>{vehiculo.fecha ? new Date(vehiculo.fecha).toLocaleDateString() : ""}</td>
+              <td>{vehiculo.tipo}</td>
+              <td>{vehiculo.placa}</td>
+              <td>{vehiculo.marca}</td>
+              <td>{vehiculo.modelo}</td>
+              <td>{vehiculo.color}</td>
+              <td>{vehiculo.barrio}</td>
+              <td>
+                <button onClick={() => abrirModalEditar(vehiculo)} className="btn-tabla editar">Editar</button>
+                <button onClick={() => eliminarVehiculo(vehiculo._id)} className="btn-tabla eliminar">Eliminar</button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {vehiculos.map((vehiculo) => (
-              <tr key={vehiculo.id}>
-                <td>{vehiculo.fecha}</td>
-                <td>{vehiculo.tipo}</td>
-                <td>{vehiculo.placa}</td>
-                <td>{vehiculo.marca}</td>
-                <td>{vehiculo.modelo}</td>
-                <td>{vehiculo.color}</td>
-                <td>{vehiculo.barrio}</td>
-                <td className="acciones">
-                  <button className="btnEditar" onClick={() => abrirModal(vehiculo)}>Editar</button>
-                  <button className="btnEliminar" onClick={() => eliminarVehiculo(vehiculo.id)}>Eliminar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+          ))}
+        </tbody>
+      </table>
 
-      {mostrarModal && vehiculoEditado && (
+      <div className="contenedor-boton-volver">
+        <button className="btn-volver" onClick={irAPanelAdmin}>
+          Volver al Panel de Administración
+        </button>
+      </div>
+
+      {mostrarModal && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Editar Vehículo</h3>
-            <input name="fecha" value={vehiculoEditado.fecha} onChange={handleChange} />
-            <input name="tipo" value={vehiculoEditado.tipo} onChange={handleChange} />
-            <input name="placa" value={vehiculoEditado.placa} onChange={handleChange} />
-            <input name="marca" value={vehiculoEditado.marca} onChange={handleChange} />
-            <input name="modelo" value={vehiculoEditado.modelo} onChange={handleChange} />
-            <input name="color" value={vehiculoEditado.color} onChange={handleChange} />
-            <input name="barrio" value={vehiculoEditado.barrio} onChange={handleChange} />
-            <div className="modal-buttons">
-              <button className="btnGuardar" onClick={guardarCambios}>Guardar</button>
-              <button className="btnCancelar" onClick={cerrarModal}>Cancelar</button>
+          <div className="modal-contenido">
+            <h3>{modoAgregar ? "Agregar Vehículo" : "Editar Vehículo"}</h3>
+            {campos.map((campo) => (
+              <div key={campo} className="form-group">
+                <label>{campo.charAt(0).toUpperCase() + campo.slice(1)}</label>
+                {campo === "tipo" ? (
+                  <select
+                    name={campo}
+                    value={vehiculoEditado[campo]}
+                    onChange={manejarCambio}
+                    required
+                  >
+                    <option value="">Seleccionar Tipo</option>
+                    <option value="Auto">Auto</option>
+                    <option value="Moto">Moto</option>
+                    <option value="Camioneta">Camioneta</option>
+                    <option value="Bus">Bus</option>
+                    <option value="Camión">Camión</option>
+                  </select>
+                ) : (
+                  <input
+                    type={campo === "fecha" ? "date" : "text"}
+                    name={campo}
+                    value={vehiculoEditado[campo]}
+                    onChange={manejarCambio}
+                    required
+                  />
+                )}
+              </div>
+            ))}
+
+            <div className="modal-botones">
+              <button onClick={guardarCambios} className="btn-modal guardar">
+                {modoAgregar ? "Guardar Vehículo" : "Guardar Cambios"}
+              </button>
+              <button onClick={cerrarModal} className="btn-modal cancelar">Cancelar</button>
             </div>
           </div>
         </div>
       )}
-
-      <div className="botones-acciones">
-        <button className="btnAgregar" onClick={reporVehiculo}>Agregar Vehiculo</button>
-        <button className="btnAgregar" onClick={regresarPanel}>Regresar</button>
-      </div>
-
     </div>
   );
 }

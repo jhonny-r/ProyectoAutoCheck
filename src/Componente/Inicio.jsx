@@ -53,7 +53,7 @@ function Inicio({usuarioActivo, vehiculos, consultas, setConsultas, agregarVehic
           <span className="nav-item" onClick={() => navigate('/ForoVecinal')}>💬 Foro Vecinal</span>
           <span className="nav-item" onClick={() => navigate('/configuracion')}>⚙️ Configuración</span>
           <span className="nav-item" onClick={() => navigate('/MiAutoCheck')}>🚗 MiAutoCheck</span>
-          <span className="nav-item" onClick={() => navigate('/admin')}>👤 Administrador</span>
+          <span className="nav-item" onClick={() => navigate('/PanelAdmin')}>👤 Administrador</span>
         </div>
       </div>
 

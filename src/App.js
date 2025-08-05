@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   useEffect(()=>{
-    axios.get("http://localhost:3001/vehiculos")
+    axios.get("http://localhost:8000/api/vehiculos")
     .then(res =>{
       setVehiculos(res.data);
     })
@@ -46,20 +46,27 @@ function App() {
 
   },[]);
 
+  useEffect(()=>{
+    axios.get("http://localhost:8000/api/barrios")
+    .then(res =>{
+      setBarrios(res.data);
+    })
+    .catch(error =>{
+      console.error("Error al obtener los barrios",error);
+    })
+
+  },[]);
+
+
+
   const [usuarios, setUsuarios] = useState([]);
 
   const [vehiculos, setVehiculos] = useState([]);
 
-  console.log(vehiculos);
+  const [barrios, setBarrios] = useState([]);
 
-  const [BarriosPeligrosos, setBarriosPeligrosos] = useState([
-    { barrio: 'La floresta', peligrosidad: '3' },
-    { barrio: 'Marta Bucaran', peligrosidad: '2' },
-    { barrio: 'La marin', peligrosidad: '1' },
-    { barrio: 'El condado', peligrosidad: '3' },
-    { barrio: 'La pradera', peligrosidad: '2' },
-    { barrio: 'El bosque', peligrosidad: '3' }
-  ]);
+  console.log(vehiculos);
+  console.log(barrios);
 
   const [usuarioActivo, setUsuarioActivo] = useState(
     JSON.parse(localStorage.getItem('usuarioActivo')) || null
@@ -115,14 +122,32 @@ const agregarVehiculo = (nuevoVehiculo) => {
 
 const eliminarVehiculo = (id)=>{
   axios.delete("http://localhost:8000/api/vehiculos/" + id)
-  .then(()=>setVehiculos(prev=>prev.filter(rest=>rest.id !== id)))
+  .then(()=>setVehiculos(prev=>prev.filter(rest=>rest._id !== id)))
   .catch((error)=>console.error("Error al eliminar un vehiculo",error));
 };
 
 const editarVehiculo = (id,vehiculoActualizado)=>{
   return axios.put("http://localhost:8000/api/vehiculos/" + id,vehiculoActualizado)
-  .then((res)=>setVehiculos(prev=>prev.map(rest=> rest.id == id ? res.data:rest)))
+  .then((res)=>setVehiculos(prev=>prev.map(rest=> rest._id == id ? res.data:rest)))
   .catch((error)=>console.error("Error al actualizar el vehiculo",error))
+};
+
+const agregarBarrio = (nuevoBarrio) => {
+  axios.post("http://localhost:8000/api/barrios", nuevoBarrio)
+    .then((res) => setBarrios(prev => [...prev, res.data]))
+    .catch((error) => console.error("Error al agregar el barrio:", error));
+};
+
+const eliminarBarrio = (id) => {
+  axios.delete(`http://localhost:8000/api/barrios/${id}`)
+    .then(() => setBarrios(prev => prev.filter(barrio => barrio._id !== id)))
+    .catch((error) => console.error("Error al eliminar el barrio:", error));
+};
+
+const editarBarrio = (id, barrioActualizado) => {
+  return axios.put(`http://localhost:8000/api/barrios/${id}`, barrioActualizado)
+    .then((res) => setBarrios(prev => prev.map(barrio => barrio._id === id ? res.data : barrio)))
+    .catch((error) => console.error("Error al actualizar el barrio:", error));
 };
 
   const eliminarConsulta = (placa) => {
@@ -146,7 +171,7 @@ const editarVehiculo = (id,vehiculoActualizado)=>{
           <Route path="/MiAutoCheck" element={<MiAutoCheck usuario={usuarioActivo} consultas={consultas} eliminarConsulta={eliminarConsulta} setUsuarioActivo={setUsuarioActivo} setConsultas={setConsultas} />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo agregarVehiculo={agregarVehiculo} />} />
-          <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={BarriosPeligrosos} />} />
+          <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={barrios} />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo />} />
           <Route path="/VerificarVehiculo" element={<VerificarVehiculo vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} />} />
           <Route path="/Configuracion" element={<Configuracion />} />
@@ -154,9 +179,9 @@ const editarVehiculo = (id,vehiculoActualizado)=>{
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
           <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
           <Route path="/PanelAdmin" element={<PanelAdmin />} />
-          <Route path="/GestionZonas" element={<GestionZonas />} />
+          <Route path="/GestionZonas" element={<GestionZonas barrios={barrios} agregarBarrio={agregarBarrio} eliminarBarrio={eliminarBarrio} editarBarrio={editarBarrio} />} />
           <Route path="/ListaUsuarios" element={<ListaUsuarios usuarios={usuarios} eliminarUsuario={eliminarUsuario} editarUsuario={editarUsuario}  agregarUsuario={agregarUsuario}/>} />
-          <Route path="/ListaVehiculos" element={<ListaVehiculos vehiculos={vehiculos} eliminarVehiculo={eliminarVehiculo} editarVehiculo={editarVehiculo} />}/>
+          <Route path="/ListaVehiculos" element={<ListaVehiculos vehiculos={vehiculos} eliminarVehiculo={eliminarVehiculo} editarVehiculo={editarVehiculo} agregarVehiculo={agregarVehiculo} />}/>
         </Routes>
       </BrowserRouter>
 
