@@ -2,7 +2,7 @@ const Sector = require('../models/sector.model');
 
 module.exports.createSector = async (req, res) => {
     const { nombre } = req.body;
-    try {
+    try { 
         if (!nombre) {
             return res.status(400).json({ message: 'El nombre del sector es obligatorio' });
         }

@@ -18,6 +18,18 @@ allVehiculosRoutes(app);
 const allBarriosRoutes = require('./serverMySql/routes/barrio.routes.js');
 allBarriosRoutes(app);
 
+const allSectoresRoutes = require('./serverMySql/routes/sector.routes.js');
+allSectoresRoutes(app);
+
+const allMarcasRoutes = require('./serverMySql/routes/marca.routes.js');
+allMarcasRoutes(app);
+
+const allTipoVehiculosRoutes = require('./serverMySql/routes/tipoVehiculo.routes.js');
+allTipoVehiculosRoutes(app);
+
+const allNivelRiesgosRoutes = require('./serverMySql/routes/nivelRiesgo.routes.js');
+allNivelRiesgosRoutes(app);
+
 app.listen(port,()=>{
     console.log("Server listening at port",port);
 })
