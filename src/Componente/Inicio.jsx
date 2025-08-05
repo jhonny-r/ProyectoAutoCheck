@@ -10,6 +10,7 @@ import zonas from '../Imagenes/zonas.png';
 import VerificarVehiculo from './VerificarVehiculo';
 import ReporteVehiculo from './ReporteVehiculo';
 import MapaReportes from './MapaReportes';
+import Configuracion from './Configuracion';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -27,6 +28,7 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
   const [mostrarVerificarVehiculo, setMostrarVerificarVehiculo] = useState(false);
   const [mostrarReporteVehiculo, setMostrarReporteVehiculo] = useState(false);
   const [mostrarMapaReportes, setMostrarMapaReportes] = useState(false);
+  const [mostrarConfiguracion, setMostrarConfiguracion] = useState(false);
   
   // Estados para la ubicación del usuario
   const [ubicacionUsuario, setUbicacionUsuario] = useState(null);
@@ -93,6 +95,14 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
 
   const cerrarMapaReportes = () => {
     setMostrarMapaReportes(false);
+  };
+
+  const abrirConfiguracion = () => {
+    setMostrarConfiguracion(true);
+  };
+
+  const cerrarConfiguracion = () => {
+    setMostrarConfiguracion(false);
   };
 
   return (
@@ -194,6 +204,12 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
           BarriosPeligrosos={BarriosPeligrosos || []}
           topVehiculos={topVehiculos || []}
           onClose={cerrarMapaReportes}
+        />
+      )}
+
+      {mostrarConfiguracion && (
+        <Configuracion 
+          onClose={cerrarConfiguracion}
         />
       )}
     </div>
