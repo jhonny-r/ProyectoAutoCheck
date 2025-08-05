@@ -13,7 +13,6 @@ import VerificarVehiculo from './Componente/VerificarVehiculo.jsx';
 import Configuracion from './Componente/Configuracion.jsx';
 import MiZona from './Componente/MiZona.jsx';
 import RecuperacionContra from './Componente/RecuperacionContra.jsx';
-import NuevaEntradaForo from './Componente/NuevaEntradaForo.jsx';
 import PanelAdmin from './Componente/PanelAdmin.jsx';
 import axios from 'axios';
 import GestionZonas from './Componente/GestionZonas.jsx';
@@ -201,7 +200,6 @@ const editarBarrio = (id, barrioActualizado) => {
           <Route path="/Configuracion" element={<Configuracion />} />
           <Route path="/MiZona" element={<MiZona barrios={barrios} />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
-          <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
           <Route path="/PanelAdmin" element={<PanelAdmin />} />
           <Route path="/GestionZonas" element={<GestionZonas barrios={barrios} agregarBarrio={agregarBarrio} eliminarBarrio={eliminarBarrio} editarBarrio={editarBarrio} />} />
           <Route path="/ListaUsuarios" element={<ListaUsuarios usuarios={usuarios} eliminarUsuario={eliminarUsuario} editarUsuario={editarUsuario}  agregarUsuario={agregarUsuario}/>} />

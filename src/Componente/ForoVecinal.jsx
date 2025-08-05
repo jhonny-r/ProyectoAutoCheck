@@ -10,70 +10,54 @@ import moto from '../Imagenes/moto.png';
 
 function ForoVecinal() {
   const navigate = useNavigate();
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [tipoNombre, setTipoNombre] = useState("nombre"); // "nombre" o "alias"
+  const [tipoIncidente, setTipoIncidente] = useState(""); // Para el tipo de incidente seleccionado
+  const [zonaSeleccionada, setZonaSeleccionada] = useState("La Floresta"); // Para la zona seleccionada
   
-  // Estados para likes, respuestas y comentarios
-  const [likes, setLikes] = useState({});
-  const [showResponses, setShowResponses] = useState({});
-  const [responses, setResponses] = useState({});
-  const [newResponse, setNewResponse] = useState({});
-
-  const handleLike = (postId) => {
-    setLikes(prev => ({
-      ...prev,
-      [postId]: (prev[postId] || 0) + 1
-    }));
+  // Simular datos del usuario (en una app real, esto vendría del contexto/estado global)
+  const usuario = {
+    nombre: "Juan Pérez",
+    alias: "Anónimo"
   };
 
-  const toggleResponses = (postId) => {
-    setShowResponses(prev => ({
-      ...prev,
-      [postId]: !prev[postId]
-    }));
-  };
-
-  const handleAddResponse = (postId) => {
-    if (newResponse[postId]?.trim()) {
-      setResponses(prev => ({
-        ...prev,
-        [postId]: [
-          ...(prev[postId] || []),
-          {
-            id: Date.now(),
-            text: newResponse[postId],
-            author: 'Usuario',
-            time: 'Ahora'
-          }
-        ]
-      }));
-      setNewResponse(prev => ({
-        ...prev,
-        [postId]: ''
-      }));
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí podrías enviar los datos al servidor
+    setMostrarModal(false);
   };
 
   return (
     <div className="foro-container">
-      {/* BARRA SUPERIOR GRIS */}
-      <div className="foro-header">
-        <div className="barra-header">
-          <img src={logo} alt="Logo" className="logo-header" />
-          <span className="texto-header">AutoCheck</span>
-        </div>
-      </div>
-
       {/* CONTENEDOR CON TITULO Y CONTROLES */}
       <div className="foro-header-row">
         <div className="contenido-col">
           <h1 className="foro-titulo">FORO VECINAL</h1>
           <p className="foro-subtitulo">Comparte y Mantente al tanto de lo que sucede en tu zona</p>
           <div className="foro-controles">
-            <select className="zona-select">
-              <option>La Floresta</option>
-              <option>El Batán</option>
-              <option>El Recreo</option>
+            <select 
+              className="zona-select"
+              value={zonaSeleccionada}
+              onChange={(e) => setZonaSeleccionada(e.target.value)}
+            >
+              <option value="La Floresta">La Floresta</option>
+              <option value="El Batán">El Batán</option>
+              <option value="El Recreo">El Recreo</option>
             </select>
-            <button className="publicar-btn" onClick={() => navigate("/NuevaEntradaForo")}>Nueva Publicación</button>
+            <select 
+              className="tipo-select"
+              value={tipoIncidente}
+              onChange={(e) => setTipoIncidente(e.target.value)}
+            >
+              <option value="" disabled>Tipo de incidente</option>
+              <option value="Robo">Robo</option>
+              <option value="Riña">Riña</option>
+              <option value="Vandalismo">Vandalismo</option>
+              <option value="Vehículo sospechoso">Vehículo sospechoso</option>
+              <option value="Moto sospechosa">Moto sospechosa</option>
+              <option value="Otros">Otros</option>
+            </select>
+            <button className="publicar-btn" onClick={() => setMostrarModal(true)}>➕ Nueva Publicación</button>
           </div>
         </div>
 
@@ -88,52 +72,15 @@ function ForoVecinal() {
         {/* Publicación 1 */}
         <div className="pub-card">
           <div className="pub-header">
-            <img src={user1} alt="Antonio" className="pub-avatar" />
+            <img src={userAnonimo} alt="Anónimo" className="pub-avatar" />
             <div className="pub-info">
-              <h4 className="pub-autor">Antonio</h4>
-              <p className="pub-meta">26 de abr. 15:30 • Sector Bosque</p>
+              <h4 className="pub-autor">Anónimo</h4>
+              <p className="pub-meta">27 de abr. 11:30 • El Recreo</p>
             </div>
           </div>
           <div className="pub-content">
-            <p className="pub-texto">Vi a alguien intentando abrir un auto blanco estacionado en la calle. ¿Alguien más lo notó?</p>
+            <p className="pub-texto">Encontré esta moto abandonada en la esquina. Está bien deteriorada. He notificado a las autoridades correspondientes para que se hagan cargo de la situación. Es importante mantenerse alerta ante este tipo de situaciones en nuestro barrio.</p>
           </div>
-          <div className="pub-stats">
-            <span className="stat-item">👁️ 23 vistas</span>
-            <span className="stat-item">💬 {(responses['post1'] || []).length} respuestas</span>
-            <span className="stat-item">❤️ {likes['post1'] || 0} me gusta</span>
-          </div>
-          <div className="pub-actions">
-            <button className="action-btn like-btn" onClick={() => handleLike('post1')}>
-              ❤️ Me gusta
-            </button>
-            <button className="action-btn response-btn" onClick={() => toggleResponses('post1')}>
-              💬 Responder
-            </button>
-            <button className="action-btn report-btn">
-              🚩 Reportar
-            </button>
-          </div>
-          
-          {showResponses['post1'] && (
-            <div className="responses-section">
-              <div className="response-input">
-                <input
-                  type="text"
-                  placeholder="Escribe tu respuesta..."
-                  value={newResponse['post1'] || ''}
-                  onChange={(e) => setNewResponse(prev => ({...prev, 'post1': e.target.value}))}
-                  onKeyPress={(e) => e.key === 'Enter' && handleAddResponse('post1')}
-                />
-                <button onClick={() => handleAddResponse('post1')}>Enviar</button>
-              </div>
-              {(responses['post1'] || []).map(response => (
-                <div key={response.id} className="response-item">
-                  <strong>{response.author}:</strong> {response.text}
-                  <span className="response-time">{response.time}</span>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
 
         {/* Publicación 2 */}
@@ -146,148 +93,8 @@ function ForoVecinal() {
             </div>
           </div>
           <div className="pub-content">
-            <p className="pub-texto">Les recomiendo a todos asegurar bien sus bicis si las dejan afuera.</p>
+            <p className="pub-texto">Les recomiendo a todos asegurar bien sus bicis si las dejan afuera. He visto varios intentos de robo en la zona últimamente. Es importante tomar precauciones adicionales, especialmente durante la noche.</p>
           </div>
-          <div className="pub-stats">
-            <span className="stat-item">👁️ 45 vistas</span>
-            <span className="stat-item">💬 {(responses['post2'] || []).length} respuestas</span>
-            <span className="stat-item">❤️ {likes['post2'] || 0} me gusta</span>
-          </div>
-          <div className="pub-actions">
-            <button className="action-btn like-btn" onClick={() => handleLike('post2')}>
-              ❤️ Me gusta
-            </button>
-            <button className="action-btn response-btn" onClick={() => toggleResponses('post2')}>
-              💬 Responder
-            </button>
-            <button className="action-btn report-btn">
-              🚩 Reportar
-            </button>
-          </div>
-          
-          {showResponses['post2'] && (
-            <div className="responses-section">
-              <div className="response-input">
-                <input
-                  type="text"
-                  placeholder="Escribe tu respuesta..."
-                  value={newResponse['post2'] || ''}
-                  onChange={(e) => setNewResponse(prev => ({...prev, 'post2': e.target.value}))}
-                  onKeyPress={(e) => e.key === 'Enter' && handleAddResponse('post2')}
-                />
-                <button onClick={() => handleAddResponse('post2')}>Enviar</button>
-              </div>
-              {(responses['post2'] || []).map(response => (
-                <div key={response.id} className="response-item">
-                  <strong>{response.author}:</strong> {response.text}
-                  <span className="response-time">{response.time}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Publicación 3 */}
-        <div className="pub-card">
-          <div className="pub-header">
-            <img src={userAnonimo} alt="Anónimo" className="pub-avatar" />
-            <div className="pub-info">
-              <h4 className="pub-autor">Anónimo</h4>
-              <p className="pub-meta">27 de abr. 11:30 • El Recreo</p>
-            </div>
-          </div>
-          <div className="pub-content">
-            <p className="pub-texto">Encontré esta moto abandonada en la esquina. Está bien deteriorada. ¿Alguien la reconoce?</p>
-            <img src={moto} alt="Moto" className="pub-image" />
-          </div>
-          <div className="pub-stats">
-            <span className="stat-item">👁️ 67 vistas</span>
-            <span className="stat-item">💬 {(responses['post3'] || []).length} respuestas</span>
-            <span className="stat-item">❤️ {likes['post3'] || 0} me gusta</span>
-          </div>
-          <div className="pub-actions">
-            <button className="action-btn like-btn" onClick={() => handleLike('post3')}>
-              ❤️ Me gusta
-            </button>
-            <button className="action-btn response-btn" onClick={() => toggleResponses('post3')}>
-              💬 Responder
-            </button>
-            <button className="action-btn report-btn">
-              🚩 Reportar
-            </button>
-          </div>
-          
-          {showResponses['post3'] && (
-            <div className="responses-section">
-              <div className="response-input">
-                <input
-                  type="text"
-                  placeholder="Escribe tu respuesta..."
-                  value={newResponse['post3'] || ''}
-                  onChange={(e) => setNewResponse(prev => ({...prev, 'post3': e.target.value}))}
-                  onKeyPress={(e) => e.key === 'Enter' && handleAddResponse('post3')}
-                />
-                <button onClick={() => handleAddResponse('post3')}>Enviar</button>
-              </div>
-              {(responses['post3'] || []).map(response => (
-                <div key={response.id} className="response-item">
-                  <strong>{response.author}:</strong> {response.text}
-                  <span className="response-time">{response.time}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Publicación 4 */}
-        <div className="pub-card">
-          <div className="pub-header">
-            <img src={user3} alt="Antonio" className="pub-avatar" />
-            <div className="pub-info">
-              <h4 className="pub-autor">Antonio</h4>
-              <p className="pub-meta">26 de abr. 15:30 • Sector Bosque</p>
-            </div>
-          </div>
-          <div className="pub-content">
-            <p className="pub-texto">Vi a alguien intentando abrir un auto blanco estacionado en la calle. ¿Alguien más lo notó?</p>
-          </div>
-          <div className="pub-stats">
-            <span className="stat-item">👁️ 12 vistas</span>
-            <span className="stat-item">💬 {(responses['post4'] || []).length} respuestas</span>
-            <span className="stat-item">❤️ {likes['post4'] || 0} me gusta</span>
-          </div>
-          <div className="pub-actions">
-            <button className="action-btn like-btn" onClick={() => handleLike('post4')}>
-              ❤️ Me gusta
-            </button>
-            <button className="action-btn response-btn" onClick={() => toggleResponses('post4')}>
-              💬 Responder
-            </button>
-            <button className="action-btn report-btn">
-              🚩 Reportar
-            </button>
-          </div>
-          
-          {showResponses['post4'] && (
-            <div className="responses-section">
-              <div className="response-input">
-                <input
-                  type="text"
-                  placeholder="Escribe tu respuesta..."
-                  value={newResponse['post4'] || ''}
-                  onChange={(e) => setNewResponse(prev => ({...prev, 'post4': e.target.value}))}
-                  onKeyPress={(e) => e.key === 'Enter' && handleAddResponse('post4')}
-                />
-                <button onClick={() => handleAddResponse('post4')}>Enviar</button>
-              </div>
-              {(responses['post4'] || []).map(response => (
-                <div key={response.id} className="response-item">
-                  <strong>{response.author}:</strong> {response.text}
-                  <span className="response-time">{response.time}</span>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
 
@@ -296,6 +103,77 @@ function ForoVecinal() {
         <span>AutoCheck</span>
         <span>Juntos hacemos las calles más seguras</span>
       </footer>
+
+      {/* MODAL NUEVA PUBLICACIÓN */}
+      {mostrarModal && (
+        <div className="modal-overlay" onClick={() => setMostrarModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <form className="foro-form" onSubmit={handleSubmit}>
+              <div className="foro-header">NUEVA PUBLICACIÓN</div>
+
+              <div className="nombre-container">
+                <input 
+                  type="text" 
+                  value={tipoNombre === "nombre" ? usuario.nombre : usuario.alias}
+                  readOnly
+                  className="nombre-input"
+                />
+                <select 
+                  value={tipoNombre} 
+                  onChange={(e) => setTipoNombre(e.target.value)}
+                  className="tipo-nombre-select"
+                >
+                  <option value="nombre">Mostrar nombre</option>
+                  <option value="alias">Mostrar como anónimo</option>
+                </select>
+              </div>
+
+              <input 
+                type="text" 
+                placeholder="Barrio o sector" 
+                className="barrio-input"
+                value={zonaSeleccionada}
+                onChange={(e) => setZonaSeleccionada(e.target.value)}
+              />
+
+              {tipoIncidente ? (
+                <input 
+                  type="text" 
+                  value={tipoIncidente}
+                  readOnly
+                  className="tipo-incidente-input"
+                  placeholder="Tipo de incidente"
+                />
+              ) : (
+                <select 
+                  className="tipo-incidente-select"
+                  value={tipoIncidente}
+                  onChange={(e) => setTipoIncidente(e.target.value)}
+                >
+                  <option value="" disabled>Tipo de incidente</option>
+                  <option value="Robo">Robo</option>
+                  <option value="Riña">Riña</option>
+                  <option value="Vandalismo">Vandalismo</option>
+                  <option value="Vehículo sospechoso">Vehículo sospechoso</option>
+                  <option value="Moto sospechosa">Moto sospechosa</option>
+                  <option value="Otros">Otros</option>
+                </select>
+              )}
+
+              <textarea
+                placeholder="Escribe aquí tu mensaje o alerta para los vecinos..."
+                rows="6"
+                className="mensaje-textarea"
+              ></textarea>
+
+              <div className="modal-buttons">
+                <button type="submit" className="btn-publicar">PUBLICAR</button>
+                <button type="button" className="btn-cancelar" onClick={() => setMostrarModal(false)}>CANCELAR</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
