@@ -10,6 +10,7 @@ import zonas from '../Imagenes/zonas.png';
 import VerificarVehiculo from './VerificarVehiculo';
 import ReporteVehiculo from './ReporteVehiculo';
 import MapaReportes from './MapaReportes';
+import Configuracion from './Configuracion';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -27,6 +28,7 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
   const [mostrarVerificarVehiculo, setMostrarVerificarVehiculo] = useState(false);
   const [mostrarReporteVehiculo, setMostrarReporteVehiculo] = useState(false);
   const [mostrarMapaReportes, setMostrarMapaReportes] = useState(false);
+  const [mostrarConfiguracion, setMostrarConfiguracion] = useState(false);
   
   // Estados para la ubicación del usuario
   const [ubicacionUsuario, setUbicacionUsuario] = useState(null);
@@ -95,6 +97,14 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
     setMostrarMapaReportes(false);
   };
 
+  const abrirConfiguracion = () => {
+    setMostrarConfiguracion(true);
+  };
+
+  const cerrarConfiguracion = () => {
+    setMostrarConfiguracion(false);
+  };
+
   return (
     <div className="home-container" style={{ backgroundImage: `url(${fondo})` }}>
       <div className="header-menu">
@@ -105,7 +115,7 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
         <div className="nav-box">
           <span className="nav-item" onClick={() => navigate('/')}>🏠 Inicio</span>
           <span className="nav-item" onClick={() => navigate('/ForoVecinal')}>💬 Foro Vecinal</span>
-          <span className="nav-item" onClick={() => navigate('/configuracion')}>⚙️ Configuración</span>
+          <span className="nav-item" onClick={abrirConfiguracion}>⚙️ Configuración</span>
           <span className="nav-item" onClick={() => navigate('/MiAutoCheck')}>🚗 MiAutoCheck</span>
           {usuario && usuario.rol === 'administrador' && (
             <span className="nav-item" onClick={() => navigate('/PanelAdmin')}>👤 Administrador</span>
@@ -195,6 +205,12 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
           BarriosPeligrosos={BarriosPeligrosos || []}
           topVehiculos={topVehiculos || []}
           onClose={cerrarMapaReportes}
+        />
+      )}
+
+      {mostrarConfiguracion && (
+        <Configuracion 
+          onClose={cerrarConfiguracion}
         />
       )}
     </div>
