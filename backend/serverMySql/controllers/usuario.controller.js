@@ -106,10 +106,14 @@ module.exports.getUsuario = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error al obtener el usuario' });
     }
-};
+}; 
 
 module.exports.updateUsuario = async (req, res) => {
     try {
+        if(req.body.contrasena) {
+            const salt = await bcrypt.genSalt(10);
+            req.body.contrasena = await bcrypt.hash(req.body.contrasena, salt);
+        }
         const [updateRowCount] = await Usuario.update(req.body, {
             where: { _id: req.params.id }
         });
