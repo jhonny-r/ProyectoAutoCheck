@@ -11,7 +11,7 @@ import VerificarVehiculo from './VerificarVehiculo';
 import ReporteVehiculo from './ReporteVehiculo';
 import MapaReportes from './MapaReportes';
 
-function Inicio({usuarioActivo, vehiculos, consultas, setConsultas, agregarVehiculo, BarriosPeligrosos}) {
+function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, barrios}) {
   const navigate = useNavigate();
   const [mostrarVerificarVehiculo, setMostrarVerificarVehiculo] = useState(false);
   const [mostrarReporteVehiculo, setMostrarReporteVehiculo] = useState(false);
@@ -105,7 +105,7 @@ function Inicio({usuarioActivo, vehiculos, consultas, setConsultas, agregarVehic
 
       {mostrarMapaReportes && (
         <MapaReportes 
-          BarriosPeligrosos={BarriosPeligrosos || []}
+          BarriosPeligrosos={barrios || []}
           onClose={cerrarMapaReportes}
         />
       )}

@@ -166,7 +166,7 @@ const editarBarrio = (id, barrioActualizado) => {
           {/* Login es la ruta por defecto */}
           <Route path="/" element={<Login usuarios={usuarios} setUsuarioActivo={setUsuarioActivo} />} />
 
-          <Route path="/Inicio" element={<Inicio usuario={usuarioActivo} />} />
+          <Route path="/Inicio" element={<Inicio usuario={usuarioActivo} vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} agregarVehiculo={agregarVehiculo} barrios={barrios} />} />
           <Route path="/Registro" element={<Registro agregarUsuario={agregarUsuario} usuarios={usuarios} />} />
           <Route path="/MiAutoCheck" element={<MiAutoCheck usuario={usuarioActivo} consultas={consultas} eliminarConsulta={eliminarConsulta} setUsuarioActivo={setUsuarioActivo} setConsultas={setConsultas} />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />

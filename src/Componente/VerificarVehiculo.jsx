@@ -12,6 +12,7 @@ function VerificarVehiculo({vehiculos,consultas,setConsultas, onClose}) {
 
     const consultar = (e) =>{
         e.preventDefault();
+        console.log("vehiculos",vehiculos);
         const vehiculo = vehiculos.find((v) => v.placa.toUpperCase() === placa.toUpperCase());
         if (vehiculo) {
            setFecha(vehiculo.fecha);
