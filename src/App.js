@@ -199,7 +199,7 @@ const editarBarrio = (id, barrioActualizado) => {
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo />} />
           <Route path="/VerificarVehiculo" element={<VerificarVehiculo vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} />} />
           <Route path="/Configuracion" element={<Configuracion />} />
-          <Route path="/MiZona" element={<MiZona />} />
+          <Route path="/MiZona" element={<MiZona barrios={barrios} />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
           <Route path="/NuevaEntradaForo" element={<NuevaEntradaForo />} />
           <Route path="/PanelAdmin" element={<PanelAdmin />} />
