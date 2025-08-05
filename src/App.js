@@ -58,12 +58,36 @@ function App() {
   },[]);
 
 
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/top/barrios")
+      .then(res => {
+        setTopBarrios(res.data);
+      })
+      .catch(error => {
+        console.error("Error al obtener los top barrios:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/top/vehiculos")
+      .then(res => {
+        setTopVehiculos(res.data);
+      })
+      .catch(error => {
+        console.error("Error al obtener los top vehiculos:", error);
+      });
+  }, []);
+
 
   const [usuarios, setUsuarios] = useState([]);
 
   const [vehiculos, setVehiculos] = useState([]);
 
   const [barrios, setBarrios] = useState([]);
+
+  const [topBarrios, setTopBarrios] = useState([]);
+
+  const [topVehiculos, setTopVehiculos] = useState([]);
 
   console.log(vehiculos);
   console.log(barrios);
@@ -166,12 +190,12 @@ const editarBarrio = (id, barrioActualizado) => {
           {/* Login es la ruta por defecto */}
           <Route path="/" element={<Login usuarios={usuarios} setUsuarioActivo={setUsuarioActivo} />} />
 
-          <Route path="/Inicio" element={<Inicio usuario={usuarioActivo} vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} agregarVehiculo={agregarVehiculo} barrios={barrios} />} />
+          <Route path="/Inicio" element={<Inicio usuario={usuarioActivo} vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} agregarVehiculo={agregarVehiculo} barrios={barrios} BarriosPeligrosos={topBarrios} topVehiculos={topVehiculos} />} />
           <Route path="/Registro" element={<Registro agregarUsuario={agregarUsuario} usuarios={usuarios} />} />
           <Route path="/MiAutoCheck" element={<MiAutoCheck usuario={usuarioActivo} consultas={consultas} eliminarConsulta={eliminarConsulta} setUsuarioActivo={setUsuarioActivo} setConsultas={setConsultas} />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo agregarVehiculo={agregarVehiculo} />} />
-          <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={barrios} />} />
+          <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={topBarrios} topVehiculos={topVehiculos} />} />
           <Route path="/ReporteVehiculo" element={<ReporteVehiculo />} />
           <Route path="/VerificarVehiculo" element={<VerificarVehiculo vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} />} />
           <Route path="/Configuracion" element={<Configuracion />} />

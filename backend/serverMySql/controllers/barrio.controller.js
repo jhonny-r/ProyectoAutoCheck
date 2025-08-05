@@ -59,3 +59,16 @@ module.exports.deleteBarrio = async (req, res) => {
         res.status(500).json({ message: 'Error al eliminar el barrio' });
     }
 };
+
+
+module.exports.TopBarrios = async (req, res) => {
+    try {
+        const barrios = await Barrio.findAll({
+            order: [['riesgo', 'DESC']],
+            limit: 5
+        });
+        res.status(200).json(barrios);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener los barrios' });
+    }
+};

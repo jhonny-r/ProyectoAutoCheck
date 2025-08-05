@@ -128,3 +128,24 @@ module.exports.getBarriosPeligrosos = async (_, res) => {
         res.status(500).json({ message: 'Error al obtener los barrios más peligrosos' });
     }
 };
+
+module.exports.topVehiculos = async (_, res) => {
+    try {
+        const vehiculos = await Vehiculo.findAll();
+        const conteoAutos = {};
+
+        for (const vehiculo of vehiculos) {
+            const key = `${vehiculo.marca} ${vehiculo.modelo}`;
+            conteoAutos[key] = (conteoAutos[key] || 0) + 1;
+        }
+
+        const autosOrdenados = Object.entries(conteoAutos)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5)
+            .map(([auto, cantidad]) => ({ auto, cantidad }));
+
+        res.status(200).json(autosOrdenados);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener los autos más repetidos' });
+    }
+};

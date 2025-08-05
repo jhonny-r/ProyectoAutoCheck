@@ -416,3 +416,64 @@
     min-width: auto;
   }
 }
+
+/* Estilos específicos para Leaflet */
+.leaflet-container {
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.leaflet-popup-tip {
+  background: white;
+}
+
+/* Asegurar que el mapa tenga altura */
+.mapa-container-modal .leaflet-container {
+  height: 100% !important;
+  min-height: 400px;
+}
+
+/* Leyenda del mapa */
+.mapa-leyenda {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 120px;
+}
+
+.mapa-leyenda h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.color-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  margin-right: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
