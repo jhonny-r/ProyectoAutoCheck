@@ -47,26 +47,99 @@
 
 .zona-mapa-botones {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
+  gap: 20px;
+  flex-wrap: nowrap;
 }
 
 /* Mapa */
 .zona-mapa-contenedor {
   background: white;
-  padding: 20px;
+  padding: 15px;
   border-radius: 16px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   text-align: center;
-  max-width: 400px;
-  width: 100%;
+  width: 350px;
+  flex-shrink: 0;
+  position: relative;
 }
 
 .zona-mapa {
   width: 100%;
   border-radius: 12px;
+}
+
+/* Estilos para el mapa interactivo en MiZona */
+.mapa-interactivo {
+  width: 100%;
+}
+
+.mapa-cargando {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 16px;
+  color: #374151;
+  font-weight: 500;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapa-error {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  color: #dc2626;
+  font-size: 12px;
+  text-align: center;
+}
+
+.mapa-loading-zona {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  color: #2563eb;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Asegurar que el mapa de Leaflet se vea bien en MiZona */
+.zona-mapa-contenedor .leaflet-container {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .zona-mapa-botones {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .zona-mapa-contenedor {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .zona-botones-vertical {
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 0;
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .zona-botones-vertical button {
+    flex: 1;
+  }
 }
 
 .zona-select {
@@ -76,6 +149,20 @@
   border-radius: 6px;
   border: 1px solid #ccc;
   width: 100%;
+}
+
+.zona-select-overlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.zona-select-overlay .zona-select {
+  margin-top: 0;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .mensaje-exito {
@@ -88,6 +175,26 @@
   border-radius: 8px;
   font-size: 0.95rem;
   text-align: left;
+  animation: fadeInOut 0.5s ease-in-out;
+  transition: opacity 0.3s ease-out;
+}
+
+/* Animación para el mensaje de éxito */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Clase para cuando el mensaje está desapareciendo */
+.mensaje-exito.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
 /* Botones verticales */
@@ -95,30 +202,45 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  align-self: flex-start;
+  margin-top: 15px;
+  min-width: 180px;
 }
 
 .btn-verde {
   background-color: #1da547;
   color: white;
-  padding: 14px 20px;
+  padding: 12px 16px;
   border: none;
   border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 1rem;
-  width: 200px;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.btn-verde:hover {
+  background-color: #16a085;
+  transform: translateY(-2px);
 }
 
 .btn-azul {
   background-color: #252bb3;
   color: white;
-  padding: 14px 20px;
+  padding: 12px 16px;
   border: none;
   border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 1rem;
-  width: 200px;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.btn-azul:hover {
+  background-color: #1e229a;
+  transform: translateY(-2px);
 }
 
 /* Cards */
