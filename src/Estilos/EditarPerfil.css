@@ -1,154 +1,307 @@
-.perfil-container {
-  padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
-  position: relative;
+/* PÁGINA EDITAR PERFIL - FORMATO FORMULARIO */
+.perfil-page-container {
   min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  background-image: url('../Imagenes/fondoEditar.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* Header de la Página */
+.perfil-page-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.perfil-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.perfil-logo img {
+  width: 32px;
+  height: 32px;
+}
+
+.perfil-logo span {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
 }
 
 .volver-btn {
-  position: absolute;
-  left: 2rem;
-  top: 2rem;
-  padding: 0.5rem 1.2rem;
-  background-color: black;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: white;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s ease;
 }
 
-.perfil-title {
+.volver-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+/* Contenido Principal */
+.perfil-page-main {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-title {
   text-align: center;
-  font-size: 2rem;
-  margin-top: 1rem;
-  color: #2e2e2e;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: white;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.perfil-card {
-  max-width: 800px;
-  margin: 2rem auto;
-  background-color: #ffffff;
+/* Contenedor del Formulario */
+.perfil-content-page {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-.avatar-section {
-  text-align: center;
-  margin-bottom: 2rem;
-  position: relative;
-}
-
-.avatar {
-  width: 250px;
-  border-radius: 50%;
-  background-color: #dcd4f2;
-  object-fit: cover;
-}
-
-.edit-icon {
-  position: absolute;
-  bottom: 40px;
-  right: calc(50% - 60px);
-  width: 24px;
-  cursor: pointer;
-}
-
-.input-with-icon {
-  position: relative;
-}
-
-.input-with-iconNombre input {
-  width: 40%;
-  padding: 0.6rem 2rem 0.6rem 0.6rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.input-with-icon input {
-  width: 100%;
-  padding: 0.6rem 2rem 0.6rem 0.6rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.input-with-icon img {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  cursor: pointer;
-}
-
-.perfil-form {
-  width: 100%;
-}
-
-.form-row {
+.perfil-form-page {
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Sección Avatar */
+.avatar-section-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.avatar-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.avatar-page {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.upload-btn-page {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border-radius: 50%;
+  border: 3px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.file-input {
+  display: none;
+}
+
+.avatar-text {
+  color: #6b7280;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Secciones del Formulario */
+.form-section-page {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #374151;
   margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.2);
 }
 
-.form-group {
-  flex: 1;
+.form-grid-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-weight: bold;
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field.half-width {
+  grid-column: span 2;
+}
+
+.form-field label {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
 }
 
 .cambiar {
-  font-size: 0.85rem;
-  color: #007bff;
+  color: #3b82f6;
   cursor: pointer;
+  font-weight: 500;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
 }
 
-.form-group select {
+.cambiar:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.form-field input,
+.form-field select {
   width: 100%;
-  padding: 0.6rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
-.form-buttons {
-  text-align: center;
-  margin-top: 2rem;
+.form-field input:focus,
+.form-field select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.guardar {
-  background-color: #2ecc71;
-  color: white;
-  padding: 0.6rem 1.4rem;
-  border: none;
-  border-radius: 8px;
-  margin-right: 1rem;
-  cursor: pointer;
-}
-
-.cancelar {
-  background-color: black;
-  color: white;
-  padding: 0.6rem 1.4rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.footer {
+/* Botones de la Página */
+.form-buttons-page {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: 2rem;
+  gap: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.guardar-page {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  min-width: 180px;
+  transition: all 0.3s ease;
+}
+
+.cancelar-page {
+  background: rgba(107, 114, 128, 0.1);
+  color: #374151;
+  padding: 1rem 3rem;
+  border: 2px solid rgba(107, 114, 128, 0.3);
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 180px;
+  transition: all 0.3s ease;
+}
+
+.guardar-page:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+}
+
+.cancelar-page:hover {
+  background: rgba(107, 114, 128, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .form-grid-page {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .form-field.half-width {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .perfil-page-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .perfil-page-main {
+    padding: 1rem;
+  }
+  
+  .perfil-content-page {
+    padding: 1.5rem;
+  }
+  
+  .form-grid-page {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .form-field.half-width {
+    grid-column: span 1;
+  }
+  
+  .form-buttons-page {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .guardar-page,
+  .cancelar-page {
+    width: 100%;
+  }
 }

@@ -1,94 +1,183 @@
+/* Contenedor principal con diseño moderno y responsivo */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(to bottom, #0099cc, #003366);/*degradado de color de arriba hacia abajo*/
-    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0099cc 0%, #0077b3 50%, #003366 100%);
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
+/* Caja de login con diseño más elegante y proporcionado */
 .login-box {
-    background-color: white;
-    border-radius: 10px;
-    padding: 60px;
-    width: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px 35px;
+    max-width: 420px;
+    width: 100%;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /*sombra al elemento para dar profundidad visual "flotando"*/
-    background: transparent;
+    box-shadow: 
+        0 25px 45px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+.login-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 35px 60px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
+/* Logo con mejor proporción */
+.logoBlanco {
+    width: 45%;
+    height: auto;
+    margin: 0 auto 30px auto;
+    filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.3));
+    transition: filter 0.3s ease;
+}
+
+.logoBlanco:hover {
+    filter: drop-shadow(0 4px 15px rgba(255, 255, 255, 0.5));
+}
+
+/* Título mejorado */
 .login-box h2 {
-    margin-bottom: 20px;
+    margin-bottom: 35px;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Inputs con diseño moderno y mejor UX */
 .login-input {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
+    padding: 15px 20px;
+    margin: 12px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
+.login-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+}
+
+.login-input:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.1),
+        inset 0 2px 10px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Botón principal con diseño más atractivo */
 .login-button {
     width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #002855;
+    padding: 15px 20px;
+    margin: 25px 0 10px 0;
+    background: linear-gradient(135deg, #002855 0%, #004080 100%);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 8px 25px rgba(0, 40, 85, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .login-button:hover {
-    background-color: #001f40;
+    background: linear-gradient(135deg, #001f40 0%, #003366 100%);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 35px rgba(0, 40, 85, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
+.login-button:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 5px 15px rgba(0, 40, 85, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Enlaces con mejor diseño */
 .login-links {
-    margin-top: 15px;
+    margin-top: 25px;
     font-size: 14px;
+    line-height: 1.6;
 }
 
 .login-links a {
-    color: #cceeff;
+    color: rgba(204, 238, 255, 0.9);
     text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    padding: 5px 8px;
+    border-radius: 6px;
 }
 
-.login-links a:hover { /*se subraya el elemento al colocar el mouse encima*/
-    text-decoration: underline;
+.login-links a:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    text-shadow: 0 1px 5px rgba(255, 255, 255, 0.3);
 }
 
-.logoBlanco {
-  width: 60%;   
-  height: auto; 
-  margin: 0 auto; 
-}
-
+/* Aplicar box-sizing a todos los elementos */
 .login-input,
 .login-button {
-  box-sizing: border-box; /*evita que los elementos crezcan de forma inesperada-- se aplica en el pading o borde*/
+    box-sizing: border-box;
 }
 
+/* Ocultar completamente el botón de administrador */
 .admin-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #555;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
+    display: none !important;
 }
 
-.admin-button:hover {
-    background-color: #333;
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 15px;
+    }
+    
+    .login-box {
+        padding: 30px 25px;
+        margin: 10px;
+    }
+    
+    .logoBlanco {
+        width: 50%;
+        margin-bottom: 25px;
+    }
+    
+    .login-box h2 {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+    
+    .login-input,
+    .login-button {
+        padding: 12px 16px;
+        font-size: 15px;
+    }
 }

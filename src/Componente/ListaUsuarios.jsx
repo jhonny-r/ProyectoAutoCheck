@@ -9,30 +9,23 @@ function ListaUsuarios({ usuarios, eliminarUsuario, editarUsuario, agregarUsuari
   const [confirmarContraseña, setConfirmarContraseña] = useState("");
   const navigate = useNavigate();
 
-  const campos = ["nombre", "alias", "telefono", "email", "direccion", "contraseña"];
+  const campos = ["nombre", "alias", "telefono", "email", "direccion", "contrasena"];
 
   const abrirModalEditar = (usuario) => {
     setUsuarioEditado({ ...usuario });
     setModoAgregar(false);
-    setConfirmarContraseña(usuario.contraseña); // para editar visible
+    setConfirmarContraseña(usuario.contrasena); // para editar visible
     setMostrarModal(true);
   };
 
   const abrirModalAgregar = () => {
-    const nuevoId = (
-      usuarios.length > 0
-        ? Math.max(...usuarios.map(u => Number(u.id))) + 1
-        : 1
-    ).toString();
-
     setUsuarioEditado({
-      id: nuevoId,
       nombre: "",
       alias: "",
       telefono: "",
       email: "",
       direccion: "",
-      contraseña: ""
+      contrasena: ""
     });
     setConfirmarContraseña("");
     setModoAgregar(true);
@@ -54,7 +47,7 @@ function ListaUsuarios({ usuarios, eliminarUsuario, editarUsuario, agregarUsuari
   const guardarCambios = () => {
     const aliasFinal = usuarioEditado.alias.trim() === "" ? usuarioEditado.nombre : usuarioEditado.alias;
 
-    if (modoAgregar && usuarioEditado.contraseña !== confirmarContraseña) {
+    if (modoAgregar && usuarioEditado.contrasena !== confirmarContraseña) {
       alert("Las contraseñas no coinciden");
       return;
     }
@@ -64,10 +57,15 @@ function ListaUsuarios({ usuarios, eliminarUsuario, editarUsuario, agregarUsuari
       alias: aliasFinal,
     };
 
+    // Para crear usuario, incluir confirmarContrasena
     if (modoAgregar) {
-      agregarUsuario(usuarioFinal);
+      const usuarioParaCrear = {
+        ...usuarioFinal,
+        confirmarContrasena: confirmarContraseña
+      };
+      agregarUsuario(usuarioParaCrear);
     } else {
-      editarUsuario(usuarioEditado.id, usuarioFinal);
+      editarUsuario(usuarioEditado._id, usuarioFinal);
     }
 
     cerrarModal();
@@ -103,8 +101,8 @@ function ListaUsuarios({ usuarios, eliminarUsuario, editarUsuario, agregarUsuari
         </thead>
         <tbody>
           {usuarios.map((usuario) => (
-            <tr key={usuario.id}>
-              <td>{usuario.id}</td>
+            <tr key={usuario._id}>
+              <td>{usuario._id}</td>
               <td>{usuario.nombre}</td>
               <td>{usuario.alias}</td>
               <td>{usuario.telefono}</td>
@@ -112,7 +110,7 @@ function ListaUsuarios({ usuarios, eliminarUsuario, editarUsuario, agregarUsuari
               <td>{usuario.direccion}</td>
               <td>
                 <button onClick={() => abrirModalEditar(usuario)} className="btn-tabla editar">Editar</button>
-                <button onClick={() => eliminarUsuario(usuario.id)} className="btn-tabla eliminar">Eliminar</button>
+                <button onClick={() => eliminarUsuario(usuario._id)} className="btn-tabla eliminar">Eliminar</button>
               </td>
             </tr>
           ))}

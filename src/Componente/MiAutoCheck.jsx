@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import '../Estilos/MiAutoCheck.css';
 import { useNavigate } from "react-router-dom";
 import avatar from '../Imagenes/avatar.avif';
+import EditarPerfil from './EditarPerfil';
 
 function MiAutoCheck({ usuario, consultas, eliminarConsulta, setUsuarioActivo, setConsultas }) {
     const navigate = useNavigate();
+    const [mostrarEditarPerfil, setMostrarEditarPerfil] = useState(false);
     const horaAcceso = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const abrirEditarPerfil = () => {
+        setMostrarEditarPerfil(true);
+    };
+
+    const cerrarEditarPerfil = () => {
+        setMostrarEditarPerfil(false);
+    };
 
     return (
         <div className="mi-auto">
@@ -23,7 +33,7 @@ function MiAutoCheck({ usuario, consultas, eliminarConsulta, setUsuarioActivo, s
                 {/* BOTONES LATERALES */}
                 <div className="botones">
                     <button onClick={() => navigate("/Inicio")}>Volver al Inicio</button>
-                    <button onClick={() => navigate("/EditarPerfil")}>Editar Perfil</button>
+                    <button onClick={abrirEditarPerfil}>Editar Perfil</button>
                     <button onClick={() => {
                         localStorage.removeItem("usuarioActivo");
                         localStorage.removeItem("consultas");
@@ -79,6 +89,11 @@ function MiAutoCheck({ usuario, consultas, eliminarConsulta, setUsuarioActivo, s
             <div className="footer">
                 AutoCheck - Juntos hacemos las calles más seguras
             </div>
+
+            {/* MODAL EDITAR PERFIL */}
+            {mostrarEditarPerfil && (
+                <EditarPerfil onClose={cerrarEditarPerfil} />
+            )}
         </div>
     );
 }

@@ -1,103 +1,185 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import '../Estilos/GestionZonas.css';
 import { useNavigate } from 'react-router-dom';
 
-function GestionZonas() {
-  const [zonas, setZonas] = useState([]);
-  const [nombreBarrio, setNombreBarrio] = useState('');
+function GestionZonas({ barrios, agregarBarrio, eliminarBarrio, editarBarrio }) {
+  const [nombre, setNombre] = useState('');
+  const [sector, setSector] = useState('');
+  const [riesgo, setRiesgo] = useState('');
   const [editando, setEditando] = useState(null);
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [modoAgregar, setModoAgregar] = useState(false);
 
-  const url = "http://localhost:3001/zonas";
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get(url).then((res) => setZonas(res.data));
-  }, []);
+  const abrirModalAgregar = () => {
+    setNombre('');
+    setSector('');
+    setRiesgo('');
+    setModoAgregar(true);
+    setMostrarModal(true);
+  };
+
+  const abrirModalEditar = (barrio) => {
+    setEditando(barrio);
+    setNombre(barrio.nombre);
+    setSector(barrio.sector);
+    setRiesgo(barrio.riesgo.toString());
+    setModoAgregar(false);
+    setMostrarModal(true);
+  };
+
+  const cerrarModal = () => {
+    setMostrarModal(false);
+    setEditando(null);
+    setNombre('');
+    setSector('');
+    setRiesgo('');
+    setModoAgregar(false);
+  };
 
   const agregarZona = () => {
-    if (nombreBarrio.trim() === '') return alert('El nombre del barrio es obligatorio');
-    const nuevaZona = { nombreBarrio };
-    axios.post(url, nuevaZona).then((res) => {
-      setZonas([...zonas, res.data]);
-      setNombreBarrio('');
-    });
+    if (nombre.trim() === '') return alert('El nombre del barrio es obligatorio');
+    if (sector.trim() === '') return alert('El sector es obligatorio');
+    if (riesgo === '') return alert('El nivel de riesgo es obligatorio');
+    
+    const nuevaZona = { 
+      nombre, 
+      sector, 
+      riesgo: parseInt(riesgo) 
+    };
+    
+    agregarBarrio(nuevaZona);
+    cerrarModal();
   };
 
   const eliminarZona = (id) => {
     if (window.confirm('¿Estás seguro de eliminar esta zona?')) {
-      axios.delete(`${url}/${id}`).then(() => {
-        setZonas(zonas.filter((z) => z.id !== id));
-      });
+      eliminarBarrio(id);
     }
   };
 
-  const iniciarEdicion = (zona) => {
-    setEditando(zona);
-    setNombreBarrio(zona.nombreBarrio);
-  };
+  const guardarCambios = () => {
+    if (nombre.trim() === '') return alert('El nombre del barrio es obligatorio');
+    if (sector.trim() === '') return alert('El sector es obligatorio');
+    if (riesgo === '') return alert('El nivel de riesgo es obligatorio');
 
-  const cancelarEdicion = () => {
-    setEditando(null);
-    setNombreBarrio('');
-  };
+    if (modoAgregar) {
+      const nuevaZona = { 
+        nombre, 
+        sector, 
+        riesgo: parseInt(riesgo) 
+      };
+      agregarBarrio(nuevaZona);
+    } else {
+      const barrioActualizado = {
+        nombre,
+        sector,
+        riesgo: parseInt(riesgo)
+      };
+      editarBarrio(editando._id, barrioActualizado);
+    }
 
-  const guardarEdicion = () => {
-    if (nombreBarrio.trim() === '') return alert('El nombre del barrio es obligatorio');
-
-    axios.put(`${url}/${editando.id}`, { ...editando, nombreBarrio }).then((res) => {
-      setZonas(zonas.map((z) => (z.id === editando.id ? res.data : z)));
-      setEditando(null);
-      setNombreBarrio('');
-    });
+    cerrarModal();
   };
 
   return (
     <div className="zonas-container">
-      <h2>Gestión de Zonas</h2>
+      <div className="titulo-zona">
+        <h2>Gestión de Zonas</h2>
+      </div>
 
-      {editando && (
-        <p>Editando zona con ID: <strong>{editando.id}</strong></p>
-      )}
-
-      <input
-        type="text"
-        placeholder="Nombre del Barrio"
-        value={nombreBarrio}
-        onChange={(e) => setNombreBarrio(e.target.value)}
-      />
-      {editando ? (
-        <>
-          <button onClick={guardarEdicion}>Guardar Cambios</button>
-          <button onClick={cancelarEdicion}>Cancelar</button>
-        </>
-      ) : (
-        <button onClick={agregarZona}>Agregar Zona</button>
-      )}
+      <div className="contenedor-boton-agregar">
+        <button className="btn-agregar-centrado" onClick={abrirModalAgregar}>
+          Agregar Zona
+        </button>
+      </div>
 
       <table>
         <thead>
           <tr>
             <th>ID</th>
             <th>Nombre del Barrio</th>
+            <th>Sector</th>
+            <th>Nivel de Riesgo</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {zonas.map((zona) => (
-            <tr key={zona.id}>
-              <td>{zona.id}</td>
-              <td>{zona.nombreBarrio}</td>
+          {barrios.map((barrio) => (
+            <tr key={barrio._id}>
+              <td>{barrio._id}</td>
+              <td>{barrio.nombre}</td>
+              <td>{barrio.sector}</td>
+              <td>{barrio.riesgo}</td>
               <td>
-                <button onClick={() => iniciarEdicion(zona)}>Editar</button>
-                <button onClick={() => eliminarZona(zona.id)}>Eliminar</button>
+                <button className="btn-tabla" onClick={() => abrirModalEditar(barrio)}>Editar</button>
+                <button className="btn-tabla" onClick={() => eliminarZona(barrio._id)}>Eliminar</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button onClick={() => navigate('/PanelAdmin')}>Volver al Panel de Administración</button>
 
+      <div className="contenedor-boton-volver">
+        <button className="btn-volver" onClick={() => navigate('/PanelAdmin')}>Volver al Panel de Administración</button>
+      </div>
+
+      {mostrarModal && (
+        <div className="modal-overlay">
+          <div className="modal-contenido">
+            <h3>{modoAgregar ? "Agregar Zona" : "Editar Zona"}</h3>
+            
+            <div className="form-group">
+              <label>Nombre del Barrio</label>
+              <input
+                type="text"
+                name="nombre"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Sector</label>
+              <select
+                name="sector"
+                value={sector}
+                onChange={(e) => setSector(e.target.value)}
+                required
+              >
+                <option value="">Seleccionar Sector</option>
+                <option value="Centro">Centro</option>
+                <option value="Norte">Norte</option>
+                <option value="Sur">Sur</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Nivel de Riesgo</label>
+              <select
+                name="riesgo"
+                value={riesgo}
+                onChange={(e) => setRiesgo(e.target.value)}
+                required
+              >
+                <option value="">Seleccionar Nivel de Riesgo</option>
+                <option value="1">Bajo (1)</option>
+                <option value="2">Medio (2)</option>
+                <option value="3">Alto (3)</option>
+              </select>
+            </div>
+
+            <div className="modal-botones">
+              <button onClick={guardarCambios} className="btn-modal guardar">
+                {modoAgregar ? "Guardar Zona" : "Guardar Cambios"}
+              </button>
+              <button onClick={cerrarModal} className="btn-modal cancelar">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import '../Estilos/VerificarVehiculo.css';
 import { useNavigate } from "react-router-dom";
 
-function VerificarVehiculo({vehiculos,consultas,setConsultas}) {
+function VerificarVehiculo({vehiculos,consultas,setConsultas, onClose}) {
     const navigate = useNavigate();
     
     const [placa,setPlaca] = useState("");
@@ -12,6 +12,7 @@ function VerificarVehiculo({vehiculos,consultas,setConsultas}) {
 
     const consultar = (e) =>{
         e.preventDefault();
+        console.log("vehiculos",vehiculos);
         const vehiculo = vehiculos.find((v) => v.placa.toUpperCase() === placa.toUpperCase());
         if (vehiculo) {
            setFecha(vehiculo.fecha);
@@ -48,23 +49,46 @@ function VerificarVehiculo({vehiculos,consultas,setConsultas}) {
   
     };
 
-    return (
-        <form className="verificar-vehiculo" onSubmit={consultar}>
-            <div className="header">CONSULTA DE VEHICULO</div>
-            <div className="fila">
-                <input type="text" placeholder="Placa" value={placa} onChange={(e)=>setPlaca(e.target.value)}/>
-                <button type="submit" className="btnConsultar">CONSULTAR</button>
-            </div>
+    const handleClose = () => {
+        if (onClose) {
+            onClose();
+        } else {
+            navigate("/");
+        }
+    };
 
-            <input type="text" placeholder="Fecha del robo" value={fecha} readOnly/>
-            <input type="text" placeholder="Barrio" value={barrio} readOnly/>
-            <textarea placeholder="Descripcion" value={descripcion} readOnly/>
-            <div className="botones-finales">
-                 <button type="button" className="btnLimpiar" onClick={()=>{setPlaca(""); setFecha("");setBarrio("");setDescripcion("")}}>Limpiar</button> 
-                 <button type="button" className="btnRegresar" onClick={()=>navigate("/Inicio")}>Volver al Inicio</button>
-            </div>
-           
-        </form>
+    const limpiarFormulario = () => {
+        setPlaca("");
+        setFecha("");
+        setBarrio("");
+        setDescripcion("");
+    };
+
+    return (
+        <div className="verificar-container">
+            <form className="verificar-vehiculo" onSubmit={consultar}>
+                <div className="header">🚗 CONSULTA DE VEHICULO</div>
+                <div className="fila">
+                    <input 
+                        type="text" 
+                        placeholder="Placa" 
+                        value={placa} 
+                        onChange={(e)=>setPlaca(e.target.value)}
+                        required
+                    />
+                    <button type="submit" className="btnConsultar">CONSULTAR</button>
+                </div>
+
+                <input type="text" placeholder="Fecha del robo" value={fecha} readOnly/>
+                <input type="text" placeholder="Barrio" value={barrio} readOnly/>
+                <textarea placeholder="Descripcion" value={descripcion} readOnly/>
+                
+                <div className="botones-finales">
+                     <button type="button" className="btnLimpiar" onClick={limpiarFormulario}>Limpiar</button> 
+                     <button type="button" className="btnRegresar" onClick={handleClose}>Volver al Inicio</button>
+                </div>
+            </form>
+        </div>
     );
 }
 

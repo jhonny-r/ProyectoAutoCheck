@@ -1,170 +1,171 @@
-/* Fondo general */
-body {
-  background-color: #c5bbbb;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-/* Contenedor principal */
-.lista-vehiculos-container {
-  padding: 40px;
+.vehiculos-contenedor {
+  padding: 30px;
+  background-color: #c8c0c0;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Título */
-.lista-vehiculos-container h2 {
-  font-size: 28px;
+.titulo-zona {
+  background-color: #b1f7b1;
+  padding: 15px 30px;
+  border-radius: 10px;
+  text-align: center;
   font-weight: bold;
-  background-color: #96f7a0;
-  padding: 12px 25px;
-  border-radius: 12px;
-  margin-bottom: 20px;
+  font-size: 24px;
+  margin-bottom: 10px;
+  width: fit-content;
 }
 
-/* Botón agregar */
-.btnAgregar {
-  background-color: #2196f3;
+.contenedor-boton-agregar {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.btn-agregar-centrado {
+  padding: 10px 20px;
+  background-color: #2077cf;
   color: white;
-  padding: 10px 18px;
   border: none;
   border-radius: 20px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 30px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-.btnAgregar:hover {
-  background-color: #1976d2;
+.btn-agregar-centrado:hover {
+  background-color: #125aa0;
 }
 
-/* Tabla de vehículos */
-.vehiculos-table {
-  width: 100%;
-  max-width: 1000px;
+.tabla-vehiculos {
   border-collapse: collapse;
+  width: 90%;
   background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  margin-bottom: 30px;
 }
 
-.vehiculos-table th,
-.vehiculos-table td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.tabla-vehiculos th,
+.tabla-vehiculos td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
 }
 
-.vehiculos-table th {
-  background-color: #36f498;
+.tabla-vehiculos th {
+  background-color: #333;
   color: white;
-  font-weight: bold;
 }
 
-/* Fila hover */
-.vehiculos-table tr:hover {
-  background-color: #f1f1f1;
-}
-
-/* Botones en celdas */
-.vehiculos-table .acciones {
-  display: flex;
-  gap: 10px;
-}
-
-/* Botón común */
-.btnEditar,
-.btnEliminar {
+.btn-tabla {
   padding: 6px 12px;
-  border-radius: 12px;
-  font-weight: bold;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s;
+  margin: 2px;
+  font-weight: bold;
 }
 
-.btnEditar {
-  background-color: #ffc107;
-  color: black;
+.btn-tabla.editar {
+  background-color: #4caf50;
+  color: white;
 }
 
-.btnEditar:hover {
-  background-color: #e0a800;
-}
-
-.btnEliminar {
+.btn-tabla.eliminar {
   background-color: #f44336;
   color: white;
 }
 
-.btnEliminar:hover {
-  background-color: #d32f2f;
+.contenedor-boton-volver {
+  text-align: center;
+  margin-top: 10px;
 }
 
-/* Modal overlay */
+.btn-volver {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 10px 25px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-volver:hover {
+  background-color: #333;
+}
+
+/* Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Modal contenido */
-.modal-content {
+.modal-contenido {
   background-color: white;
-  padding: 30px;
-  border-radius: 15px;
-  width: 350px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 25px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-contenido h3 {
+  margin-bottom: 15px;
   text-align: center;
 }
 
-.modal-content input {
-  width: 100%;
-  margin: 8px 0;
-  padding: 6px 10px;
-  border-radius: 5px;
+.form-group {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px;
+  border-radius: 4px;
   border: 1px solid #ccc;
 }
 
-/* Botones del modal */
-.modal-buttons {
-  margin-top: 15px;
+.modal-botones {
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
-.btnGuardar {
+.btn-modal {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-modal.guardar {
   background-color: #4caf50;
   color: white;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
 }
 
-.btnCancelar {
+.btn-modal.cancelar {
   background-color: #f44336;
   color: white;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.botones-acciones {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
 }
