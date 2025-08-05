@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
             token = token.split(' ')[1];
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.usuario = await Usuario.findOne({ where: { _id: decoded.id } }, { attributes: { exclude: ['contrasena'] } });
-            next();
+            next(); 
         } catch (error) {
             res.status(401).json({ message: 'Token no válido o ha expirado' });
         }

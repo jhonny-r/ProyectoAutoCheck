@@ -151,26 +151,29 @@ module.exports.deleteUsuario = async (req, res) => {
 };
 
 module.exports.cambiarContrasena = async (req, res) => {
-    const { contrasenaAntigua, nuevaContrasena } = req.body;
+     const { contrasenaAntigua, nuevaContrasena } = req.body;
+    const usuarioId = req.params.id;
 
     try {
-        const usuario = await Usuario.findOne({ where: { _id: req.usuario.id } });
+        const usuario = await Usuario.findOne({ where: { _id: usuarioId } });
 
         if (!usuario) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
-        const contrasenaValida = await bcrypt.compare(contrasenaAntigua, usuario.contrasena);
-
-        if (!contrasenaValida) {
-            return res.status(401).json({ message: 'Contraseña incorrecta' });
+        const esCorrecta = await bcrypt.compare(contrasenaAntigua, usuario.contrasena);
+        if (!esCorrecta) {
+            return res.status(401).json({ message: 'Contraseña actual incorrecta' });
         }
 
         const salt = await bcrypt.genSalt(10);
-        usuario.contrasena = await bcrypt.hash(nuevaContrasena, salt);
+        const nuevaHash = await bcrypt.hash(nuevaContrasena, salt);
+
+        usuario.contrasena = nuevaHash;
         await usuario.save();
 
-        res.status(200).json({ message: 'Contraseña actualizada correctamente' });
+        res.json({ message: 'Contraseña actualizada correctamente' });
+
     } catch (error) {
         res.status(500).json({ message: 'Error al cambiar la contraseña', error: error.message });
     }
