@@ -3,8 +3,8 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET || '12345678', {
+const generateToken = (id, rol) => {
+    return jwt.sign({ id, rol }, process.env.JWT_SECRET || '12345678', {
         expiresIn: '30d'
     });
 };
@@ -36,7 +36,8 @@ module.exports.createUsuario = async (req, res) => {
             telefono,
             direccion,
             email,
-            contrasena: hashedPassword
+            contrasena: hashedPassword,
+            rol: 'usuario'
         });
 
         res.status(201).json({
@@ -46,9 +47,10 @@ module.exports.createUsuario = async (req, res) => {
             telefono: nuevoUsuario.telefono,
             direccion: nuevoUsuario.direccion,
             email: nuevoUsuario.email,
+            rol: nuevoUsuario.rol,
             createdAt: nuevoUsuario.createdAt,
             updatedAt: nuevoUsuario.updatedAt,
-            token: generateToken(nuevoUsuario._id)
+            token: generateToken(nuevoUsuario._id, nuevoUsuario.rol)
         });
 
     } catch (error) {
@@ -77,7 +79,8 @@ module.exports.loginUsuario = async (req, res) => {
             _id: usuarioEncontrado._id,
             nombre: usuarioEncontrado.nombre,
             email: usuarioEncontrado.email,
-            token: generateToken(usuarioEncontrado._id)
+            rol: usuarioEncontrado.rol,
+            token: generateToken(usuarioEncontrado._id, usuarioEncontrado.rol)
         });
 
     } catch (error) {

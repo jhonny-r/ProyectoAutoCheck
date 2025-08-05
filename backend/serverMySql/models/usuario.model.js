@@ -59,6 +59,11 @@ const Usuario = sequelize.define('Usuario', {
     validate: {
       notNull: { msg: 'La contraseña es un campo obligatorio' }
     }
+  },
+  rol:{
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'administrador'
   }
 }, {
   tableName: 'usuarios',
