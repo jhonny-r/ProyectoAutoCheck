@@ -173,6 +173,37 @@ h1 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para el mapa interactivo */
+.mapa-interactivo {
+  width: 100%;
+}
+
+.mapa-cargando {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 16px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.mapa-error {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  color: #dc2626;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Asegurar que el mapa de Leaflet se vea bien */
+.mapa-interactivo .leaflet-container {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
 /* Botón Mi Zona compacto */
 .btn-mizona {
   margin-top: 15px;

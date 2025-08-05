@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Estilos/Inicio.css';
 import fondo from '../Imagenes/fondo.jpg';
@@ -10,12 +10,66 @@ import zonas from '../Imagenes/zonas.png';
 import VerificarVehiculo from './VerificarVehiculo';
 import ReporteVehiculo from './ReporteVehiculo';
 import MapaReportes from './MapaReportes';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+// Fix para los iconos de Leaflet en React
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
 
 function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, barrios, BarriosPeligrosos, topVehiculos}) {
   const navigate = useNavigate();
   const [mostrarVerificarVehiculo, setMostrarVerificarVehiculo] = useState(false);
   const [mostrarReporteVehiculo, setMostrarReporteVehiculo] = useState(false);
   const [mostrarMapaReportes, setMostrarMapaReportes] = useState(false);
+  
+  // Estados para la ubicación del usuario
+  const [ubicacionUsuario, setUbicacionUsuario] = useState(null);
+  const [cargandoUbicacion, setCargandoUbicacion] = useState(true);
+  const [errorUbicacion, setErrorUbicacion] = useState(null);
+
+  // useEffect para obtener la ubicación del usuario
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUbicacionUsuario({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          });
+          setCargandoUbicacion(false);
+        },
+        (error) => {
+          console.error("Error obteniendo ubicación:", error);
+          // Ubicación por defecto (Quito, Ecuador)
+          setUbicacionUsuario({
+            lat: -0.2201641,
+            lng: -78.5123274
+          });
+          setErrorUbicacion("No se pudo obtener tu ubicación. Mostrando Quito por defecto.");
+          setCargandoUbicacion(false);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
+        }
+      );
+    } else {
+      // Geolocalización no soportada
+      setUbicacionUsuario({
+        lat: -0.2201641,
+        lng: -78.5123274
+      });
+      setErrorUbicacion("Tu navegador no soporta geolocalización. Mostrando Quito por defecto.");
+      setCargandoUbicacion(false);
+    }
+  }, []);
 
   const abrirVerificarVehiculo = () => {
     setMostrarVerificarVehiculo(true);
@@ -53,7 +107,9 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
           <span className="nav-item" onClick={() => navigate('/ForoVecinal')}>💬 Foro Vecinal</span>
           <span className="nav-item" onClick={() => navigate('/configuracion')}>⚙️ Configuración</span>
           <span className="nav-item" onClick={() => navigate('/MiAutoCheck')}>🚗 MiAutoCheck</span>
-          <span className="nav-item" onClick={() => navigate('/PanelAdmin')}>👤 Administrador</span>
+          {usuario && usuario.rol === 'administrador' && (
+            <span className="nav-item" onClick={() => navigate('/PanelAdmin')}>👤 Administrador</span>
+          )}
         </div>
       </div>
 
@@ -62,7 +118,38 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
         <p className="subtitulo">Verifica, Reporta y Mantente Informado</p>
 
         <div className="mapa-container">
-          <img src={mapa} alt="Mapa" className="imagen-mapa" />
+          {cargandoUbicacion ? (
+            <div className="mapa-cargando">
+              <p>Obteniendo tu ubicación...</p>
+            </div>
+          ) : (
+            <div className="mapa-interactivo">
+              <MapContainer 
+                center={[ubicacionUsuario.lat, ubicacionUsuario.lng]} 
+                zoom={18} 
+                style={{ height: '300px', width: '100%', borderRadius: '15px' }}
+                scrollWheelZoom={false}
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Marker position={[ubicacionUsuario.lat, ubicacionUsuario.lng]}>
+                  <Popup>
+                    <div>
+                      <strong>Tu ubicación actual</strong><br/>
+                      {errorUbicacion ? errorUbicacion : "Estás aquí"}
+                    </div>
+                  </Popup>
+                </Marker>
+              </MapContainer>
+              {errorUbicacion && (
+                <div className="mapa-error">
+                  <small>{errorUbicacion}</small>
+                </div>
+              )}
+            </div>
+          )}
           <button className="btn-mizona" onClick={() => navigate('/MiZona')}>Mi zona</button>
         </div>
 
