@@ -5,13 +5,6 @@ import '../Estilos/Registro.css';
 function Registro({ agregarUsuario, usuarios }) {
   const navigate = useNavigate();
 
-  // ID como string para compatibilidad con json-server
-  const _id = (
-    usuarios.length > 0
-      ? Math.max(...usuarios.map(u => Number(u._id))) + 1
-      : 1
-  ).toString();
-
   const [nombre, setNombre] = React.useState("");
   const [alias, setAlias] = React.useState("");
   const [telefono, setTelefono] = React.useState("");
@@ -21,7 +14,7 @@ function Registro({ agregarUsuario, usuarios }) {
   // Nuevo estado para confirmar contraseña
   const [confirmarContrasena, setConfirmarContrasena] = React.useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const aliasFinal = alias.trim() === "" ? nombre : alias;
@@ -33,7 +26,6 @@ function Registro({ agregarUsuario, usuarios }) {
 
     // Armar nuevo usuario y enviarlo
     const nuevoUsuario = {
-      _id,
       nombre,
       alias: aliasFinal,
       telefono,
@@ -44,8 +36,16 @@ function Registro({ agregarUsuario, usuarios }) {
     };
 
     console.log("Nuevo usuario a registrar:", nuevoUsuario);
-    agregarUsuario(nuevoUsuario);
-    navigate("/");
+    
+    // Llamar a agregarUsuario y esperar el resultado
+    try {
+      await agregarUsuario(nuevoUsuario);
+      alert("Usuario registrado exitosamente");
+      navigate("/");
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+      alert("Error al registrar el usuario. Por favor intenta de nuevo.");
+    }
   };
 
   return (

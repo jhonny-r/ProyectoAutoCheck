@@ -101,16 +101,16 @@ function App() {
 
 
   const agregarUsuario = (nuevo) => {
-
     console.log("Nuevo usuario a agregar:", nuevo);
-    axios.post('http://localhost:8000/api/usuarios', nuevo)
+    return axios.post('http://localhost:8000/api/usuarios', nuevo)
       .then(response => {
         setUsuarios(prev => [...prev, response.data]);
+        return response.data;
       })
       .catch(error => {
         console.error('Error al agregar el usuario:', error);
+        throw error;
       });
-
   };
 
   const eliminarUsuario = (id) => {

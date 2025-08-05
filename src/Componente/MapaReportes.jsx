@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../Estilos/MapaReportes.css';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Polygon, Popup, Marker, Circle } from 'react-leaflet';
@@ -17,71 +17,97 @@ function MapaReportes({ BarriosPeligrosos, topVehiculos, onClose }) {
   const navigate = useNavigate();
   const [barrioDesplegado, setBarrioDesplegado] = useState(false);
   const [autosDesplegado, setAutosDesplegado] = useState(false);
+  const [coordenadasBarrios, setCoordenadasBarrios] = useState({});
 
   // Debug: ver qué datos están llegando
   console.log("BarriosPeligrosos en MapaReportes:", BarriosPeligrosos);
   console.log("topVehiculos en MapaReportes:", topVehiculos);
 
-  // Coordenadas de ejemplo para barrios de Quito (deberías reemplazar con datos reales)
-  const coordenadasBarrios = {
-    "La Floresta": [
-      [-0.1815, -78.4851],
-      [-0.1825, -78.4851],
-      [-0.1825, -78.4841],
-      [-0.1815, -78.4841],
-      [-0.1815, -78.4851]
-    ],
-    "Centro Histórico": [
-      [-0.2201, -78.5120],
-      [-0.2210, -78.5120],
-      [-0.2210, -78.5110],
-      [-0.2201, -78.5110],
-      [-0.2201, -78.5120]
-    ],
-    "San Roque": [
-      [-0.2180, -78.5140],
-      [-0.2190, -78.5140],
-      [-0.2190, -78.5130],
-      [-0.2180, -78.5130],
-      [-0.2180, -78.5140]
-    ]
+  // Función para buscar coordenadas reales del barrio usando geocodificación
+  const buscarCoordenadasReales = async (nombreBarrio) => {
+    try {
+      const query = encodeURIComponent(`${nombreBarrio}, Quito, Ecuador`);
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1&addressdetails=1`
+      );
+      const data = await response.json();
+      
+      if (data && data.length > 0) {
+        const lat = parseFloat(data[0].lat);
+        const lon = parseFloat(data[0].lon);
+        console.log(`Coordenadas encontradas para ${nombreBarrio}:`, lat, lon);
+        return {
+          center: [lat, lon],
+          radius: 800
+        };
+      } else {
+        console.log(`No se encontraron coordenadas para ${nombreBarrio}, usando fallback`);
+        return null;
+      }
+    } catch (error) {
+      console.error(`Error buscando coordenadas para ${nombreBarrio}:`, error);
+      return null;
+    }
   };
 
-  // Función para generar coordenadas automáticamente para cualquier barrio
-  const generarCoordenadasBarrio = (index) => {
+  // useEffect para buscar coordenadas reales cuando cambian los barrios
+  useEffect(() => {
+    const buscarTodasLasCoordenadas = async () => {
+      if (BarriosPeligrosos && BarriosPeligrosos.length > 0) {
+        const nuevasCoordenadas = {};
+        
+        for (let i = 0; i < BarriosPeligrosos.length; i++) {
+          const barrio = BarriosPeligrosos[i];
+          const coordenadas = await buscarCoordenadasReales(barrio.nombre);
+          
+          if (coordenadas) {
+            nuevasCoordenadas[barrio.nombre] = coordenadas;
+          } else {
+            // Fallback si no se encuentran coordenadas reales
+            nuevasCoordenadas[barrio.nombre] = generarCoordenadasPorNombre(barrio.nombre, i);
+          }
+          
+          // Pequeña pausa para no sobrecargar la API
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        
+        setCoordenadasBarrios(nuevasCoordenadas);
+      }
+    };
+
+    buscarTodasLasCoordenadas();
+  }, [BarriosPeligrosos]);
+
+  // Función para generar coordenadas automáticamente basándose en el nombre del barrio (fallback)
+  const generarCoordenadasPorNombre = (nombreBarrio, index) => {
     // Centro base de Quito
     const latBase = -0.2;
     const lonBase = -78.5;
     
-    // Generar un desplazamiento único basado en el índice
-    const offsetLat = (index * 0.02) - 0.05; // Distribuir verticalmente
-    const offsetLon = ((index % 3) * 0.02) - 0.02; // Distribuir horizontalmente
+    // Crear un "hash" simple del nombre del barrio para generar coordenadas consistentes
+    let hash = 0;
+    for (let i = 0; i < nombreBarrio.length; i++) {
+      const char = nombreBarrio.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convertir a entero de 32 bits
+    }
     
-    const centerLat = latBase + offsetLat;
-    const centerLon = lonBase + offsetLon;
+    // Usar el hash para generar offsets consistentes
+    const offsetLat = ((hash % 100) / 1000) - 0.05; // Rango de -0.05 a 0.05
+    const offsetLon = (((hash / 100) % 100) / 1000) - 0.05; // Rango de -0.05 a 0.05
+    
+    // Combinar con el índice para evitar superposiciones
+    const indexOffsetLat = (index * 0.01) - 0.02;
+    const indexOffsetLon = ((index % 4) * 0.01) - 0.015;
+    
+    const centerLat = latBase + offsetLat + indexOffsetLat;
+    const centerLon = lonBase + offsetLon + indexOffsetLon;
     
     // Retornar centro y radio para círculo
     return {
       center: [centerLat, centerLon],
       radius: 800 // Radio en metros
     };
-  };
-
-  // Función para obtener coordenadas (predefinidas o generadas automáticamente)
-  const obtenerCoordenadasBarrio = (nombreBarrio, index) => {
-    // Primero intentar usar coordenadas predefinidas (convertidas a círculo)
-    if (coordenadasBarrios[nombreBarrio]) {
-      const coords = coordenadasBarrios[nombreBarrio];
-      // Calcular el centro del polígono predefinido
-      const centerLat = coords.reduce((sum, point) => sum + point[0], 0) / coords.length;
-      const centerLon = coords.reduce((sum, point) => sum + point[1], 0) / coords.length;
-      return {
-        center: [centerLat, centerLon],
-        radius: 800
-      };
-    }
-    // Si no existe, generar automáticamente
-    return generarCoordenadasBarrio(index);
   };
 
   // Función para obtener color según el nivel de riesgo
@@ -133,7 +159,11 @@ function MapaReportes({ BarriosPeligrosos, topVehiculos, onClose }) {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
               {BarriosPeligrosos && BarriosPeligrosos.map((barrio, index) => {
-                const coordenadas = obtenerCoordenadasBarrio(barrio.nombre, index);
+                const coordenadas = coordenadasBarrios[barrio.nombre];
+                
+                // Solo renderizar si ya tenemos las coordenadas
+                if (!coordenadas) return null;
+                
                 return (
                   <Circle
                     key={index}
@@ -163,15 +193,15 @@ function MapaReportes({ BarriosPeligrosos, topVehiculos, onClose }) {
               <h4>Nivel de Riesgo</h4>
               <div className="leyenda-item">
                 <span className="color-box" style={{backgroundColor: 'red'}}></span>
-                <span>Alto (3)</span>
+                <span>Alto</span>
               </div>
               <div className="leyenda-item">
                 <span className="color-box" style={{backgroundColor: 'orange'}}></span>
-                <span>Medio (2)</span>
+                <span>Medio</span>
               </div>
               <div className="leyenda-item">
                 <span className="color-box" style={{backgroundColor: 'yellow'}}></span>
-                <span>Bajo (1)</span>
+                <span>Bajo</span>
               </div>
             </div>
           </div>
