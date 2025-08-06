@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../Estilos/GestionZonas.css';
 import { useNavigate } from 'react-router-dom';
 
-function GestionZonas({ barrios, agregarBarrio, eliminarBarrio, editarBarrio }) {
+function GestionZonas({ barrios, agregarBarrio, eliminarBarrio, editarBarrio, sectores, nivelesRiesgo }) {
   const [nombre, setNombre] = useState('');
   const [sector, setSector] = useState('');
   const [riesgo, setRiesgo] = useState('');
@@ -11,6 +11,9 @@ function GestionZonas({ barrios, agregarBarrio, eliminarBarrio, editarBarrio }) 
   const [modoAgregar, setModoAgregar] = useState(false);
 
   const navigate = useNavigate();
+
+  console.log("Sectores recibidos en GestionZonas:", sectores);
+  console.log("Niveles de riesgo recibidos en GestionZonas:", nivelesRiesgo);
 
   const abrirModalAgregar = () => {
     setNombre('');
@@ -148,9 +151,13 @@ function GestionZonas({ barrios, agregarBarrio, eliminarBarrio, editarBarrio }) 
                 required
               >
                 <option value="">Seleccionar Sector</option>
-                <option value="Centro">Centro</option>
-                <option value="Norte">Norte</option>
-                <option value="Sur">Sur</option>
+                {sectores && sectores.length > 0 && (
+                  sectores.map((sectorObj) => (
+                    <option key={sectorObj._id} value={sectorObj.nombre}>
+                      {sectorObj.nombre}
+                    </option>
+                  ))
+                )}
               </select>
             </div>
 
@@ -163,9 +170,13 @@ function GestionZonas({ barrios, agregarBarrio, eliminarBarrio, editarBarrio }) 
                 required
               >
                 <option value="">Seleccionar Nivel de Riesgo</option>
-                <option value="1">Bajo (1)</option>
-                <option value="2">Medio (2)</option>
-                <option value="3">Alto (3)</option>
+                {nivelesRiesgo && nivelesRiesgo.length > 0 && (
+                  nivelesRiesgo.map((nivelObj) => (
+                    <option key={nivelObj._id} value={nivelObj.riesgo}>
+                      {nivelObj.riesgo}
+                    </option>
+                  ))
+                )}
               </select>
             </div>
 

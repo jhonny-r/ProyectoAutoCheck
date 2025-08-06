@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../Estilos/MiAutoCheck.css';
 import { useNavigate } from "react-router-dom";
 import avatar from '../Imagenes/avatar.avif';
-import EditarPerfil from './EditarPerfil';
+import EditarPerfil from './EditarPerfil'; 
 
 function MiAutoCheck({ usuario, consultas, eliminarConsulta, setUsuarioActivo, setConsultas }) {
     const navigate = useNavigate();
@@ -73,7 +73,7 @@ function MiAutoCheck({ usuario, consultas, eliminarConsulta, setUsuarioActivo, s
 
                     {/* SECCIÓN ALERTAS Y ZONA */}
                     <div className="alertas-zona">
-                        <div className="columna">
+                        <div className="columna"> 
                             <h3>🔔 Alertas Activas</h3>
                             <span>{consultas.some(c => c.alerta) ? 'Alerta registrada' : 'Ninguna Alerta'}</span>
                         </div>
@@ -88,11 +88,11 @@ function MiAutoCheck({ usuario, consultas, eliminarConsulta, setUsuarioActivo, s
             {/* PIE DE PÁGINA */}
             <div className="footer">
                 AutoCheck - Juntos hacemos las calles más seguras
-            </div>
+            </div> 
 
             {/* MODAL EDITAR PERFIL */}
             {mostrarEditarPerfil && (
-                <EditarPerfil onClose={cerrarEditarPerfil} />
+                <EditarPerfil onClose={cerrarEditarPerfil} usuario={usuario} setUsuarioActivo={setUsuarioActivo} />
             )}
         </div>
     );
