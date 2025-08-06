@@ -61,7 +61,7 @@ function ListaVehiculos({ vehiculos, eliminarVehiculo, editarVehiculo, agregarVe
   return (
     <div className="vehiculos-contenedor">
       <div className="titulo-zona">
-        <h2>Gestión de Vehículos</h2>
+        <h2>🚗 Gestión de Vehículos</h2>
       </div>
 
       <div className="contenedor-boton-agregar">

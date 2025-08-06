@@ -78,7 +78,7 @@ function ListaUsuarios({ usuarios, eliminarUsuario, editarUsuario, agregarUsuari
   return (
     <div className="usuarios-contenedor">
       <div className="titulo-zona">
-        <h2>Gestión de Usuarios</h2>
+        <h2>👥 Gestión de Usuarios</h2>
       </div>
 
       <div className="contenedor-boton-agregar">

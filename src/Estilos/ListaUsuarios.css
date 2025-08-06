@@ -1,6 +1,6 @@
 .usuarios-contenedor {
   padding: 30px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,14 +16,22 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 60% 60%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
   pointer-events: none;
+  animation: backgroundFloat 8s ease-in-out infinite;
+}
+
+@keyframes backgroundFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(5px) rotate(-1deg); }
 }
 
 .titulo-zona {
-  background: linear-gradient(135deg, #a8f0a8, #7ed957);
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
   padding: 20px 40px;
   border-radius: 25px;
   text-align: center;
@@ -31,12 +39,28 @@
   font-size: 28px;
   margin-bottom: 25px;
   width: fit-content;
-  color: #2c3e50;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: white;
+  box-shadow: 
+    0 15px 35px rgba(102, 126, 234, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
   z-index: 1;
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% { 
+    box-shadow: 
+      0 15px 35px rgba(102, 126, 234, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.3);
+  }
+  50% { 
+    box-shadow: 
+      0 20px 45px rgba(240, 147, 251, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.4);
+  }
 }
 
 .contenedor-boton-agregar {
@@ -48,7 +72,7 @@
 
 .btn-agregar-centrado {
   padding: 15px 30px;
-  background: linear-gradient(135deg, #2196F3, #1976D2);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   border: none;
   border-radius: 25px;
@@ -56,31 +80,17 @@
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 32px rgba(33, 150, 243, 0.3);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
 }
 
-.btn-agregar-centrado::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.btn-agregar-centrado:hover::before {
-  left: 100%;
-}
-
 .btn-agregar-centrado:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(33, 150, 243, 0.4);
+  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+  background: linear-gradient(135deg, #764ba2, #f093fb);
 }
 
 .tabla-usuarios {
@@ -92,8 +102,8 @@
   backdrop-filter: blur(20px);
   border-radius: 20px;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
+    0 25px 50px rgba(102, 126, 234, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
   margin-bottom: 30px;
   overflow: hidden;
   position: relative;
@@ -101,24 +111,9 @@
 }
 
 .tabla-usuarios thead {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   position: relative;
-}
-
-.tabla-usuarios thead::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { transform: translateX(-100%); }
-  50% { transform: translateX(100%); }
+  z-index: 2;
 }
 
 .tabla-usuarios th {
@@ -146,10 +141,12 @@
   padding: 18px 15px;
   text-align: center;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1);
   font-size: 14px;
-  color: #2c3e50;
+  color: #1e293b;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .tabla-usuarios tbody tr {
@@ -158,12 +155,12 @@
 }
 
 .tabla-usuarios tbody tr:hover {
-  background: linear-gradient(135deg, rgba(33, 150, 243, 0.08), rgba(25, 118, 210, 0.08));
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(240, 147, 251, 0.08));
   transform: translateY(-2px);
 }
 
 .tabla-usuarios tbody tr:hover td {
-  border-bottom-color: rgba(33, 150, 243, 0.2);
+  border-bottom-color: rgba(102, 126, 234, 0.2);
 }
 
 .tabla-usuarios tbody tr:last-child td {
@@ -193,41 +190,28 @@
   overflow: hidden;
 }
 
-.btn-tabla::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.btn-tabla:hover::before {
-  left: 100%;
-}
-
 .btn-tabla.editar {
-  background: linear-gradient(135deg, #4CAF50, #45a049);
+  background: linear-gradient(135deg, #10b981, #34d399);
   color: white;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 .btn-tabla.editar:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  background: linear-gradient(135deg, #34d399, #6ee7b7);
 }
 
 .btn-tabla.eliminar {
-  background: linear-gradient(135deg, #f44336, #d32f2f);
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
   color: white;
-  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
 }
 
 .btn-tabla.eliminar:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+  background: linear-gradient(135deg, #fbbf24, #fcd34d);
 }
 
 .contenedor-boton-volver {
@@ -238,7 +222,7 @@
 }
 
 .btn-volver {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   font-weight: bold;
   padding: 15px 35px;
@@ -251,31 +235,17 @@
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.3);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
 }
 
-.btn-volver::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.btn-volver:hover::before {
-  left: 100%;
-}
-
 .btn-volver:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(44, 62, 80, 0.4);
+  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+  background: linear-gradient(135deg, #764ba2, #f093fb);
 }
 
 /* Modal */
@@ -285,8 +255,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
+  background: rgba(102, 126, 234, 0.4);
+  backdrop-filter: blur(15px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -307,10 +277,11 @@
   width: 450px;
   max-width: 90%;
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
+    0 25px 50px rgba(102, 126, 234, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
   animation: slideIn 0.3s ease;
+  position: relative;
 }
 
 @keyframes slideIn {
@@ -321,11 +292,16 @@
 .modal-contenido h3 {
   margin-bottom: 25px;
   text-align: center;
-  color: #2c3e50;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-size: 24px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
 }
 
 .form-group {
@@ -337,7 +313,7 @@
 .form-group label {
   font-weight: bold;
   margin-bottom: 8px;
-  color: #2c3e50;
+  color: #1e293b;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -355,8 +331,8 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #2196F3;
-  box-shadow: 0 0 20px rgba(33, 150, 243, 0.2);
+  border-color: #667eea;
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
   background: rgba(255, 255, 255, 1);
 }
 
@@ -382,39 +358,26 @@
   overflow: hidden;
 }
 
-.btn-modal::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.btn-modal:hover::before {
-  left: 100%;
-}
-
 .btn-modal.guardar {
-  background: linear-gradient(135deg, #4CAF50, #45a049);
+  background: linear-gradient(135deg, #10b981, #34d399);
   color: white;
-  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
 }
 
 .btn-modal.guardar:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+  box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5);
+  background: linear-gradient(135deg, #34d399, #6ee7b7);
 }
 
 .btn-modal.cancelar {
-  background: linear-gradient(135deg, #f44336, #d32f2f);
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
   color: white;
-  box-shadow: 0 8px 25px rgba(244, 67, 54, 0.3);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
 }
 
 .btn-modal.cancelar:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(244, 67, 54, 0.4);
+  box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5);
+  background: linear-gradient(135deg, #fbbf24, #fcd34d);
 }
