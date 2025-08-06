@@ -26,6 +26,18 @@ module.exports.updateNuevaPublicacion = async (req, res) => {
     }
 };
 
+// Obtener todas las publicaciones
+module.exports.getAllPublicaciones = async (req, res) => {
+    try {
+        const publicaciones = await NuevaPublicacion.findAll({
+            order: [['createdAt', 'DESC']] // Ordenar por fecha de creación, más recientes primero
+        });
+        res.status(200).json(publicaciones);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener las publicaciones' });
+    }
+};
+
 // Obtener publicaciones por barrio
 module.exports.getPublicacionesPorBarrio = async (req, res) => {
     try {

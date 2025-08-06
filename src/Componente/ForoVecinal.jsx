@@ -8,23 +8,72 @@ import user3 from '../Imagenes/user3.png';
 import userAnonimo from '../Imagenes/userAnonimo.png';
 import moto from '../Imagenes/moto.png';
 
-function ForoVecinal() {
+function ForoVecinal({ barrios, tipoIncidente, usuario, publicaciones, agregarPublicacion }) {
   const navigate = useNavigate();
   const [mostrarModal, setMostrarModal] = useState(false);
-  const [tipoNombre, setTipoNombre] = useState("nombre"); // "nombre" o "alias"
-  const [tipoIncidente, setTipoIncidente] = useState(""); // Para el tipo de incidente seleccionado
-  const [zonaSeleccionada, setZonaSeleccionada] = useState("La Floresta"); // Para la zona seleccionada
+  const [tipoNombre, setTipoNombre] = useState("nombre"); // "nombre" o "anonimo"
+  const [tipoIncidenteSeleccionado, setTipoIncidenteSeleccionado] = useState(""); // Para el tipo de incidente seleccionado
+  const [zonaSeleccionada, setZonaSeleccionada] = useState(""); // Para la zona seleccionada
+  const [mensaje, setMensaje] = useState(""); // Para el textarea del mensaje
+  const [enviandoPublicacion, setEnviandoPublicacion] = useState(false); // Para mostrar estado de carga
   
-  // Simular datos del usuario (en una app real, esto vendría del contexto/estado global)
-  const usuario = {
-    nombre: "Juan Pérez",
-    alias: "Anónimo"
-  };
+  console.log("Barrios recibidos en ForoVecinal:", barrios);
+  console.log("Tipos de incidente recibidos en ForoVecinal:", tipoIncidente);
+  console.log("Usuario activo recibido en ForoVecinal:", usuario);
+  console.log("Publicaciones recibidas en ForoVecinal:", publicaciones);
+  
+  // Obtener nombre del usuario activo - solo nombre si apellido no existe
+  const nombreUsuario = usuario 
+    ? (usuario.apellido ? `${usuario.nombre} ${usuario.apellido}` : usuario.nombre)
+    : "Usuario";
 
-  const handleSubmit = (e) => {
+  // Determinar qué mostrar según la selección
+  const nombreAMostrar = tipoNombre === "nombre" ? nombreUsuario : "Anónimo";
+
+  // Filtrar publicaciones por barrio seleccionado
+  const publicacionesFiltradas = publicaciones && publicaciones.length > 0 
+    ? (zonaSeleccionada 
+        ? publicaciones.filter(pub => pub.barrio === zonaSeleccionada)
+        : publicaciones)
+    : [];
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí podrías enviar los datos al servidor
-    setMostrarModal(false);
+    
+    // Validar que todos los campos estén llenos
+    if (!nombreAMostrar || !zonaSeleccionada || !tipoIncidenteSeleccionado || !mensaje.trim()) {
+      alert("Por favor completa todos los campos antes de publicar.");
+      return;
+    }
+
+    const nuevaPublicacion = {
+      nombre: nombreAMostrar,
+      barrio: zonaSeleccionada,
+      tipoIncidente: tipoIncidenteSeleccionado,
+      descripcion: mensaje.trim()
+    };
+
+    setEnviandoPublicacion(true);
+    
+    try {
+      await agregarPublicacion(nuevaPublicacion);
+      
+      // Limpiar el formulario
+      setZonaSeleccionada("");
+      setTipoIncidenteSeleccionado("");
+      setMensaje("");
+      setTipoNombre("nombre");
+      
+      // Cerrar el modal
+      setMostrarModal(false);
+      
+      alert("¡Publicación creada exitosamente!");
+    } catch (error) {
+      console.error("Error al crear la publicación:", error);
+      alert("Error al crear la publicación. Inténtalo de nuevo.");
+    } finally {
+      setEnviandoPublicacion(false);
+    }
   };
 
   return (
@@ -33,29 +82,28 @@ function ForoVecinal() {
       <div className="foro-header-row">
         <div className="contenido-col">
           <h1 className="foro-titulo">FORO VECINAL</h1>
-          <p className="foro-subtitulo">Comparte y Mantente al tanto de lo que sucede en tu zona</p>
+          <p className="foro-subtitulo">
+            Comparte y Mantente al tanto de lo que sucede en tu zona
+            {zonaSeleccionada && (
+              <span className="contador-publicaciones">
+                {` • ${publicacionesFiltradas.length} publicación${publicacionesFiltradas.length !== 1 ? 'es' : ''} en ${zonaSeleccionada}`}
+              </span>
+            )}
+          </p>
           <div className="foro-controles">
             <select 
               className="zona-select"
               value={zonaSeleccionada}
               onChange={(e) => setZonaSeleccionada(e.target.value)}
             >
-              <option value="La Floresta">La Floresta</option>
-              <option value="El Batán">El Batán</option>
-              <option value="El Recreo">El Recreo</option>
-            </select>
-            <select 
-              className="tipo-select"
-              value={tipoIncidente}
-              onChange={(e) => setTipoIncidente(e.target.value)}
-            >
-              <option value="" disabled>Tipo de incidente</option>
-              <option value="Robo">Robo</option>
-              <option value="Riña">Riña</option>
-              <option value="Vandalismo">Vandalismo</option>
-              <option value="Vehículo sospechoso">Vehículo sospechoso</option>
-              <option value="Moto sospechosa">Moto sospechosa</option>
-              <option value="Otros">Otros</option>
+              <option value="">Seleccionar Zona</option>
+              {barrios && barrios.length > 0 && (
+                barrios.map((barrioObj) => (
+                  <option key={barrioObj._id} value={barrioObj.nombre}>
+                    {barrioObj.nombre}
+                  </option>
+                ))
+              )}
             </select>
             <button className="publicar-btn" onClick={() => setMostrarModal(true)}>➕ Nueva Publicación</button>
           </div>
@@ -69,33 +117,45 @@ function ForoVecinal() {
 
       {/* PUBLICACIONES */}
       <div className="publicaciones-container">
-        {/* Publicación 1 */}
-        <div className="pub-card">
-          <div className="pub-header">
-            <img src={userAnonimo} alt="Anónimo" className="pub-avatar" />
-            <div className="pub-info">
-              <h4 className="pub-autor">Anónimo</h4>
-              <p className="pub-meta">27 de abr. 11:30 • El Recreo</p>
+        {publicacionesFiltradas && publicacionesFiltradas.length > 0 ? (
+          publicacionesFiltradas.map((publicacion) => (
+            <div key={publicacion._id} className="pub-card">
+              <div className="pub-header">
+                <img 
+                  src={publicacion.nombre === "Anónimo" ? userAnonimo : user2} 
+                  alt={publicacion.nombre} 
+                  className="pub-avatar" 
+                />
+                <div className="pub-info">
+                  <h4 className="pub-autor">{publicacion.nombre}</h4>
+                  <p className="pub-meta">
+                    {new Date(publicacion.createdAt).toLocaleDateString('es-ES', {
+                      day: 'numeric',
+                      month: 'short',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })} • {publicacion.barrio}
+                  </p>
+                </div>
+              </div>
+              <div className="pub-content">
+                <div className="pub-tipo-incidente">
+                  <span className="tipo-badge">{publicacion.tipoIncidente}</span>
+                </div>
+                <p className="pub-texto">{publicacion.descripcion}</p>
+              </div>
             </div>
+          ))
+        ) : (
+          <div className="no-publicaciones">
+            <p>
+              {zonaSeleccionada 
+                ? `No hay publicaciones disponibles para ${zonaSeleccionada}.`
+                : "No hay publicaciones disponibles. Selecciona una zona para ver las publicaciones."
+              }
+            </p>
           </div>
-          <div className="pub-content">
-            <p className="pub-texto">Encontré esta moto abandonada en la esquina. Está bien deteriorada. He notificado a las autoridades correspondientes para que se hagan cargo de la situación. Es importante mantenerse alerta ante este tipo de situaciones en nuestro barrio.</p>
-          </div>
-        </div>
-
-        {/* Publicación 2 */}
-        <div className="pub-card">
-          <div className="pub-header">
-            <img src={user2} alt="María" className="pub-avatar" />
-            <div className="pub-info">
-              <h4 className="pub-autor">María</h4>
-              <p className="pub-meta">26 de abr. 17:30 • El Batán</p>
-            </div>
-          </div>
-          <div className="pub-content">
-            <p className="pub-texto">Les recomiendo a todos asegurar bien sus bicis si las dejan afuera. He visto varios intentos de robo en la zona últimamente. Es importante tomar precauciones adicionales, especialmente durante la noche.</p>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* FOOTER */}
@@ -114,17 +174,18 @@ function ForoVecinal() {
               <div className="nombre-container">
                 <input 
                   type="text" 
-                  value={tipoNombre === "nombre" ? usuario.nombre : usuario.alias}
+                  value={nombreAMostrar}
                   readOnly
                   className="nombre-input"
+                  placeholder="Nombre del usuario"
                 />
                 <select 
                   value={tipoNombre} 
                   onChange={(e) => setTipoNombre(e.target.value)}
                   className="tipo-nombre-select"
                 >
-                  <option value="nombre">Mostrar nombre</option>
-                  <option value="alias">Mostrar como anónimo</option>
+                  <option value="nombre">Mi nombre</option>
+                  <option value="anonimo">Anónimo</option>
                 </select>
               </div>
 
@@ -136,39 +197,45 @@ function ForoVecinal() {
                 onChange={(e) => setZonaSeleccionada(e.target.value)}
               />
 
-              {tipoIncidente ? (
-                <input 
-                  type="text" 
-                  value={tipoIncidente}
-                  readOnly
-                  className="tipo-incidente-input"
-                  placeholder="Tipo de incidente"
-                />
-              ) : (
-                <select 
-                  className="tipo-incidente-select"
-                  value={tipoIncidente}
-                  onChange={(e) => setTipoIncidente(e.target.value)}
-                >
-                  <option value="" disabled>Tipo de incidente</option>
-                  <option value="Robo">Robo</option>
-                  <option value="Riña">Riña</option>
-                  <option value="Vandalismo">Vandalismo</option>
-                  <option value="Vehículo sospechoso">Vehículo sospechoso</option>
-                  <option value="Moto sospechosa">Moto sospechosa</option>
-                  <option value="Otros">Otros</option>
-                </select>
-              )}
+              <select 
+                className="tipo-incidente-select"
+                value={tipoIncidenteSeleccionado}
+                onChange={(e) => setTipoIncidenteSeleccionado(e.target.value)}
+              >
+                <option value="" disabled>Tipo de incidente</option>
+                {tipoIncidente && tipoIncidente.length > 0 && (
+                  tipoIncidente.map((tipoObj) => (
+                    <option key={tipoObj._id} value={tipoObj.nombre}>
+                      {tipoObj.nombre}
+                    </option>
+                  ))
+                )}
+              </select>
 
               <textarea
                 placeholder="Escribe aquí tu mensaje o alerta para los vecinos..."
                 rows="6"
                 className="mensaje-textarea"
+                value={mensaje}
+                onChange={(e) => setMensaje(e.target.value)}
               ></textarea>
 
               <div className="modal-buttons">
-                <button type="submit" className="btn-publicar">PUBLICAR</button>
-                <button type="button" className="btn-cancelar" onClick={() => setMostrarModal(false)}>CANCELAR</button>
+                <button 
+                  type="submit" 
+                  className="btn-publicar"
+                  disabled={enviandoPublicacion}
+                >
+                  {enviandoPublicacion ? "PUBLICANDO..." : "PUBLICAR"}
+                </button>
+                <button 
+                  type="button" 
+                  className="btn-cancelar" 
+                  onClick={() => setMostrarModal(false)}
+                  disabled={enviandoPublicacion}
+                >
+                  CANCELAR
+                </button>
               </div>
             </form>
           </div>
