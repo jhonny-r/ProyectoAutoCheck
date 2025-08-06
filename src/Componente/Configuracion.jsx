@@ -15,7 +15,7 @@ function Configuracion({ onClose }) {
   const [contraAntigua, setContraAntigua] = useState('');
   const [contraNueva, setContraNueva] = useState('');
   const [mensajeCambio, setMensajeCambio] = useState('');
-
+ 
   const handleGuardarCambio = () => {
     setMensajeCambio('Contraseña actualizada correctamente.');
     setTimeout(() => setMensajeCambio(''), 3000);

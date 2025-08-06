@@ -30,6 +30,12 @@ allTipoVehiculosRoutes(app);
 const allNivelRiesgosRoutes = require('./serverMySql/routes/nivelRiesgo.routes.js');
 allNivelRiesgosRoutes(app);
 
+const allTipoIncidenteRoutes = require('./serverMySql/routes/tipoIncidente.routes.js');
+allTipoIncidenteRoutes(app);
+
+const allNuevaPublicacionRoutes = require('./serverMySql/routes/nuevaPublicacion.routes.js');
+allNuevaPublicacionRoutes(app);
+
 app.listen(port,()=>{
     console.log("Server listening at port",port);
 })

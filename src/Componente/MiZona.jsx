@@ -14,7 +14,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-function MiZona({ barrios }) {
+function MiZona({ barrios, onClose }) {
   const navigate = useNavigate();
   const [mostrarCombo, setMostrarCombo] = useState(false);
   const [zonaSeleccionada, setZonaSeleccionada] = useState('');
@@ -160,17 +160,23 @@ function MiZona({ barrios }) {
   };
 
   return (
-    <div className="zona-container">
-      <button className="volver-btn" onClick={() => navigate('/Inicio')}>Volver al Inicio</button>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content zona-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <h2>🏘️ Mi Zona</h2>
+          <button type="button" className="cerrar-btn" onClick={onClose}>
+            ✕
+          </button>
+        </div>
 
-      <h1 className="zona-titulo">Mi Zona</h1>
-      <p className="zona-subtitulo">
-        Gestiona la zona que deseas monitorear y mantente informado de lo que ocurre a tu alrededor.
-      </p>
+        <div className="zona-modal-content">
+          <p className="zona-subtitulo">
+            Gestiona la zona que deseas monitorear y mantente informado de lo que ocurre a tu alrededor.
+          </p>
 
-      <div className="zona-centro">
-        <div className="zona-mapa-botones">
-          <div className="zona-mapa-contenedor">
+          <div className="zona-centro">
+            <div className="zona-mapa-botones">
+              <div className="zona-mapa-contenedor">
             {cargandoUbicacion ? (
               <div className="mapa-cargando">
                 <p>Obteniendo tu ubicación...</p>
@@ -269,25 +275,18 @@ function MiZona({ barrios }) {
         </div>
       </div>
 
-      <div className="zona-estadisticas">
-        <div className="card-alerta">
-          <p className="valor">5</p>
-          <p>Alertas<br />Últimos 7 días</p>
-        </div>
-        <div className="card-reporte">
-          <p className="valor">12</p>
-          <p>Reportes<br />Recientes</p>
-        </div>
-        <div className="card-sospechoso">
-          <p className="valor">2</p>
-          <p>Vehículos<br />Sospechosos</p>
+          <div className="zona-estadisticas">
+            <div className="card-alerta">
+              <p className="valor">🚨 5</p>
+              <p>Alertas<br />Últimos 7 días</p>
+            </div>
+            <div className="card-reporte">
+              <p className="valor">📋 12</p>
+              <p>Reportes<br />Recientes</p>
+            </div>
+          </div>
         </div>
       </div>
-
-      <footer className="footer">
-        <span>AutoCheck</span>
-        <span>Juntos hacemos las calles más seguras</span>
-      </footer>
     </div>
   );
 }

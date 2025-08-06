@@ -64,7 +64,6 @@ function Login({ usuarios, setUsuarioActivo }) {
                 <button className="admin-button" onClick={entrarComoAdmin}>Entrar como Administrador</button>
 
                 <div className="login-links">
-                    <Link to="/recuperacioncontra">Recuperar contraseña</Link><br /><br />
                     <Link to="/registro">Crear Cuenta</Link>
                 </div>
             </div>
