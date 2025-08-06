@@ -30,7 +30,7 @@ function Login({ usuarios, setUsuarioActivo }) {
                 alert("Usuario o contraseña no válidos");
             }
         } catch (error) {
-            alert("Error al conectar con el servidor");
+            alert("Usuario o contraseña no válidos");
         }
     };
 

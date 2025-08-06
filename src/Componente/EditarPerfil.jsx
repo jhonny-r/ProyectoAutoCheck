@@ -1,13 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../Estilos/EditarPerfil.css';
 import editarPerfil from '../Imagenes/editarPerfil.png';
-import lapiz from '../Imagenes/lapiz.png';
-import logo from '../Imagenes/LogoBlanco.svg';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const EditarPerfil = ({ onClose }) => {
+const EditarPerfil = ({ usuario, onClose, setUsuarioActivo }) => {
+  const navigate = useNavigate();
   const [imagenPerfil, setImagenPerfil] = useState(editarPerfil);
-  const [mostrarCambiarPassword, setMostrarCambiarPassword] = useState(false);
-  const [mensajeExito, setMensajeExito] = useState('');
+
+  const [formData, setFormData] = useState({
+    nombre: '',
+    alias: '',
+    telefono: '',
+    email: '',
+    direccion: '',
+    contrasena: '',
+  });
+
+  useEffect(() => {
+    if (usuario) {
+      setFormData({
+        nombre: usuario.nombre || '',
+        alias: usuario.alias || '',
+        telefono: usuario.telefono || '',
+        email: usuario.email || '',
+        direccion: usuario.direccion || '',
+        contrasena: '',
+      });
+    }
+  }, [usuario]);
 
   const manejarCambioImagen = (e) => {
     const archivo = e.target.files[0];
@@ -20,142 +41,120 @@ const EditarPerfil = ({ onClose }) => {
     }
   };
 
-  const manejarGuardarPerfil = (e) => {
-    e.preventDefault();
-    setMensajeExito('✅ Perfil actualizado correctamente');
-    
-    // Ocultar el mensaje después de 3 segundos
-    setTimeout(() => {
-      setMensajeExito('');
-    }, 3000);
+  const manejarCambio = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const manejarGuardarPassword = () => {
-    setMensajeExito('✅ Contraseña actualizada correctamente');
-    setMostrarCambiarPassword(false);
-    
-    // Ocultar el mensaje después de 3 segundos
-    setTimeout(() => {
-      setMensajeExito('');
-    }, 3000);
+  const manejarSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const datos = { ...formData };
+      if (!datos.contrasena) {
+        delete datos.contrasena;
+      }
+
+      const res = await axios.put(`http://localhost:8000/api/usuarios/${usuario._id}`, datos);
+
+      // ✅ ACTUALIZAR el estado del usuario y localStorage
+      setUsuarioActivo(res.data);
+      localStorage.setItem("usuarioActivo", JSON.stringify(res.data));
+
+      alert('Perfil actualizado correctamente');
+      onClose(); // cerrar el modal
+    } catch (error) {
+      console.error('Error al actualizar perfil:', error);
+      alert('Ocurrió un error al actualizar el perfil');
+    }
   };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="perfil-modal" onClick={(e) => e.stopPropagation()}>
-        <form className="perfil-form-modal" onSubmit={manejarGuardarPerfil}>
+      <div className="modal-content perfil-modal" onClick={(e) => e.stopPropagation()}>
+        <form className="perfil-form-modal" onSubmit={manejarSubmit}>
           <div className="modal-header">
             <h2>👤 Editar Perfil</h2>
-            <button type="button" className="cerrar-btn" onClick={onClose}>
-              ✕
-            </button>
+            <button type="button" className="cerrar-btn" onClick={onClose}>✕</button>
           </div>
 
-          {/* Mensaje de éxito */}
-          {mensajeExito && (
-            <div className="mensaje-exito">
-              {mensajeExito}
-            </div>
-          )}
-
-          {/* Sección Avatar */}
+          {/* Avatar */}
           <div className="avatar-section-modal">
             <div className="avatar-container">
               <img src={imagenPerfil} alt="Avatar" className="avatar-modal" />
-              <input 
-                type="file" 
-                accept="image/*" 
+              <input
+                type="file"
+                accept="image/*"
                 onChange={manejarCambioImagen}
                 className="file-input"
                 id="archivo-imagen"
               />
-              <label htmlFor="archivo-imagen" className="upload-btn-modal">
-                📷
-              </label>
+              <label htmlFor="archivo-imagen" className="upload-btn-modal">📷</label>
             </div>
           </div>
 
-          {/* Grid compacto para información */}
+          {/* Campos */}
           <div className="form-grid-compact">
             <div className="form-field">
               <label>Nombre Completo</label>
-              <input type="text" placeholder="Nombre completo" />
+              <input
+                type="text"
+                name="nombre"
+                value={formData.nombre}
+                onChange={manejarCambio}
+              />
             </div>
             <div className="form-field">
               <label>Alias</label>
-              <input type="text" placeholder="Alias" />
-            </div>
-            <div className="form-field">
-              <label>Fecha de Nacimiento</label>
-              <input type="date" />
+              <input
+                type="text"
+                name="alias"
+                value={formData.alias}
+                onChange={manejarCambio}
+              />
             </div>
             <div className="form-field">
               <label>Teléfono</label>
-              <input type="tel" placeholder="0999999999" />
+              <input
+                type="tel"
+                name="telefono"
+                value={formData.telefono}
+                onChange={manejarCambio}
+              />
             </div>
             <div className="form-field">
               <label>Correo electrónico</label>
-              <input type="email" placeholder="correo@ejemplo.com" />
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={manejarCambio}
+              />
             </div>
             <div className="form-field">
-              <label>Ciudad</label>
-              <select>
-                <option value="">Selecciona una ciudad</option>
-                <option value="quito">Quito</option>
-                <option value="guayaquil">Guayaquil</option>
-                <option value="cuenca">Cuenca</option>
-              </select>
+              <label>Dirección</label>
+              <input
+                type="text"
+                name="direccion"
+                value={formData.direccion}
+                onChange={manejarCambio}
+              />
             </div>
             <div className="form-field">
-              <label>Sector</label>
-              <select>
-                <option value="">Selecciona un sector</option>
-                <option value="norte">Norte</option>
-                <option value="centro">Centro</option>
-                <option value="sur">Sur</option>
-              </select>
-            </div>
-            <div className="form-field">
-              <label>
-                Contraseña 
-                <span className="cambiar-link" onClick={() => setMostrarCambiarPassword(!mostrarCambiarPassword)}>
-                  Cambiar
-                </span>
-              </label>
-              <input type="password" placeholder="••••••••" readOnly />
+              <label>Contraseña (dejar en blanco si no cambia)</label>
+              <input
+                type="password"
+                name="contrasena"
+                value={formData.contrasena}
+                onChange={manejarCambio}
+              />
             </div>
           </div>
 
-          {/* Sección cambiar contraseña */}
-          {mostrarCambiarPassword && (
-            <div className="password-change-section">
-              <div className="form-field">
-                <label>Nueva Contraseña</label>
-                <input type="password" placeholder="Nueva contraseña" />
-              </div>
-              <div className="form-field">
-                <label>Confirmar Contraseña</label>
-                <input type="password" placeholder="Confirmar contraseña" />
-              </div>
-              <div className="password-change-actions">
-                <button type="button" className="btn-guardar-password" onClick={manejarGuardarPassword}>
-                  Guardar
-                </button>
-                <button type="button" className="btn-cancelar-password" onClick={() => setMostrarCambiarPassword(false)}>
-                  Cancelar
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Botones del modal */}
+          {/* Botones */}
           <div className="modal-buttons">
-            <button type="submit" className="btn-guardar">
-              Guardar
-            </button>
-            <button type="button" className="btn-cancelar" onClick={onClose}>
-              Cancelar
-            </button>
+            <button type="submit" className="btn-guardar">GUARDAR</button>
+            <button type="button" className="btn-cancelar" onClick={onClose}>CANCELAR</button>
           </div>
         </form>
       </div>
