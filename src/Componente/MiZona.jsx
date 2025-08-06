@@ -29,6 +29,10 @@ function MiZona({ barrios, onClose }) {
   // Estados para la ubicación de la zona seleccionada
   const [ubicacionZona, setUbicacionZona] = useState(null);
   const [cargandoZona, setCargandoZona] = useState(false);
+  
+  // Estados para los reportes por barrio
+  const [cantidadReportes, setCantidadReportes] = useState(0);
+  const [cargandoReportes, setCargandoReportes] = useState(false);
 
   // Función para manejar el cierre del modal
   const handleClose = () => {
@@ -120,10 +124,41 @@ function MiZona({ barrios, onClose }) {
     }
   };
 
-  // useEffect para buscar coordenadas cuando cambia la zona seleccionada
+  // Función para obtener la cantidad de reportes por barrio
+  const obtenerReportesPorBarrio = async (nombreBarrio) => {
+    if (!nombreBarrio) {
+      setCantidadReportes(0);
+      return;
+    }
+    
+    setCargandoReportes(true);
+    try {
+      const response = await fetch(`http://localhost:8000/api/reportes/barrios`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ barrio: nombreBarrio })
+      });
+      
+      const data = await response.json();
+      console.log("Reportes obtenidos para", nombreBarrio, ":", data);
+      
+      // Asumiendo que la API devuelve { barrio: "nombre", cantidad: number }
+      setCantidadReportes(data.cantidad || 0);
+    } catch (error) {
+      console.error("Error al obtener reportes del barrio:", error);
+      setCantidadReportes(0);
+    } finally {
+      setCargandoReportes(false);
+    }
+  };
+
+  // useEffect para buscar coordenadas y reportes cuando cambia la zona seleccionada
   useEffect(() => {
     if (zonaSeleccionada) {
       buscarCoordenadasZona(zonaSeleccionada);
+      obtenerReportesPorBarrio(zonaSeleccionada);
     }
   }, [zonaSeleccionada]);
 
@@ -285,12 +320,10 @@ function MiZona({ barrios, onClose }) {
       </div>
 
           <div className="zona-estadisticas">
-            <div className="card-alerta">
-              <p className="valor">🚨 5</p>
-              <p>Alertas<br />Últimos 7 días</p>
-            </div>
             <div className="card-reporte">
-              <p className="valor">📋 12</p>
+              <p className="valor">
+                📋 {cargandoReportes ? '...' : cantidadReportes}
+              </p>
               <p>Reportes<br />Recientes</p>
             </div>
           </div>
