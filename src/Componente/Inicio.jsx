@@ -23,7 +23,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, barrios, BarriosPeligrosos, topVehiculos}) {
+function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, barrios, BarriosPeligrosos, topVehiculos, tipoVehiculo, marcas}) {
   const navigate = useNavigate();
   const [mostrarVerificarVehiculo, setMostrarVerificarVehiculo] = useState(false);
   const [mostrarReporteVehiculo, setMostrarReporteVehiculo] = useState(false);
@@ -195,6 +195,9 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
       {mostrarReporteVehiculo && (
         <ReporteVehiculo 
           agregarVehiculo={agregarVehiculo}
+          tipoVehiculo={tipoVehiculo}
+          barrios={barrios}
+          marcas={marcas}
           onClose={cerrarReporteVehiculo}
         />
       )}

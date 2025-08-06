@@ -85,9 +85,7 @@ function GestionZonas({ barrios, agregarBarrio, eliminarBarrio, editarBarrio }) 
 
   return (
     <div className="zonas-container">
-      <div className="titulo-zona">
-        <h2>Gestión de Zonas</h2>
-      </div>
+      <h2 className="titulo-zona">🏘️ Gestión de Zonas</h2>
 
       <div className="contenedor-boton-agregar">
         <button className="btn-agregar-centrado" onClick={abrirModalAgregar}>

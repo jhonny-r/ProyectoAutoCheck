@@ -2,8 +2,12 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import '../Estilos/ReporteVehiculo.css';
 
-function ReporteVehiculo({agregarVehiculo, onClose}){
+function ReporteVehiculo({agregarVehiculo, onClose, tipoVehiculo, barrios, marcas}){
     const navigate = useNavigate();
+
+    console.log("Tipos de vehículo recibidos en ReporteVehiculo:", tipoVehiculo);
+    console.log("Barrios recibidos en ReporteVehiculo:", barrios);
+    console.log("Marcas recibidas en ReporteVehiculo:", marcas);
 
     const [fecha, setFecha] = useState("");
     const [tipo, setTipo] = useState("");
@@ -50,17 +54,25 @@ function ReporteVehiculo({agregarVehiculo, onClose}){
                 </div>
                 <select value={tipo} onChange={(e)=>setTipo(e.target.value)} required>
                     <option value="">Tipo de vehiculo</option>
-                    <option value="Auto">Auto</option>
-                    <option value="Moto">Moto</option>
-                    <option value="Camioneta">Camioneta</option>
+                    {tipoVehiculo && tipoVehiculo.length > 0 && (
+                        tipoVehiculo.map((tipoObj) => (
+                            <option key={tipoObj._id} value={tipoObj.nombre}>
+                                {tipoObj.nombre}
+                            </option>
+                        ))
+                    )}
                 </select>
                 <input type="text" placeholder="Placa" value={placa} onChange={(e)=>setPlaca(e.target.value)} required/>
                 
                 <select value={marca} onChange={(e)=>setMarca(e.target.value)} required>
                     <option value="">Marca</option>
-                    <option value="Chevrolet">Chevrolet</option>
-                    <option value="Kia">Kia</option>
-                    <option value="Hyundai">Hyundai</option>
+                    {marcas && marcas.length > 0 && (
+                        marcas.map((marcaObj) => (
+                            <option key={marcaObj._id} value={marcaObj.nombre}>
+                                {marcaObj.nombre}
+                            </option>
+                        ))
+                    )}
                 </select>
 
                 <div className="fila">
@@ -70,9 +82,13 @@ function ReporteVehiculo({agregarVehiculo, onClose}){
 
                 <select value={barrio} onChange={(e)=>setBarrio(e.target.value)} required>
                     <option value="">Barrio</option>
-                    <option value="La Floresta">La Floresta</option>
-                    <option value="Carcelén">Carcelén</option>
-                    <option value="Solanda">Solanda</option>
+                    {barrios && barrios.length > 0 && (
+                        barrios.map((barrioObj) => (
+                            <option key={barrioObj._id} value={barrioObj.nombre}>
+                                {barrioObj.nombre}
+                            </option>
+                        ))
+                    )}
                 </select>
 
                 <div className="botones-finales">
