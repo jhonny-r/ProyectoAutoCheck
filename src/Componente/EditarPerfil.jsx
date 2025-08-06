@@ -141,7 +141,7 @@ const EditarPerfil = ({ usuario, onClose, setUsuarioActivo }) => {
               />
             </div>
             <div className="form-field">
-              <label>Contraseña</label>
+              <label>Contraseña (dejar en blanco si no cambia)</label>
               <input
                 type="password"
                 name="contrasena"
@@ -151,36 +151,10 @@ const EditarPerfil = ({ usuario, onClose, setUsuarioActivo }) => {
             </div>
           </div>
 
-          {/* Sección cambiar contraseña */}
-          {mostrarCambiarPassword && (
-            <div className="password-change-section">
-              <div className="form-field">
-                <label>Nueva Contraseña</label>
-                <input type="password" placeholder="Nueva contraseña" />
-              </div>
-              <div className="form-field">
-                <label>Confirmar Contraseña</label>
-                <input type="password" placeholder="Confirmar contraseña" />
-              </div>
-              <div className="password-change-actions">
-                <button type="button" className="btn-guardar-password" onClick={manejarGuardarPassword}>
-                  Guardar
-                </button>
-                <button type="button" className="btn-cancelar-password" onClick={() => setMostrarCambiarPassword(false)}>
-                  Cancelar
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Botones del modal */}
+          {/* Botones */}
           <div className="modal-buttons">
-            <button type="submit" className="btn-guardar">
-              Guardar
-            </button>
-            <button type="button" className="btn-cancelar" onClick={onClose}>
-              Cancelar
-            </button>
+            <button type="submit" className="btn-guardar">GUARDAR</button>
+            <button type="button" className="btn-cancelar" onClick={onClose}>CANCELAR</button>
           </div>
         </form>
       </div>
