@@ -80,6 +80,30 @@ function App() {
 
   },[]);
 
+  useEffect(()=>{
+    axios.get("http://localhost:8000/api/sectores")
+    .then(res =>{
+      console.log("Sectores obtenidos del API:", res.data);
+      setSectores(res.data);
+    })
+    .catch(error =>{
+      console.error("Error al obtener los sectores",error);
+    })
+
+  },[]);
+
+  useEffect(()=>{
+    axios.get("http://localhost:8000/api/nivelesRiesgo")
+    .then(res =>{
+      console.log("Niveles de riesgo obtenidos del API:", res.data);
+      setNivelesRiesgo(res.data);
+    })
+    .catch(error =>{
+      console.error("Error al obtener los niveles de riesgo",error);
+    })
+
+  },[]);
+
 
   useEffect(() => {
     axios.get("http://localhost:8000/api/top/barrios")
@@ -111,6 +135,10 @@ function App() {
   const [tipoVehiculo, setTipoVehiculo] = useState([]);
 
   const [marcas, setMarcas] = useState([]);
+
+  const [sectores, setSectores] = useState([]);
+
+  const [nivelesRiesgo, setNivelesRiesgo] = useState([]);
 
   const [topBarrios, setTopBarrios] = useState([]);
 
@@ -228,9 +256,9 @@ const editarBarrio = (id, barrioActualizado) => {
           <Route path="/MiZona" element={<MiZona barrios={barrios} />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
           <Route path="/PanelAdmin" element={<PanelAdmin />} />
-          <Route path="/GestionZonas" element={<GestionZonas barrios={barrios} agregarBarrio={agregarBarrio} eliminarBarrio={eliminarBarrio} editarBarrio={editarBarrio} />} />
+          <Route path="/GestionZonas" element={<GestionZonas barrios={barrios} agregarBarrio={agregarBarrio} eliminarBarrio={eliminarBarrio} editarBarrio={editarBarrio} sectores={sectores} nivelesRiesgo={nivelesRiesgo} />} />
           <Route path="/ListaUsuarios" element={<ListaUsuarios usuarios={usuarios} eliminarUsuario={eliminarUsuario} editarUsuario={editarUsuario}  agregarUsuario={agregarUsuario}/>} />
-          <Route path="/ListaVehiculos" element={<ListaVehiculos vehiculos={vehiculos} eliminarVehiculo={eliminarVehiculo} editarVehiculo={editarVehiculo} agregarVehiculo={agregarVehiculo} />}/>
+          <Route path="/ListaVehiculos" element={<ListaVehiculos vehiculos={vehiculos} eliminarVehiculo={eliminarVehiculo} editarVehiculo={editarVehiculo} agregarVehiculo={agregarVehiculo} tipoVehiculo={tipoVehiculo} marcas={marcas} barrios={barrios} />}/>
         </Routes>
       </BrowserRouter>
 
