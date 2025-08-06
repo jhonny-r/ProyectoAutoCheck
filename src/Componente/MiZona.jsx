@@ -204,23 +204,17 @@ function MiZona({ barrios, onClose }) {
   };
 
   return (
-    <div className="modal-overlay" onClick={handleClose}>
-      <div className="modal-content zona-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>🏘️ Mi Zona</h2>
-          <button type="button" className="btn-volver-inicio" onClick={handleClose}>
+    <div className="mapa-reportes-modal">
+      <div className="mapa-reportes-container">
+        <div className="encabezado">
+          <h1>🏘️ Mi Zona</h1>
+          <button className="btn-negro" onClick={handleClose}>
             Volver al Inicio
           </button>
         </div>
 
-        <div className="zona-modal-content">
-          <p className="zona-subtitulo">
-            Gestiona la zona que deseas monitorear y mantente informado de lo que ocurre a tu alrededor.
-          </p>
-
-          <div className="zona-centro">
-            <div className="zona-mapa-botones">
-              <div className="zona-mapa-contenedor">
+        <div className="contenido-principal">
+          <div className="mapa-container-modal">
             {cargandoUbicacion ? (
               <div className="mapa-cargando">
                 <p>Obteniendo tu ubicación...</p>
@@ -233,7 +227,7 @@ function MiZona({ barrios, onClose }) {
                     ubicacionZona ? ubicacionZona.lng : ubicacionUsuario.lng
                   ]} 
                   zoom={18} 
-                  style={{ height: '250px', width: '100%', borderRadius: '12px' }}
+                  style={{ height: '100%', width: '100%', borderRadius: '15px' }}
                   scrollWheelZoom={true}
                   key={`${ubicacionZona ? ubicacionZona.lat : ubicacionUsuario.lat}-${ubicacionZona ? ubicacionZona.lng : ubicacionUsuario.lng}`}
                 >
@@ -286,6 +280,7 @@ function MiZona({ barrios, onClose }) {
                 )}
               </div>
             )}
+            
             {mostrarCombo && (
               <div className="zona-select-overlay">
                 <select
@@ -305,26 +300,60 @@ function MiZona({ barrios, onClose }) {
                 </select>
               </div>
             )}
-            {mensajeZona && (
-              <div className={`mensaje-exito ${mensajeFadeOut ? 'fade-out' : ''}`}>
-                {mensajeZona}
+          </div>
+
+          <div className="listas-container">
+            <div className="lista-seccion">
+              <div className="lista-header">
+                <h2>Gestión de Zona</h2>
               </div>
-            )}
-          </div>
+              <div className="lista-content expanded">
+                <p style={{color: '#334155', marginBottom: '15px', fontSize: '14px'}}>
+                  Gestiona la zona que deseas monitorear y mantente informado de lo que ocurre a tu alrededor.
+                </p>
+                
+                <div style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
+                  <button className="btn-verde" onClick={cambiarZona}>
+                    🔄 Cambiar Zona
+                  </button>
+                  <button className="btn-azul" onClick={establecerZona}>
+                    ⭐ Establecer como Principal
+                  </button>
+                </div>
+                
+                {mensajeZona && (
+                  <div className={`mensaje-exito ${mensajeFadeOut ? 'fade-out' : ''}`} style={{marginTop: '15px'}}>
+                    {mensajeZona}
+                  </div>
+                )}
+              </div>
+            </div>
 
-          <div className="zona-botones-vertical">
-            <button className="btn-verde" onClick={cambiarZona}>Cambiar Zona</button>
-            <button className="btn-azul" onClick={establecerZona}>Establecer como Principal</button>
-          </div>
-        </div>
-      </div>
-
-          <div className="zona-estadisticas">
-            <div className="card-reporte">
-              <p className="valor">
-                📋 {cargandoReportes ? '...' : cantidadReportes}
-              </p>
-              <p>Reportes<br />Recientes</p>
+            <div className="lista-seccion">
+              <div className="lista-header">
+                <h2>Estadísticas de la Zona</h2>
+              </div>
+              <div className="lista-content expanded">
+                <div className="card-reporte" style={{
+                  background: 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)',
+                  padding: '20px',
+                  borderRadius: '12px',
+                  textAlign: 'center',
+                  border: '2px solid rgba(217, 119, 6, 0.2)'
+                }}>
+                  <p className="valor" style={{
+                    fontSize: '2rem',
+                    margin: '0 0 8px 0',
+                    fontWeight: '700',
+                    color: '#d97706'
+                  }}>
+                    📋 {cargandoReportes ? '...' : cantidadReportes}
+                  </p>
+                  <p style={{margin: '0', color: '#d97706', fontWeight: '600'}}>
+                    Reportes Recientes
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
