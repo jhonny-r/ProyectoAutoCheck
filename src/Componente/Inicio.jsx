@@ -11,6 +11,7 @@ import VerificarVehiculo from './VerificarVehiculo';
 import ReporteVehiculo from './ReporteVehiculo';
 import MapaReportes from './MapaReportes';
 import Configuracion from './Configuracion';
+import MiZona from './MiZona';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -29,6 +30,7 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
   const [mostrarReporteVehiculo, setMostrarReporteVehiculo] = useState(false);
   const [mostrarMapaReportes, setMostrarMapaReportes] = useState(false);
   const [mostrarConfiguracion, setMostrarConfiguracion] = useState(false);
+  const [mostrarMiZona, setMostrarMiZona] = useState(false);
   
   // Estados para la ubicación del usuario
   const [ubicacionUsuario, setUbicacionUsuario] = useState(null);
@@ -113,7 +115,7 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
           <span className="logo-text">AutoCheck</span>
         </div>
         <div className="nav-box">
-          <span className="nav-item" onClick={() => navigate('/')}>🏠 Salir</span>
+          <span className="nav-item" onClick={() => navigate('/')}>🚪 Salir</span>
           <span className="nav-item" onClick={() => navigate('/ForoVecinal')}>💬 Foro Vecinal</span>
           <span className="nav-item" onClick={() => navigate('/MiAutoCheck')}>🚗 MiAutoCheck</span>
           {usuario && usuario.rol === 'administrador' && (
@@ -159,7 +161,7 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
               )}
             </div>
           )}
-          <button className="btn-mizona" onClick={() => navigate('/MiZona')}>Mi zona</button>
+          <button className="btn-mizona" onClick={() => setMostrarMiZona(true)}>Mi zona</button>
         </div>
 
         <div className="opciones">
@@ -213,6 +215,13 @@ function Inicio({usuario, vehiculos, consultas, setConsultas, agregarVehiculo, b
       {mostrarConfiguracion && (
         <Configuracion 
           onClose={cerrarConfiguracion}
+        />
+      )}
+
+      {mostrarMiZona && (
+        <MiZona 
+          barrios={barrios}
+          onClose={() => setMostrarMiZona(false)}
         />
       )}
     </div>

@@ -30,6 +30,15 @@ function MiZona({ barrios, onClose }) {
   const [ubicacionZona, setUbicacionZona] = useState(null);
   const [cargandoZona, setCargandoZona] = useState(false);
 
+  // Función para manejar el cierre del modal
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      navigate('/Inicio');
+    }
+  };
+
   // useEffect para obtener la ubicación del usuario
   useEffect(() => {
     if (navigator.geolocation) {
@@ -160,12 +169,12 @@ function MiZona({ barrios, onClose }) {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={handleClose}>
       <div className="modal-content zona-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>🏘️ Mi Zona</h2>
-          <button type="button" className="cerrar-btn" onClick={onClose}>
-            ✕
+          <button type="button" className="btn-volver-inicio" onClick={handleClose}>
+            Volver al Inicio
           </button>
         </div>
 

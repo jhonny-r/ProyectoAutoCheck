@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import Inicio from './Componente/Inicio.jsx';
 import Login from './Componente/Login.jsx';
@@ -11,7 +11,6 @@ import MapaReportes from './Componente/MapaReportes.jsx';
 import ReporteVehiculo from './Componente/ReporteVehiculo.jsx';
 import VerificarVehiculo from './Componente/VerificarVehiculo.jsx';
 import Configuracion from './Componente/Configuracion.jsx';
-import MiZona from './Componente/MiZona.jsx';
 import RecuperacionContra from './Componente/RecuperacionContra.jsx';
 import PanelAdmin from './Componente/PanelAdmin.jsx';
 import axios from 'axios';
@@ -225,7 +224,6 @@ const editarBarrio = (id, barrioActualizado) => {
           <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={topBarrios} topVehiculos={topVehiculos} />} />
           <Route path="/VerificarVehiculo" element={<VerificarVehiculo vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} />} />
           <Route path="/Configuracion" element={<Configuracion />} />
-          <Route path="/MiZona" element={<MiZona barrios={barrios} />} />
           <Route path="/RecuperacionContra" element={<RecuperacionContra usuarios={usuarios} />} />
           <Route path="/PanelAdmin" element={<PanelAdmin />} />
           <Route path="/GestionZonas" element={<GestionZonas barrios={barrios} agregarBarrio={agregarBarrio} eliminarBarrio={eliminarBarrio} editarBarrio={editarBarrio} />} />
