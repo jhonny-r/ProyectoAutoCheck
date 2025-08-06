@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../Estilos/ListaVehiculos.css';
 
-function ListaVehiculos({ vehiculos, eliminarVehiculo, editarVehiculo, agregarVehiculo }) {
+function ListaVehiculos({ vehiculos, eliminarVehiculo, editarVehiculo, agregarVehiculo, tipoVehiculo, marcas, barrios }) {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [vehiculoEditado, setVehiculoEditado] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
@@ -125,11 +125,45 @@ function ListaVehiculos({ vehiculos, eliminarVehiculo, editarVehiculo, agregarVe
                     required
                   >
                     <option value="">Seleccionar Tipo</option>
-                    <option value="Auto">Auto</option>
-                    <option value="Moto">Moto</option>
-                    <option value="Camioneta">Camioneta</option>
-                    <option value="Bus">Bus</option>
-                    <option value="Camión">Camión</option>
+                    {tipoVehiculo && tipoVehiculo.length > 0 && (
+                      tipoVehiculo.map((tipoObj) => (
+                        <option key={tipoObj._id} value={tipoObj.nombre}>
+                          {tipoObj.nombre}
+                        </option>
+                      ))
+                    )}
+                  </select>
+                ) : campo === "marca" ? (
+                  <select
+                    name={campo}
+                    value={vehiculoEditado[campo]}
+                    onChange={manejarCambio}
+                    required
+                  >
+                    <option value="">Seleccionar Marca</option>
+                    {marcas && marcas.length > 0 && (
+                      marcas.map((marcaObj) => (
+                        <option key={marcaObj._id} value={marcaObj.nombre}>
+                          {marcaObj.nombre}
+                        </option>
+                      ))
+                    )}
+                  </select>
+                ) : campo === "barrio" ? (
+                  <select
+                    name={campo}
+                    value={vehiculoEditado[campo]}
+                    onChange={manejarCambio}
+                    required
+                  >
+                    <option value="">Seleccionar Barrio</option>
+                    {barrios && barrios.length > 0 && (
+                      barrios.map((barrioObj) => (
+                        <option key={barrioObj._id} value={barrioObj.nombre}>
+                          {barrioObj.nombre}
+                        </option>
+                      ))
+                    )}
                   </select>
                 ) : (
                   <input
