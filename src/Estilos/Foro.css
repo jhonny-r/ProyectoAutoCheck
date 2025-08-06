@@ -565,6 +565,35 @@
   position: relative;
 }
 
+/* ELIMINAR COMPLETAMENTE CUALQUIER X DEL MODAL */
+.modal-content::before,
+.modal-content::after {
+  display: none !important;
+  content: none !important;
+}
+
+.modal-content *::before,
+.modal-content *::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Eliminar cualquier botón de cierre que pueda aparecer */
+.modal-content .close,
+.modal-content .close-btn,
+.modal-content .cerrar-btn,
+.modal-content [class*="close"],
+.modal-content [class*="cerrar"] {
+  display: none !important;
+}
+
+/* Eliminar cualquier X que pueda estar como texto */
+.modal-content *:contains("×"),
+.modal-content *:contains("✕"),
+.modal-content *:contains("X") {
+  display: none !important;
+}
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -583,6 +612,31 @@
   gap: 20px;
 }
 
+/* ELIMINAR CUALQUIER X DEL FORMULARIO */
+.foro-form::before,
+.foro-form::after {
+  display: none !important;
+  content: none !important;
+}
+
+.foro-form *::before,
+.foro-form *::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Eliminar específicamente cualquier elemento que pueda ser una X */
+.foro-form .close,
+.foro-form .close-btn,
+.foro-form .cerrar-btn,
+.foro-form [data-dismiss],
+.foro-form [aria-label*="close"],
+.foro-form [title*="close"],
+.foro-form [class*="close"],
+.foro-form [class*="cerrar"] {
+  display: none !important;
+}
+
 .foro-header {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   color: white;
@@ -595,6 +649,25 @@
   letter-spacing: 0.5px;
   box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
   text-transform: uppercase;
+  position: relative;
+}
+
+/* Eliminar cualquier X que pueda aparecer en el header */
+.foro-header::before,
+.foro-header::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Asegurar que no aparezcan pseudo-elementos con X */
+.foro-header * {
+  position: relative;
+}
+
+.foro-header *::before,
+.foro-header *::after {
+  display: none !important;
+  content: none !important;
 }
 
 .nombre-container {
@@ -719,12 +792,18 @@
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
-  width: 220px;
-  height: 56px;
+  width: 220px !important;
+  height: 56px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+  min-height: 56px !important;
+  max-height: 56px !important;
   display: flex;
   align-items: center;
   justify-content: center;
   vertical-align: top;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .btn-publicar::before {
@@ -762,14 +841,20 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
-  width: 220px;
-  height: 56px;
+  width: 220px !important;
+  height: 56px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+  min-height: 56px !important;
+  max-height: 56px !important;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
   vertical-align: top;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .btn-cancelar::before {
@@ -832,4 +917,32 @@
     font-size: 18px;
     padding: 18px;
   }
+}
+
+/* REGLA FINAL PARA ELIMINAR COMPLETAMENTE CUALQUIER X */
+.modal-overlay .modal-content {
+  position: relative;
+}
+
+.modal-overlay .modal-content > *:first-child::after,
+.modal-overlay .modal-content > *:last-child::after,
+.modal-overlay .modal-content > *:first-child::before,
+.modal-overlay .modal-content > *:last-child::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Ocultar cualquier elemento posicionado absolutamente que pueda ser una X */
+.modal-content [style*="position: absolute"],
+.modal-content [style*="position:absolute"] {
+  display: none !important;
+}
+
+/* Asegurar que no hay ningún pseudo-elemento con contenido de cierre */
+.modal-content *[data-dismiss]::before,
+.modal-content *[data-dismiss]::after,
+.modal-content *.close::before,
+.modal-content *.close::after {
+  display: none !important;
+  content: none !important;
 }

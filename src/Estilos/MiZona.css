@@ -208,39 +208,77 @@
 }
 
 .btn-verde {
-  background-color: #1da547;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
-  padding: 12px 16px;
+  padding: 14px 20px;
   border: none;
   border-radius: 12px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   width: 100%;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-verde::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-verde:hover::before {
+  left: 100%;
 }
 
 .btn-verde:hover {
-  background-color: #16a085;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
 .btn-azul {
-  background-color: #252bb3;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   color: white;
-  padding: 12px 16px;
+  padding: 14px 20px;
   border: none;
   border-radius: 12px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   width: 100%;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-azul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-azul:hover::before {
+  left: 100%;
 }
 
 .btn-azul:hover {
-  background-color: #1e229a;
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 /* Cards */
@@ -255,35 +293,68 @@
 .card-alerta,
 .card-reporte,
 .card-sospechoso {
-  padding: 18px 25px;
+  padding: 20px 25px;
   text-align: center;
-  font-weight: bold;
-  border-radius: 12px;
+  font-weight: 600;
+  border-radius: 16px;
   width: 180px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-alerta::before,
+.card-reporte::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transition: all 0.3s ease;
 }
 
 .card-alerta {
-  border: 2px solid red;
-  color: red;
-  background-color: #fff5f5;
+  background: linear-gradient(135deg, #fff5f5 0%, #fef2f2 100%);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  color: #dc2626;
+}
+
+.card-alerta::before {
+  background: linear-gradient(90deg, #dc2626, #ef4444);
+}
+
+.card-alerta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(220, 38, 38, 0.2);
 }
 
 .card-reporte {
-  border: 2px solid orange;
-  color: orange;
-  background-color: #fffaf0;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  color: #d97706;
 }
 
-.card-sospechoso {
-  border: 2px solid #1d33c2;
-  color: #1d33c2;
-  background-color: #f4f7ff;
+.card-reporte::before {
+  background: linear-gradient(90deg, #d97706, #f59e0b);
+}
+
+.card-reporte:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(217, 119, 6, 0.2);
 }
 
 .valor {
-  font-size: 2rem;
-  margin-bottom: 5px;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .footer {
@@ -296,4 +367,131 @@
   justify-content: space-between;
   padding: 10px 30px;
   font-size: 0.85rem;
+}
+
+/* ESTILOS PARA MODAL DE MI ZONA */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.zona-modal {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.zona-modal-content {
+  padding: 1.5rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 1.5rem 0;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 1rem;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  background: linear-gradient(135deg, #1233bb 0%, #23207d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-header .cerrar-btn {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(239, 68, 68, 0.2);
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.modal-header .cerrar-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #dc2626;
+  transform: scale(1.1);
+}
+
+/* Ajustes para el modal */
+.zona-modal .zona-subtitulo {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.zona-modal .zona-estadisticas {
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+/* Responsive para modal */
+@media (max-width: 768px) {
+  .zona-modal {
+    margin: 1rem;
+    max-height: 95vh;
+  }
+  
+  .zona-modal-content {
+    padding: 1rem;
+  }
+  
+  .modal-header {
+    padding: 1rem 1rem 0;
+  }
+  
+  .zona-modal .zona-mapa-botones {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .zona-modal .zona-botones-vertical {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .zona-modal .zona-estadisticas {
+    flex-direction: column;
+  }
 }
