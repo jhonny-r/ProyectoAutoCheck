@@ -78,6 +78,9 @@ module.exports.loginUsuario = async (req, res) => {
             msg: 'Ingreso exitoso',
             _id: usuarioEncontrado._id,
             nombre: usuarioEncontrado.nombre,
+            alias: usuarioEncontrado.alias,
+            telefono: usuarioEncontrado.telefono,
+            direccion: usuarioEncontrado.direccion,
             email: usuarioEncontrado.email,
             rol: usuarioEncontrado.rol,
             token: generateToken(usuarioEncontrado._id, usuarioEncontrado.rol)
