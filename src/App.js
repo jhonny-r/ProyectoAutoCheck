@@ -56,6 +56,30 @@ function App() {
 
   },[]);
 
+  useEffect(()=>{
+    axios.get("http://localhost:8000/api/tiposVehiculo")
+    .then(res =>{
+      console.log("Tipos de vehículo obtenidos del API:", res.data);
+      setTipoVehiculo(res.data);
+    })
+    .catch(error =>{
+      console.error("Error al obtener los tipos de vehiculo",error);
+    })
+
+  },[]);
+
+  useEffect(()=>{
+    axios.get("http://localhost:8000/api/marcas")
+    .then(res =>{
+      console.log("Marcas obtenidas del API:", res.data);
+      setMarcas(res.data);
+    })
+    .catch(error =>{
+      console.error("Error al obtener las marcas",error);
+    })
+
+  },[]);
+
 
   useEffect(() => {
     axios.get("http://localhost:8000/api/top/barrios")
@@ -83,6 +107,10 @@ function App() {
   const [vehiculos, setVehiculos] = useState([]);
 
   const [barrios, setBarrios] = useState([]);
+
+  const [tipoVehiculo, setTipoVehiculo] = useState([]);
+
+  const [marcas, setMarcas] = useState([]);
 
   const [topBarrios, setTopBarrios] = useState([]);
 
@@ -189,13 +217,12 @@ const editarBarrio = (id, barrioActualizado) => {
           {/* Login es la ruta por defecto */}
           <Route path="/" element={<Login usuarios={usuarios} setUsuarioActivo={setUsuarioActivo} />} />
 
-          <Route path="/Inicio" element={<Inicio usuario={usuarioActivo} vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} agregarVehiculo={agregarVehiculo} barrios={barrios} BarriosPeligrosos={topBarrios} topVehiculos={topVehiculos} />} />
+          <Route path="/Inicio" element={<Inicio usuario={usuarioActivo} vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} agregarVehiculo={agregarVehiculo} barrios={barrios} BarriosPeligrosos={topBarrios} topVehiculos={topVehiculos} tipoVehiculo={tipoVehiculo} marcas={marcas} />} />
           <Route path="/Registro" element={<Registro agregarUsuario={agregarUsuario} usuarios={usuarios} />} />
           <Route path="/MiAutoCheck" element={<MiAutoCheck usuario={usuarioActivo} consultas={consultas} eliminarConsulta={eliminarConsulta} setUsuarioActivo={setUsuarioActivo} setConsultas={setConsultas} />} />
           <Route path="/ForoVecinal" element={<ForoVecinal />} />
-          <Route path="/ReporteVehiculo" element={<ReporteVehiculo agregarVehiculo={agregarVehiculo} />} />
+          <Route path="/ReporteVehiculo" element={<ReporteVehiculo agregarVehiculo={agregarVehiculo} tipoVehiculo={tipoVehiculo} barrios={barrios} marcas={marcas} />} />
           <Route path="/MapaReportes" element={<MapaReportes BarriosPeligrosos={topBarrios} topVehiculos={topVehiculos} />} />
-          <Route path="/ReporteVehiculo" element={<ReporteVehiculo />} />
           <Route path="/VerificarVehiculo" element={<VerificarVehiculo vehiculos={vehiculos} consultas={consultas} setConsultas={setConsultas} />} />
           <Route path="/Configuracion" element={<Configuracion />} />
           <Route path="/MiZona" element={<MiZona barrios={barrios} />} />
