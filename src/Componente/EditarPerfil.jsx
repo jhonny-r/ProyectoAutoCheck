@@ -141,7 +141,7 @@ const EditarPerfil = ({ usuario, onClose, setUsuarioActivo }) => {
               />
             </div>
             <div className="form-field">
-              <label>Contraseña (dejar en blanco si no cambia)</label>
+              <label>Contraseña</label>
               <input
                 type="password"
                 name="contrasena"
