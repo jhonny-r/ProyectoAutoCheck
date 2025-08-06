@@ -156,7 +156,7 @@ const EditarPerfil = ({ usuario, onClose, setUsuarioActivo }) => {
             <button type="submit" className="btn-guardar">GUARDAR</button>
             <button type="button" className="btn-cancelar" onClick={onClose}>CANCELAR</button>
           </div>
-        </form>
+        </form> 
       </div>
     </div>
   );

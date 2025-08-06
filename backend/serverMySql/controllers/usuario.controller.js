@@ -81,7 +81,7 @@ module.exports.loginUsuario = async (req, res) => {
             alias: usuarioEncontrado.alias,
             telefono: usuarioEncontrado.telefono,
             direccion: usuarioEncontrado.direccion,
-            email: usuarioEncontrado.email,
+            email: usuarioEncontrado.email, 
             rol: usuarioEncontrado.rol,
             token: generateToken(usuarioEncontrado._id, usuarioEncontrado.rol)
         });

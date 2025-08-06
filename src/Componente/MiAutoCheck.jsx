@@ -73,7 +73,7 @@ function MiAutoCheck({ usuario, consultas, eliminarConsulta, setUsuarioActivo, s
 
                     {/* SECCIÓN ALERTAS Y ZONA */}
                     <div className="alertas-zona">
-                        <div className="columna">
+                        <div className="columna"> 
                             <h3>🔔 Alertas Activas</h3>
                             <span>{consultas.some(c => c.alerta) ? 'Alerta registrada' : 'Ninguna Alerta'}</span>
                         </div>
