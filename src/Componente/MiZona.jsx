@@ -133,7 +133,7 @@ function MiZona({ barrios, onClose }) {
     
     setCargandoReportes(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/reportes/barrios`, {
+      const response = await fetch(`http://172.29.49.83:8000/api/reportes/barrios`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

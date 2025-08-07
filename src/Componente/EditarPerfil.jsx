@@ -55,7 +55,7 @@ const EditarPerfil = ({ usuario, onClose, setUsuarioActivo }) => {
         delete datos.contrasena;
       }
 
-      const res = await axios.put(`http://localhost:8000/api/usuarios/${usuario._id}`, datos);
+      const res = await axios.put(`http://172.29.49.83:8000/api/usuarios/${usuario._id}`, datos);
 
       // ✅ ACTUALIZAR el estado del usuario y localStorage
       setUsuarioActivo(res.data);
